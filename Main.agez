@@ -1,0 +1,39 @@
+[Details]
+title = Murderous Monastery
+blurb = MAD MAD MONKS
+author = Thomas Sturges-Allard
+website = http:\\zig13.termisoc.org
+currency1name = gold coins
+currency2name = silver coins
+currency3name = copper coins
+
+[Character Setup]
+attributemethod = random
+minstrength = 15
+maxstrength = 25
+strong = 20
+minknowledge = 15
+maxknowledge = 25
+knowlegable = 20
+mindexterity = 25
+dexterous = 20
+basewillpower = 20
+disciplined = 20
+minconstition = 15
+maxconstitution = 25
+built = 20
+mincharisma = 15
+maxcharisma = 25
+loveable = 20
+minperception = 
+startfatigue = 0
+debilitatingfatigue = 70
+starthealth = 950
+goodhealth = 1000
+firstscene = 1
+Mweapon = 1
+Rweapon = 1
+inventory = [5,2]
+currencyone = 3
+currencytwo = 6
+currencythree = 9
