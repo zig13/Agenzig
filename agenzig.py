@@ -65,7 +65,7 @@ while done == 0 :
 			if sel <= opt :
 				chars2 = os.listdir(charfolder)
 				charfile = str(chars2.pop((sel-1)))
-				charname = charname.rstrip('c')
+				charname = charfile.rstrip('c')
 				charname = charname.rstrip('z')
 				charname = charname.rstrip('a')
 				charname = charname.rstrip('.')
