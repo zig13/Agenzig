@@ -59,15 +59,14 @@ while done == 0 :
 		sel = int(choice)
 		if sel == opt :
 			charname = raw_input("Please enter a charname for your character" )
-			charfile = "%s.adv" %(charname)
+			charfile = "%s.azc" %(charname)
 			done = 1
 		else:
 			if sel <= opt :
 				chars2 = os.listdir(charfolder)
-				#chars2.reverse()
 				charfile = str(chars2.pop((sel-1)))
-				charname = charfile.rstrip('v')
-				charname = charname.rstrip('d')
+				charname = charname.rstrip('c')
+				charname = charname.rstrip('z')
 				charname = charname.rstrip('a')
 				charname = charname.rstrip('.')
 				done = 1
@@ -76,7 +75,7 @@ while done == 0 :
 				print ""
 	else:
 		print "Input must be a number"
-charfile = "%s%s.adv" %(charfolder,charname)
+charfile = "%s%s.azc" %(charfolder,charname)
 character = ConfigObj(charfile, encoding='UTF8')
 if sel == opt : #Making a new character
 	character['Basics'] = {}
