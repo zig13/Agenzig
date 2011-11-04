@@ -1,0 +1,57 @@
+[1]
+description = Steel Dagger
+usetext = You install the dagger in a scabard on your belt ready for use
+isarmour = 0
+isMweapon = 1
+isRweapon = 0
+oneuse = 1
+	[[Effects]]
+	giveMweapon = 1
+[2]
+description = Iron Sword
+usetext = You install the dagger in a scabard on your belt ready for use
+isarmour = 0
+isMweapon = 1
+isRweapon = 0
+oneuse = 1
+	[[Effects]]
+	giveMweapon = 2
+[3]
+description = Hunting Leathers
+usetext = You put on the hunting leathers
+isarmour = 1
+isMweapon = 0
+isRweapon = 0
+oneuse = 1
+	[[Effects]]
+	givearmor = 3
+[4]
+description = Sling
+usetext = You move he sling to somewhere accesible and pick up a few rocks as ammo
+isarmour = 0
+isMweapon = 0
+isRweapon = 1
+oneuse = 1
+	[[Effects]]
+	giveRweapon = 1
+[5]
+description = Can of Blue Bolt
+usetext = You down the Blue Bolt
+isarmour = 0
+isMweapon = 0
+isRweapon = 0
+oneuse = 1
+	[[Effects]]
+	setfatigue = 0
+	restorehealth = 2
+	boosthealth = 10
+	restorestrength = 1
+[6]
+description = Floor Potion
+usetext = Despite not knowing it's contents, you drink the potion you found on the floor. You feel more dexterous
+isarmour = 0
+isMweapon = 0
+isRweapon = 0
+oneuse = 1
+	[[Effects]]
+	boostdexterity = 4

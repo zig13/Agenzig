@@ -1,0 +1,31 @@
+[1]
+description = Go West
+result = You pass under a low archway into another cave
+hasrequirements = 0
+simple = 1
+	[[Effects]]
+	scene = 2
+[2]
+description = Go East
+result = You climb up a wall barehanded and drop down the other side to find yourself in another cave
+hasrequirements = 1
+requirementno = 2
+simple = 1
+	[[Requirements]]
+		[[[1]]]
+		strengthreqtype = morethan #Can be morethan, lessthan or exact
+		strength = 20
+		[[[2]]]
+		haveitem = 6
+	[[Effects]]
+	scene = 3
+[3]
+description = Pick up potion
+result = You pick up the potion and add it to your pack
+hasrequirements = 0
+simple = 0
+	[[Effects]]
+	scene = 1
+	scenestateof = 1
+	scenestateto = 2
+	additems = "[6]"
