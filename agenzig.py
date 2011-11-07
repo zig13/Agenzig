@@ -1,11 +1,23 @@
-import os
+#-------------------------------------------------------------------------------
+# Name:        Agenzig Main Script
+# Purpose:
+#
+# Author:      Thomas Sturges-Allard
+#
+# Created:     01/11/2011 ish
+# Copyright:   (c) Thomas 2011
+# Licence:      Licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License.
+#			http://creativecommons.org/licenses/by-nc-sa/3.0/
+#-------------------------------------------------------------------------------
+
+import os # For checking for the existence of file and folders
 try:
 	import configobj
 except ImportError, e:
 	raw_input("ConfigObj module is required. Please install and try again")
 	exit(0)
-dot = str(os.curdir)
-sep = str(os.sep)
+dot = str(os.curdir) #The character used by the current os to denote the current folder. Is '.' in Windows
+sep = str(os.sep) #The character used by the current os to denote the demotion to another folder level. Is '/' in Windows
 mainfile = dot+sep+"main.agez"
 advsfolder = "%s%sAdventures%s" %(dot,sep,sep)
 if os.access(mainfile, os.R_OK) :
@@ -178,10 +190,12 @@ confrontationfile = advfolder+sep+"confrontations.agez"
 confrontations = ConfigObj(confrontationfile, encoding='UTF8',list_values=True)
 itemfile = advfolder+sep+"items.agez"
 items = ConfigObj(itemfile, encoding='UTF8',list_values=True)
+armourfile = advfolder+sep+"armour.agez"
+armours = ConfigObj(armourfile, encoding='UTF8',list_values=True)
 mweaponfile = advfolder+sep+"mweapons.agez"
-main = ConfigObj(mweaponfile, encoding='UTF8',list_values=True)
+mweapons = ConfigObj(mweaponfile, encoding='UTF8',list_values=True)
 rweaponfile = advfolder+sep+"rweapons.agez"
-main = ConfigObj(rweaponfile, encoding='UTF8',list_values=True)
+rweapons = ConfigObj(rweaponfile, encoding='UTF8',list_values=True)
 fight = 0
 if sel!= opt :
 	print "Continuing adventure"
@@ -265,6 +279,9 @@ while 7 != 3 : #Basically, you're not getting out of this loop...
 	sceneb = scene
 	scenestateb = scene
 	scenechanged = 0
+	statusgen = 0
+	invlistgen = 0
+	from decimal import *
 	while scenechanged == 0 :
 		prompt = raw_input("") #The main prompt!
 		if prompt == "" :
@@ -272,8 +289,53 @@ while 7 != 3 : #Basically, you're not getting out of this loop...
 		elif (prompt == "choices") or (prompt == "Choices") or (prompt == "c") or (prompt == "C") :
 			print ""
 			print scenechoices
+		elif  (prompt == "status") or (prompt == "Status") or (prompt == "s") or (prompt == "S") :
+			if statusgen != 1 :
+				if health > ((int(main['Attribute Categories']['healthy'])/100)*120) :
+					stathealth = "You are EXTREMELY Healthy\n"
+				elif (health > int(main['Attribute Categories']['healthy'])) and (health <=  ((int(main['Attribute Categories']['healthy']))/100)*120) :
+					stathealth = "You are Unnaturally Healthy\n"
+				elif (health <= int(main['Attribute Categories']['healthy'])) and (health >= ((int(main['Attribute Categories']['healthy']))/100)*80) :
+					stathealth = "You are Healthy\n"
+				elif health >= ((int(main['Attribute Categories']['healthy']))/100)*60 :
+					stathealth = "You are Hurt\n"
+				elif health >= ((int(main['Attribute Categories']['healthy']))/100)*40 :
+					stathealth = "You are Injured\n"
+				elif health >= ((int(main['Attribute Categories']['healthy']))/100)*20 :
+					stathealth = "You are Severely Injured\n"
+				elif health > 0 :
+					stathealth = "You are Near Death\n"
+				else :
+					stathealth = "How are you alive?\n"
+				if armour != 0 :
+					statarmour = "You are wearing "+str(armours[str(armour)]['description'])+"\n"
+				else :
+					armour = ""
+				if Mweapon != 0 :
+					statmweapon = mweapons[str(Mweapon)]['description']
+					mw = 1
+				else :
+					mw = 0
+				if Rweapon != 0 :
+					statrweapon = rweapons[str(Rweapon)]['description']
+					rw = 1
+				else :
+					rw = 0
+				if mw == 1 :
+					if rw == 1 :
+						statweapons = "You are wielding a "+statmweapon+" and a "+statrweapon+"\n"
+					else :
+						statweapons = "You are wielding a "+statmweapon+"\n"
+				elif rw == 1 :
+					statweapons = "You are wielding a "+statrweapon+"\n"
+				else :
+					statweapons = ""
+				status = "Current Status:\n"+stathealth+statarmour+statweapons
+				statusgen = 1
+			print ""
+			print status
 		elif (prompt == "inventory") or (prompt == "Inventory") or (prompt == "i") or (prompt == "I"):
-				print ""
+			if invlistgen != 1 :
 				itemstotal = len(inventory)
 				opt = 0
 				if itemstotal > 0 :
@@ -287,8 +349,10 @@ while 7 != 3 : #Basically, you're not getting out of this loop...
 						inventorylist = inventorylist+aitem
 				else :
 					inventorylist = "You are not carrying anything of note"
-				print inventorylist
 				inventory  = eval(character['Items']['inventory'])
+				invlistgen = 1
+			print ""
+			print inventorylist
 		elif (prompt == "help") or (prompt == "Help") or (prompt == "h") or (prompt == "H") :
 			print ""
 			print "Command List"

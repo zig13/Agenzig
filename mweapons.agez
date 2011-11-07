@@ -1,0 +1,9 @@
+[1]
+description = Steel Dagger
+slashclass = 2
+pierceclass = 7
+crushclass = 1
+fireclass = 0
+magiclass = 0
+reach = 2
+speed = 0.54
