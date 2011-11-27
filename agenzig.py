@@ -348,8 +348,7 @@ while 7 != 3 : #Basically, you're not getting out of this loop...
 					elif strength > 0 :
 						statstrength = "You are Frail\n"
 					else :
-						statstrength = "You are Incapacitated\n"
-				
+						statstrength = "You are Incapacitated\n"		
 				if (knowledge >= int(main['Attribute Categories']['knowlegable'])/10*9) and (knowledge <= int(main['Attribute Categories']['knowlegable'])/10*11) :
 					statknowledge = "You are Knowledgable\n"
 				elif knowledge > int(main['Attribute Categories']['knowlegable'])/10*11 :
@@ -374,7 +373,30 @@ while 7 != 3 : #Basically, you're not getting out of this loop...
 						statknowledge = "You are Naive\n"
 					else :
 						statknowledge = "You are Vegetative\n"
-				
+				if (dexterity >= int(main['Attribute Categories']['knowlegable'])/10*9) and (dexterity <= int(main['Attribute Categories']['knowlegable'])/10*11) :
+					statdexterity = "You are Dexterous\n"
+				elif dexterity > int(main['Attribute Categories']['knowlegable'])/10*11 :
+					if dexterity < int(main['Attribute Categories']['knowlegable'])/10*13.3 :
+						statdexterity = "You are Deft\n"
+					elif dexterity < int(main['Attribute Categories']['knowlegable'])/10*15.6 :
+						statdexterity = "You are Precise\n"
+					elif dexterity < int(main['Attribute Categories']['knowlegable'])/10*17.9 :
+						statdexterity = "You are Highly Dexterous\n"
+					elif dexterity < int(main['Attribute Categories']['knowlegable'])/10*20 :
+						statdexterity = "You are Extremely Deft\n"
+					else :
+						statdexterity = "You Move Faster Than The Eye Can See\n"
+				else :
+					if dexterity > int(main['Attribute Categories']['knowlegable'])/10*6.7 :
+						statdexterity = "You are Gawky\n"
+					elif dexterity > int(main['Attribute Categories']['knowlegable'])/10*4.4 :
+						statdexterity = "You are Ungainly\n"
+					elif dexterity > int(main['Attribute Categories']['knowlegable'])/10*2.1 :
+						statdexterity = "You are Clumsy\n"
+					elif dexterity > 0 :
+						statdexterity = "You are Highly Cumbersome\n"
+					else :
+						statdexterity = "You are Completely Uncoordinated\n"				
 				if armour != 0 :
 					statarmour = "You are wearing "+str(armours[str(armour)]['description'])+"\n"
 				else :
@@ -398,7 +420,7 @@ while 7 != 3 : #Basically, you're not getting out of this loop...
 					statweapons = "You are wielding a "+statrweapon+"\n"
 				else :
 					statweapons = ""
-				status = "Current Status:\n"+stathealth+statfatigue+"\n"+statstrength+statknowledge+"\n"+statarmour+statweapons
+				status = "Current Status:\n"+stathealth+statfatigue+"\n"+statstrength+statknowledge+statdexterity+"\n"+statarmour+statweapons
 				statusgen = 1
 			print ""
 			print status
@@ -429,6 +451,6 @@ while 7 != 3 : #Basically, you're not getting out of this loop...
 			print "'status': view your health, attributes and equipment"
 			print "'help': view these commands again"
 		else :
-			print "Try using an ACTUAL command moron" #Might change this before release...
+			print "Try using an ACTUAL command moron"  #Might change this before release...
 		if (scene != sceneb) or (scenestate != scenestateb) :
 			scenechanged = 1
