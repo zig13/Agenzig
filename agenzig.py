@@ -87,7 +87,7 @@ while done == 0 :
 	if choice.isdigit() == 1 :
 		sel = int(choice)
 		if sel == opt :
-			charname = raw_input("Please enter a charname for your character" )
+			charname = raw_input("Please enter a your character's name" )
 			charfile = "%s.azc" %(charname)
 			done = 1
 		else:
@@ -291,22 +291,90 @@ while 7 != 3 : #Basically, you're not getting out of this loop...
 			print scenechoices
 		elif  (prompt == "status") or (prompt == "Status") or (prompt == "s") or (prompt == "S") :
 			if statusgen != 1 :
-				if health > ((int(main['Attribute Categories']['healthy'])/100)*120) :
+				if health > ((int(main['Attribute Categories']['healthy'])/10)*12) :
 					stathealth = "You are EXTREMELY Healthy\n"
-				elif (health > int(main['Attribute Categories']['healthy'])) and (health <=  ((int(main['Attribute Categories']['healthy']))/100)*120) :
+				elif (health > int(main['Attribute Categories']['healthy'])) and (health <=  ((int(main['Attribute Categories']['healthy']))/10)*12) :
 					stathealth = "You are Unnaturally Healthy\n"
-				elif (health <= int(main['Attribute Categories']['healthy'])) and (health >= ((int(main['Attribute Categories']['healthy']))/100)*80) :
+				elif (health <= int(main['Attribute Categories']['healthy'])) and (health >= ((int(main['Attribute Categories']['healthy']))/10)*8) :
 					stathealth = "You are Healthy\n"
-				elif health >= ((int(main['Attribute Categories']['healthy']))/100)*60 :
+				elif health >= ((int(main['Attribute Categories']['healthy']))/10)*6 :
 					stathealth = "You are Hurt\n"
-				elif health >= ((int(main['Attribute Categories']['healthy']))/100)*40 :
+				elif health >= ((int(main['Attribute Categories']['healthy']))/10)*4 :
 					stathealth = "You are Injured\n"
-				elif health >= ((int(main['Attribute Categories']['healthy']))/100)*20 :
+				elif health >= ((int(main['Attribute Categories']['healthy']))/10)*2 :
 					stathealth = "You are Severely Injured\n"
 				elif health > 0 :
 					stathealth = "You are Near Death\n"
 				else :
 					stathealth = "How are you alive?\n"
+				if fatigue < 0 :
+					statfatigue = "You are Extraordinarily Energetic\n"
+				elif fatigue == 0 :
+					statfatigue = "You are Full of Energy\n"
+				elif fatigue <= ((int(main['Attribute Categories']['debilitatingfatigue']))/10)*1 :
+					statfatigue = "You are Mildly Fatigued\n"
+				elif fatigue <= ((int(main['Attribute Categories']['debilitatingfatigue']))/10)*2 :
+					statfatigue = "You are Weary\n"
+				elif fatigue <= ((int(main['Attribute Categories']['debilitatingfatigue']))/10)*4 :
+					statfatigue = "You are Tired\n"
+				elif fatigue <= ((int(main['Attribute Categories']['debilitatingfatigue']))/10)*6 :
+					statfatigue = "You are Worn Out\n"
+				elif fatigue <= ((int(main['Attribute Categories']['debilitatingfatigue']))/10)*8 :
+					statfatigue = "You are Exhausted\n"
+				elif fatigue > int(main['Attribute Categories']['debilitatingfatigue']) :
+					statfatigue = "You are Totally Cream Crackered\n"
+				else :
+					statfatigue = "You are beyond exhausation\n"
+				if (strength >= int(main['Attribute Categories']['strong'])/10*9) and (strength <= int(main['Attribute Categories']['strong'])/10*11) :
+					statstrength = "You are Strong\n"
+				elif strength > int(main['Attribute Categories']['strong'])/10*11 :
+					if strength < int(main['Attribute Categories']['strong'])/10*13.3 :
+						statstrength = "You are Very Strong\n"
+					elif strength < int(main['Attribute Categories']['strong'])/10*15.6 :
+						statstrength = "You are Mighty\n"
+					elif strength < int(main['Attribute Categories']['strong'])/10*17.9 :
+						statstrength = "You are Immensely Strong\n"
+					elif strength < int(main['Attribute Categories']['strong'])/10*20 :
+						statstrength = "You are Incredibly Strong\n"
+					else :
+						statstrength = "You are Herculean\n"
+				else :
+					if strength > int(main['Attribute Categories']['strong'])/10*6.7 :
+						statstrength = "You are Diminished\n"
+					elif strength > int(main['Attribute Categories']['strong'])/10*4.4 :
+						statstrength = "You are Weak\n"
+					elif strength > int(main['Attribute Categories']['strong'])/10*2.1 :
+						statstrength = "You are Feeble\n"
+					elif strength > 0 :
+						statstrength = "You are Frail\n"
+					else :
+						statstrength = "You are Incapacitated\n"
+				
+				if (knowledge >= int(main['Attribute Categories']['knowlegable'])/10*9) and (knowledge <= int(main['Attribute Categories']['knowlegable'])/10*11) :
+					statknowledge = "You are Knowledgable\n"
+				elif knowledge > int(main['Attribute Categories']['knowlegable'])/10*11 :
+					if knowledge < int(main['Attribute Categories']['knowlegable'])/10*13.3 :
+						statknowledge = "You are Very knowledgable\n"
+					elif knowledge < int(main['Attribute Categories']['knowlegable'])/10*15.6 :
+						statknowledge = "You are Highly Educated\n"
+					elif knowledge < int(main['Attribute Categories']['knowlegable'])/10*17.9 :
+						statknowledge = "You are Learned\n"
+					elif knowledge < int(main['Attribute Categories']['knowlegable'])/10*20 :
+						statknowledge = "You are Enlightened\n"
+					else :
+						statknowledge = "You are All-knowing\n"
+				else :
+					if knowledge > int(main['Attribute Categories']['knowlegable'])/10*6.7 :
+						statknowledge = "You are Poorly Educated\n"
+					elif knowledge > int(main['Attribute Categories']['knowlegable'])/10*4.4 :
+						statknowledge = "You are Dumb\n"
+					elif knowledge > int(main['Attribute Categories']['knowlegable'])/10*2.1 :
+						statknowledge = "You are Ignorant\n"
+					elif knowledge > 0 :
+						statknowledge = "You are Naive\n"
+					else :
+						statknowledge = "You are Vegetative\n"
+				
 				if armour != 0 :
 					statarmour = "You are wearing "+str(armours[str(armour)]['description'])+"\n"
 				else :
@@ -330,7 +398,7 @@ while 7 != 3 : #Basically, you're not getting out of this loop...
 					statweapons = "You are wielding a "+statrweapon+"\n"
 				else :
 					statweapons = ""
-				status = "Current Status:\n"+stathealth+statarmour+statweapons
+				status = "Current Status:\n"+stathealth+statfatigue+"\n"+statstrength+statknowledge+"\n"+statarmour+statweapons
 				statusgen = 1
 			print ""
 			print status
@@ -361,6 +429,6 @@ while 7 != 3 : #Basically, you're not getting out of this loop...
 			print "'status': view your health, attributes and equipment"
 			print "'help': view these commands again"
 		else :
-			print "Try using an ACTUAL command moron"
+			print "Try using an ACTUAL command moron" #Might change this before release...
 		if (scene != sceneb) or (scenestate != scenestateb) :
 			scenechanged = 1
