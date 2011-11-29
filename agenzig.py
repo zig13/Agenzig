@@ -16,6 +16,7 @@ try:
 except ImportError, e:
 	raw_input("ConfigObj module is required. Please install and try again")
 	exit(0)
+from configobj import *
 dot = str(os.curdir) #The character used by the current os to denote the current folder. Is '.' in Windows
 sep = str(os.sep) #The character used by the current os to denote the demotion to another folder level. Is '/' in Windows
 mainfile = dot+sep+"main.agez"
