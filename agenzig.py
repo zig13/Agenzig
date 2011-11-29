@@ -1,11 +1,11 @@
 #-------------------------------------------------------------------------------
 # Name:        Agenzig Main Script
-# Purpose:
+# Purpose:     Text-based adventure game engine
 #
 # Author:      Thomas Sturges-Allard
 #
 # Created:     01/11/2011 ish
-# Copyright:   (c) Thomas 2011
+# Copyright:   (c) Thomas Sturges-Allard 2011
 # Licence:      Licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License.
 #			http://creativecommons.org/licenses/by-nc-sa/3.0/
 #-------------------------------------------------------------------------------
