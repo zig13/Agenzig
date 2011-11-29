@@ -7,33 +7,35 @@ currencyonename = gold coins
 currencytwoname = silver coins
 currencythreename = copper coins
 
+[Attribute Categories]
+healthy = 1000
+debilitatingfatigue = 70
+strong = 20
+knowlegable = 20
+dexterous = 20
+disciplined = 20
+built = 20
+charismatic = 20
+perceptive = 20
+
 [Character Setup]
 initialscene = 1
 initialhealth = 950
-goodhealth = 1000
 initialfatigue = 5
-debilitatingfatigue = 70
 minstrength = 15
 maxstrength = 25
-strong = 20
 minknowledge = 15
 maxknowledge = 25
-knowlegable = 20
 mindexterity = 15
-maxdexterity = 25
-dexterous = 20
+maxdexterity = 20
 minwillpower = 15
 maxwillpower = 25
-disciplined = 20
 minconstitution = 15
 maxconstitution = 25
-built = 20
 mincharisma = 15
 maxcharisma = 25
-loveable = 20
 minperception = 15
 maxperception = 25
-observant = 20
 initialarmour = 1
 initialMweapon = 1
 initialRweapon = 1
