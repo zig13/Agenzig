@@ -75,16 +75,21 @@ while done == 0 :
 	chars = os.listdir(charfolder)
 	chars.reverse()
 	charsno = len(chars)
-	print "Listing characters"
 	opt = 1
-	while charsno != 0 :
-		print "%s) %s" %(opt,chars.pop())
-		charsno = charsno-1
-		opt = opt+1
-	print ""
-	print "%s) New Character" %(opt)
-	print ""
-	choice = raw_input("Please type a number corresponding to the above option you require" )
+	if charsno != 0 :
+		print "Listing characters"
+		while charsno != 0 :
+			print "%s) %s" %(opt,chars.pop())
+			charsno = charsno-1
+			opt = opt+1
+		print ""
+		print "%s) New Character" %(opt)
+		print ""
+		choice = raw_input("Please type a number corresponding to the above option you require" )
+	else :
+		print "No characters found"
+		print "Initiating character creation"
+		choice = str(1)
 	if choice.isdigit() == 1 :
 		sel = int(choice)
 		if sel == opt :
