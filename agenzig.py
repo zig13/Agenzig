@@ -288,6 +288,7 @@ while 7 != 3 : #Basically, you're not getting out of this loop...
 	scenechanged = 0
 	statusgen = 0
 	invlistgen = 0
+	itemused = 0
 	from decimal import *
 	while scenechanged == 0 :
 		prompt = raw_input("") #The main prompt!
@@ -433,15 +434,19 @@ while 7 != 3 : #Basically, you're not getting out of this loop...
 				statusgen = 1
 			print ""
 			print status
-		elif (prompt == "inventory") or (prompt == "i") :
-			if invlistgen != 1 :
+		elif (prompt == "inventory") or (prompt == "i") or (prompt.startswith("use ") and  (len(prompt) > 4)) :
+			if prompt.startswith("use ") :
+				printinv = 0
+			else :
+				printinv = 1
+			if (invlistgen != 1)  or (itemused == 1) :
 				itemstotal = len(inventory)
 				opt = 0
 				if itemstotal > 0 :
 					inventorylist = "You are carrying:\n"+str(opt)+") "+items[str(inventory.pop())]['description']+"\n"
 					while itemstotal != 0 :
-						opt = opt+1
 						aitemno = str(inventory.pop())
+						opt = opt+1
 						itemstotal = len(inventory)
 						aitemdesc = items[aitemno]['description']
 						aitem = str(opt)+") "+aitemdesc+"\n"
