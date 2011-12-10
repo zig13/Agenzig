@@ -455,8 +455,9 @@ while 7 != 3 : #Basically, you're not getting out of this loop...
 					inventorylist = "You are not carrying anything of note"
 				inventory = eval(character['Items']['inventory'])
 				invlistgen = 1
-			print ""
-			print inventorylist
+			if printinv == 1:
+				print ""
+				print inventorylist
 		elif (prompt == "help") or (prompt == "h") :
 			print ""
 			print "Command List"
