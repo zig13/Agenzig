@@ -186,7 +186,8 @@ perception = int(character['Attributes']['perception'])
 armour = int(character['Items']['armour'])
 Mweapon = int(character['Items']['Mweapon'])
 Rweapon = int(character['Items']['Rweapon'])
-inventory  = eval(character['Items']['inventory'])
+inventory = eval(character['Items']['inventory'])
+fullinventory = inventory
 # Loading other files
 scenefile = advfolder+sep+"scenes.agez"
 scenes = ConfigObj(scenefile, encoding='UTF8',list_values=True)
@@ -290,12 +291,14 @@ while 7 != 3 : #Basically, you're not getting out of this loop...
 	from decimal import *
 	while scenechanged == 0 :
 		prompt = raw_input("") #The main prompt!
+		prompt = prompt.lower()
+		print prompt
 		if prompt == "" :
 			print ""
-		elif (prompt == "choices") or (prompt == "Choices") or (prompt == "c") or (prompt == "C") :
+		elif (prompt == "choices") or (prompt == "c") :
 			print ""
 			print scenechoices
-		elif  (prompt == "status") or (prompt == "Status") or (prompt == "s") or (prompt == "S") :
+		elif  (prompt == "status") or (prompt == "s") :
 			if statusgen != 1 :
 				if health > ((int(main['Attribute Categories']['healthy'])/10)*12) :
 					stathealth = "You are EXTREMELY Healthy\n"
@@ -430,7 +433,7 @@ while 7 != 3 : #Basically, you're not getting out of this loop...
 				statusgen = 1
 			print ""
 			print status
-		elif (prompt == "inventory") or (prompt == "Inventory") or (prompt == "i") or (prompt == "I"):
+		elif (prompt == "inventory") or (prompt == "i") :
 			if invlistgen != 1 :
 				itemstotal = len(inventory)
 				opt = 0
@@ -445,11 +448,11 @@ while 7 != 3 : #Basically, you're not getting out of this loop...
 						inventorylist = inventorylist+aitem
 				else :
 					inventorylist = "You are not carrying anything of note"
-				inventory  = eval(character['Items']['inventory'])
+				inventory = eval(character['Items']['inventory'])
 				invlistgen = 1
 			print ""
 			print inventorylist
-		elif (prompt == "help") or (prompt == "Help") or (prompt == "h") or (prompt == "H") :
+		elif (prompt == "help") or (prompt == "h") or :
 			print ""
 			print "Command List"
 			print "'choices': review availible options"
