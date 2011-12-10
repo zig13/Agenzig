@@ -452,7 +452,7 @@ while 7 != 3 : #Basically, you're not getting out of this loop...
 				invlistgen = 1
 			print ""
 			print inventorylist
-		elif (prompt == "help") or (prompt == "h") or :
+		elif (prompt == "help") or (prompt == "h") :
 			print ""
 			print "Command List"
 			print "'choices': review availible options"
