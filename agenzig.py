@@ -1,4 +1,4 @@
-#-------------------------------------------------------------------------------
+﻿#-------------------------------------------------------------------------------
 # Name:        Agenzig Main Script
 # Purpose:     Text-based adventure game engine
 #
@@ -22,7 +22,7 @@ sep = str(os.sep) #The character used by the current os to denote the demotion t
 mainfile = dot+sep+"main.agez"
 advsfolder = "%s%sAdventures%s" %(dot,sep,sep)
 if os.access(mainfile, os.R_OK) :
-	main = ConfigObj(mainfile, encoding='UTF8')
+	main = ConfigObj(mainfile, unrepr=True)
 	advname = main['Details']['title']
 	charfolder = dot+sep+"Characters"+sep
 	advfolder = dot+sep
@@ -61,7 +61,7 @@ elif os.access(advsfolder, os.R_OK):
 			print "Input must be a number"
 			print ""
 	from configobj import ConfigObj
-	main = ConfigObj(mainfile, encoding='UTF8',list_values=True)
+	main = ConfigObj(mainfile, unrepr=True)
 	advname = main['Details']['title']
 	charfolder = dot+sep+advfolder+sep+"Characters"+sep
 	print advname+" succesfully loaded"
@@ -111,7 +111,7 @@ while done == 0 :
 	else:
 		print "Input must be a number"
 charfile = "%s%s.azc" %(charfolder,charname)
-character = ConfigObj(charfile, encoding='UTF8',list_values=True)
+character = ConfigObj(charfile, unrepr=True)
 if sel == opt : #Making a new character
 	csetup = main['Character Setup']
 	character['Basics'] = {}
@@ -186,23 +186,22 @@ perception = int(character['Attributes']['perception'])
 armour = int(character['Items']['armour'])
 Mweapon = int(character['Items']['Mweapon'])
 Rweapon = int(character['Items']['Rweapon'])
-inventory = eval(character['Items']['inventory'])
-fullinventory = inventory
+inventory = character['Items']['inventory']
 # Loading other files
 scenefile = advfolder+sep+"scenes.agez"
-scenes = ConfigObj(scenefile, encoding='UTF8',list_values=True)
+scenes = ConfigObj(scenefile, unrepr=True)
 choicefile = advfolder+sep+"choices.agez"
-choices = ConfigObj(choicefile, encoding='UTF8',list_values=True)
+choices = ConfigObj(choicefile, unrepr=True)
 confrontationfile = advfolder+sep+"confrontations.agez"
-confrontations = ConfigObj(confrontationfile, encoding='UTF8',list_values=True)
+confrontations = ConfigObj(confrontationfile, unrepr=True)
 itemfile = advfolder+sep+"items.agez"
-items = ConfigObj(itemfile, encoding='UTF8',list_values=True)
+items = ConfigObj(infile=itemfile, unrepr=True)
 armourfile = advfolder+sep+"armour.agez"
-armours = ConfigObj(armourfile, encoding='UTF8',list_values=True)
+armours = ConfigObj(armourfile, unrepr=True)
 mweaponfile = advfolder+sep+"mweapons.agez"
-mweapons = ConfigObj(mweaponfile, encoding='UTF8',list_values=True)
+mweapons = ConfigObj(mweaponfile, unrepr=True)
 rweaponfile = advfolder+sep+"rweapons.agez"
-rweapons = ConfigObj(rweaponfile, encoding='UTF8',list_values=True)
+rweapons = ConfigObj(rweaponfile, unrepr=True)
 fight = 0
 if sel!= opt :
 	print "Continuing adventure"
@@ -213,7 +212,7 @@ while 7 != 3 : #Basically, you're not getting out of this loop...
 	else :
 		scenestate = str(1)
 	print scenes[scene][scenestate]['description']
-	scenechoicecodes = eval(scenes[scene][scenestate]['choices'])
+	scenechoicecodes = scenes[scene][scenestate]['choices']
 	choicetotal = len(scenechoicecodes) - 1
 	choiceno = 0
 	while choiceno != choicetotal :
@@ -293,7 +292,6 @@ while 7 != 3 : #Basically, you're not getting out of this loop...
 	while scenechanged == 0 :
 		prompt = raw_input("") #The main prompt!
 		prompt = prompt.lower()
-		print prompt
 		if prompt == "" :
 			print ""
 		elif (prompt == "choices") or (prompt == "c") :
@@ -441,19 +439,26 @@ while 7 != 3 : #Basically, you're not getting out of this loop...
 				printinv = 1
 			if (invlistgen != 1)  or (itemused == 1) :
 				itemstotal = len(inventory)
+				printeditems = []
 				opt = 0
-				if itemstotal > 0 :
-					inventorylist = "You are carrying:\n"+str(opt)+") "+items[str(inventory.pop())]['description']+"\n"
-					while itemstotal != 0 :
-						aitemno = str(inventory.pop())
+				inventorylist = "You are carrying:\n"
+				while itemstotal > 0 :
+					aitemno = inventory.pop()
+					itemstotal = len(inventory)
+					if printeditems.count(aitemno) == 0 :
+						aitemocc = inventory.count(aitemno)+1
 						opt = opt+1
-						itemstotal = len(inventory)
-						aitemdesc = items[aitemno]['description']
-						aitem = str(opt)+") "+aitemdesc+"\n"
+						aitemdesc = items[str(aitemno)]['description']
+						if aitemocc == 1 :
+							aitem = str(opt)+") "+aitemdesc+"\n"
+						else :
+							aitem = str(opt)+") "+aitemdesc+" x "+str(aitemocc)+"\n"
 						inventorylist = inventorylist+aitem
-				else :
+						printeditems.append(aitemno)
+				if opt == 0 :
 					inventorylist = "You are not carrying anything of note"
-				inventory = eval(character['Items']['inventory'])
+				else :
+					inventory = character['Items']['inventory']
 				invlistgen = 1
 			if printinv == 1:
 				print ""
