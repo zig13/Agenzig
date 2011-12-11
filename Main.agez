@@ -1,11 +1,11 @@
 [Details]
-title = Murderous Monastery
-blurb = MAD MADE MONKS
-author = Thomas Sturges-Allard
-website = http:\\zig13.termisoc.org
-currencyonename = gold coins
-currencytwoname = silver coins
-currencythreename = copper coins
+title = "Murderous Monastery"
+blurb = "MAD MADE MONKS"
+author = "Thomas Sturges-Allard"
+website = "http:\\zig13.termisoc.org"
+currencyonename = "gold coins"
+currencytwoname = "silver coins"
+currencythreename = "copper coins"
 
 [Attribute Categories]
 healthy = 1000
@@ -19,7 +19,7 @@ charismatic = 20
 perceptive = 20
 
 [Character Setup]
-initialscene = 1
+initialscene = "1"
 initialhealth = 950
 initialfatigue = 5
 minstrength = 15
@@ -36,10 +36,10 @@ mincharisma = 15
 maxcharisma = 25
 minperception = 15
 maxperception = 25
-initialarmour = 1
-initialMweapon = 1
-initialRweapon = 1
-initialinventory = "[5,2]"
+initialarmour = "1"
+initialMweapon = "1"
+initialRweapon = "1"
+initialinventory = [2,5]
 initialcurrencyone = 3
 initialcurrencytwo = 6
 initialcurrencythree = 9
