@@ -1,16 +1,13 @@
 [1]
-states = 2
+states = "2"
 	[[1]]
-	description = """You are in a cave. 
-It looks very much like a cave.
-There is a potion on the ground."""
-	choices = "[1,2,3]"
+	description = "You are in a cave.\nIt looks very much like a cave.\nThere is a potion on the ground."
+	choices = [1,2,3]
 	[[2]]
-	description = """You are in a cave. 
-It looks very much like a cave."""
-	choices = "[1,2]"
+	description = "You are in a cave.\nIt looks very much like a cave."
+	choices = [1,2]
 [2]
-states = 1
+states = "1"
 	[[1]]
 	description = "Some other place"
-	choices = "[4,5]"
+	choices = [4,5]
