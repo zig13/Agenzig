@@ -463,7 +463,20 @@ while 7 != 3 : #Basically, you're not getting out of this loop...
 			if printinv == 1:
 				print ""
 				print inventorylist
-		elif (prompt == "help") or (prompt == "h") :
+			elif printinv == 0 :
+				usecode = prompt.lstrip('u')
+				usecode = usecode.lstrip('s')
+				usecode = usecode.lstrip('e')
+				usecode = usecode.lstrip(' ')
+				if choice.isdigit() == 1 :
+					usecode = int(usecode)
+					if usecode <= opt :
+						print "" #Insert item using code here
+					else :
+						print "Value given does not refer to an item in your inventory"
+				else :
+					print "USE command must be followed by a number"
+		elif (prompt == "help") or (prompt == "h") or (prompt == "man") :
 			print ""
 			print "Command List"
 			print "'choices': review availible options"
