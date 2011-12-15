@@ -471,7 +471,7 @@ while 7 != 3 : #Basically, you're not getting out of this loop...
 				if choice.isdigit() == 1 :
 					usecode = int(usecode)
 					if usecode <= opt :
-						print "" #Insert item using code here
+						itemused = str(chars2.pop((sel-1)))
 					else :
 						print "Value given does not refer to an item in your inventory"
 				else :
