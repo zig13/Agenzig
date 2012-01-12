@@ -93,7 +93,16 @@ while done == 0 :
 	if choice.isdigit() == 1 :
 		sel = int(choice)
 		if sel == opt :
-			charname = raw_input("Please enter a your character's name" )
+			charname = raw_input("Please enter a name for your character: " )
+			genderin = raw_input("Is your character Male of Female? " )
+			genderin = genderin.lower()
+			if (genderin == "male") or (genderin == "m") or (genderin == "ma") or (genderin == "mas") :
+				chargender = "male"
+			elif (genderin == "female") or (genderin == "f") or (genderin == "fe") or (genderin == "fem") :
+				chargender = "female"
+			else :
+				print "I'll take that to mean your character is gender neutral"
+				chargender = "neutral"
 			charfile = "%s.azc" %(charname)
 			done = 1
 		else:
@@ -116,6 +125,7 @@ if sel == opt : #Making a new character
 	csetup = main['Character Setup']
 	character['Basics'] = {}
 	character['Basics']['charname'] = charname
+	character['Basics']['gender'] = chargender
 	character['Basics']['scene'] = csetup['initialscene']
 	import random
 	#Setting vitals
@@ -293,7 +303,7 @@ while 7 != 3 : #Basically, you're not getting out of this loop...
 		prompt = raw_input("") #The main prompt!
 		prompt = prompt.lower()
 		if prompt == "" :
-			print ""
+			pass
 		elif (prompt == "choices") or (prompt == "c") :
 			print ""
 			print scenechoices
@@ -369,7 +379,7 @@ while 7 != 3 : #Basically, you're not getting out of this loop...
 					elif knowledge < int(main['Attribute Categories']['knowlegable'])/10*20 :
 						statknowledge = "You are Enlightened\n"
 					else :
-						statknowledge = "You are All-knowing\n"
+						statknowledge = "You are Omniscient\n"
 				else :
 					if knowledge > int(main['Attribute Categories']['knowlegable'])/10*6.7 :
 						statknowledge = "You are Poorly Educated\n"
@@ -404,7 +414,103 @@ while 7 != 3 : #Basically, you're not getting out of this loop...
 					elif dexterity > 0 :
 						statdexterity = "You are Highly Cumbersome\n"
 					else :
-						statdexterity = "You are Completely Uncoordinated\n"				
+						statdexterity = "You are Completely Uncoordinated\n"
+				if (willpower >= int(main['Attribute Categories']['determined'])/10*9) and (willpower <= int(main['Attribute Categories']['determined'])/10*11) :
+					statwillpower = "You are Determined\n"
+				elif willpower > int(main['Attribute Categories']['determined'])/10*11 :
+					if willpower < int(main['Attribute Categories']['determined'])/10*13.3 :
+						statwillpower = "You are Steadfast\n"
+					elif willpower < int(main['Attribute Categories']['determined'])/10*15.6 :
+						statwillpower = "You are Unshakable\n"
+					elif willpower < int(main['Attribute Categories']['determined'])/10*17.9 :
+						statwillpower = "You are Highly Dexterous\n"
+					elif willpower < int(main['Attribute Categories']['determined'])/10*20 :
+						statwillpower = "You are Extremely Deft\n"
+					else :
+						statwillpower = "You Move Faster Than The Eye Can See\n"
+				else :
+					if willpower > int(main['Attribute Categories']['determined'])/10*6.7 :
+						statwillpower = "You are Suggestable\n"
+					elif willpower > int(main['Attribute Categories']['determined'])/10*4.4 :
+						statwillpower = "You are Weak-willed\n"
+					elif willpower > int(main['Attribute Categories']['determined'])/10*2.1 :
+						statwillpower = "You are Obedient\n"
+					elif willpower > 0 :
+						statwillpower = "You are Robotic\n"
+					else :
+						statwillpower = "You are Completely Uncoordinated\n"	
+				if (constitution >= int(main['Attribute Categories']['built'])/10*9) and (constitution <= int(main['Attribute Categories']['built'])/10*11) :
+					statconstitution = "You are Built\n"
+				elif constitution > int(main['Attribute Categories']['built'])/10*11 :
+					if constitution < int(main['Attribute Categories']['built'])/10*13.3 :
+						statconstitution = "You are Fortified\n"
+					elif constitution < int(main['Attribute Categories']['built'])/10*15.6 :
+						statconstitution = "You are Highly Resilient\n"
+					elif constitution < int(main['Attribute Categories']['built'])/10*17.9 :
+						statconstitution = "You are Unassailable\n"
+					elif constitution < int(main['Attribute Categories']['built'])/10*20 :
+						statconstitution = "You are Impenetrable\n"
+					else :
+						statconstitution = "You are WICKED SICK\n"
+				else :
+					if constitution > int(main['Attribute Categories']['built'])/10*6.7 :
+						statconstitution = "You are Underweight\n"
+					elif constitution > int(main['Attribute Categories']['built'])/10*4.4 :
+						statconstitution = "You are Stunted\n"
+					elif constitution > int(main['Attribute Categories']['built'])/10*2.1 :
+						statconstitution = "You are Scrawny\n"
+					elif constitution > 0 :
+						statconstitution = "You are Falling Apart\n"
+					else :
+						statconstitution = "You are Incorporeal\n"
+				if (charisma >= int(main['Attribute Categories']['charismatic'])/10*9) and (charisma <= int(main['Attribute Categories']['charismatic'])/10*11) :
+					statcharisma = "You are Charismatic\n"
+				elif charisma > int(main['Attribute Categories']['charismatic'])/10*11 :
+					if charisma < int(main['Attribute Categories']['charismatic'])/10*13.3 :
+						statcharisma = "You are Persuasive\n"
+					elif charisma < int(main['Attribute Categories']['charismatic'])/10*15.6 :
+						statcharisma = "You are Imposing\n"
+					elif charisma < int(main['Attribute Categories']['charismatic'])/10*17.9 :
+						statcharisma = "You are Distinguished\n"
+					elif charisma < int(main['Attribute Categories']['charismatic'])/10*20 :
+						statcharisma = "You are Eminent\n"
+					else :
+						statcharisma = "You are Awe-inspiring\n"
+				else :
+					if charisma > int(main['Attribute Categories']['charismatic'])/10*6.7 :
+						statcharisma = "You are Unheeded\n"
+					elif charisma > int(main['Attribute Categories']['charismatic'])/10*4.4 :
+						statcharisma = "You are Unlikeable\n"
+					elif charisma > int(main['Attribute Categories']['charismatic'])/10*2.1 :
+						statcharisma = "You are Irritating\n"
+					elif charisma > 0 :
+						statcharisma = "You are Galling\n"
+					else :
+						statcharisma = "You are Widely Hated\n"
+				if (perception >= int(main['Attribute Categories']['perceptive'])/10*9) and (perception <= int(main['Attribute Categories']['perceptive'])/10*11) :
+					statperception = "You are Perceptive\n"
+				elif perception > int(main['Attribute Categories']['perceptive'])/10*11 :
+					if perception < int(main['Attribute Categories']['perceptive'])/10*13.3 :
+						statperception = "You are Keen-eyed\n"
+					elif perception < int(main['Attribute Categories']['perceptive'])/10*15.6 :
+						statperception = "You are Scanning\n"
+					elif perception < int(main['Attribute Categories']['perceptive'])/10*17.9 :
+						statperception = "You are Distinguished\n"
+					elif perception < int(main['Attribute Categories']['perceptive'])/10*20 :
+						statperception = "You are Eminent\n"
+					else :
+						statperception = "You are Omnipercipient\n"
+				else :
+					if perception > int(main['Attribute Categories']['perceptive'])/10*6.7 :
+						statperception = "You are Unheeded\n"
+					elif perception > int(main['Attribute Categories']['perceptive'])/10*4.4 :
+						statperception = "You are Illusioned\n"
+					elif perception > int(main['Attribute Categories']['perceptive'])/10*2.1 :
+						statperception = "You are Irritating\n"
+					elif perception > 0 :
+						statperception = "You are Galling\n"
+					else :
+						statperception = "You are Blind\n"							
 				if armour != 0 :
 					statarmour = "You are wearing "+str(armours[str(armour)]['description'])+"\n"
 				else :
@@ -428,7 +534,7 @@ while 7 != 3 : #Basically, you're not getting out of this loop...
 					statweapons = "You are wielding a "+statrweapon+"\n"
 				else :
 					statweapons = ""
-				status = "Current Status:\n"+stathealth+statfatigue+"\n"+statstrength+statknowledge+statdexterity+"\n"+statarmour+statweapons
+				status = "Current Status:\n"+stathealth+statfatigue+"\n"+statstrength+statknowledge+statdexterity+statwillpower+statconstitution+"\n"+statarmour+statweapons
 				statusgen = 1
 			print ""
 			print status
