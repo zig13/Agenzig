@@ -548,11 +548,13 @@ while 7 != 3 : #Basically, you're not getting out of this loop...
 				printeditems = []
 				opt = 0
 				inventorylist = "You are carrying:\n"
+				tempinventory = list(inventory)
+				tempinventory.reverse()
 				while itemstotal > 0 :
-					aitemno = inventory.pop()
-					itemstotal = len(inventory)
+					aitemno = tempinventory.pop()
+					itemstotal = len(tempinventory)
 					if printeditems.count(aitemno) == 0 :
-						aitemocc = inventory.count(aitemno)+1
+						aitemocc = tempinventory.count(aitemno)+1
 						opt = opt+1
 						aitemdesc = items[str(aitemno)]['description']
 						if aitemocc == 1 :
@@ -564,7 +566,7 @@ while 7 != 3 : #Basically, you're not getting out of this loop...
 				if opt == 0 :
 					inventorylist = "You are not carrying anything of note"
 				else :
-					inventory = character['Items']['inventory']
+					tempinventory = list(inventory)
 				invlistgen = 1
 			if printinv == 1:
 				print ""
@@ -577,9 +579,11 @@ while 7 != 3 : #Basically, you're not getting out of this loop...
 				if choice.isdigit() == 1 :
 					usecode = int(usecode)
 					if usecode <= opt :
-						itemused = str(chars2.pop((sel-1)))
+						useditem = str(tempinventory.pop((usecode-1)))
+						print useditem
+						itemused = 1
 					else :
-						print "Value given does not refer to an item in your inventory"
+						print "You are only carrying "+str(len(inventory))+" types of item"
 				else :
 					print "USE command must be followed by a number"
 		elif (prompt == "help") or (prompt == "h") or (prompt == "man") :
