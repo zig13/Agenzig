@@ -27,7 +27,7 @@ oneuse = 1
 	givearmor = '3'
 [4]
 description = 'Sling'
-usetext = "You move he sling to somewhere accesible and pick up a few rocks as ammo"
+usetext = "You move he sling to somewhere accesible and pick up a few rocks as amunition"
 isarmour = 0
 isMweapon = 0
 isRweapon = 1
