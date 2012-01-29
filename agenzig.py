@@ -12,13 +12,14 @@
 
 import os # For checking for the existence of file and folders
 try:
-	import configobj
+	import configobj #I'm using configobj instead of the built-in Configeditor as it allows for nested sections and list values
 except ImportError, e:
 	raw_input("ConfigObj module is required. Please install and try again")
 	exit(0)
 from configobj import *
 dot = str(os.curdir) #The character used by the current os to denote the current folder. Is '.' in Windows
 sep = str(os.sep) #The character used by the current os to denote the demotion to another folder level. Is '/' in Windows
+#Hopefully the use of these will help make the engine cross-platform
 mainfile = dot+sep+"main.agez"
 advsfolder = "%s%sAdventures%s" %(dot,sep,sep)
 if os.access(mainfile, os.R_OK) :
@@ -47,7 +48,7 @@ elif os.access(advsfolder, os.R_OK):
 		repeat = 1
 		if choice == "" :
 			print ""
-		elif choice.isdigit() == 1 :
+		elif choice.isdigit() == 1 : #This section basicalyl does the reverse of the above one to determine what adventure the inputted number refers to
 			sel = int(choice)
 			if sel <= opt :
 				advs2 = os.listdir(advsfolder)
@@ -68,7 +69,7 @@ elif os.access(advsfolder, os.R_OK):
 	print ""
 else :
 	print "Adventures folder missing and no main file found"
-	raw_input("If you don't know what this means, then you should probably reinstall")
+	raw_input("If you don't know what this means, then you should probably reinstall") #More informative than a crash...
 	exit(0)
 done = 0
 while done == 0 :
@@ -94,14 +95,14 @@ while done == 0 :
 		sel = int(choice)
 		if sel == opt :
 			charname = raw_input("Please enter a name for your character: " )
-			genderin = raw_input("Is your character Male of Female? " )
+			genderin = raw_input("Is your character Male of Female? " ) #Gender could be relevent to NPC dialogue and stuff. Currently adventure devs would have to use gender as a requirement for a choice but I might add functionality for male/female/neutral scenes
 			genderin = genderin.lower()
 			if (genderin == "male") or (genderin == "m") or (genderin == "ma") or (genderin == "mas") :
 				chargender = "male"
 			elif (genderin == "female") or (genderin == "f") or (genderin == "fe") or (genderin == "fem") :
 				chargender = "female"
 			else :
-				print "I'll take that to mean your character is gender neutral"
+				print "I'll take that to mean your character is gender neutral" #I'm not exactly happy with this as i'd rather not pin people down to a gender - even if they have three options
 				chargender = "neutral"
 			charfile = "%s.azc" %(charname)
 			done = 1
@@ -109,7 +110,7 @@ while done == 0 :
 			if sel <= opt :
 				chars2 = os.listdir(charfolder)
 				charfile = str(chars2.pop((sel-1)))
-				charname = charfile.rstrip('c')
+				charname = charfile.rstrip('c') #A bit crude but does the job
 				charname = charname.rstrip('z')
 				charname = charname.rstrip('a')
 				charname = charname.rstrip('.')
