@@ -593,7 +593,13 @@ while 7 != 3 : #Basically, you're not getting out of this loop...
 			print "'choices': review availible options"
 			print "'inventory': view your inventory"
 			print "'status': view your health, attributes and equipment"
+			print "'about': show information about the adventure you are playing"
 			print "'help': view these commands again"
+		elif (prompt == "about") or (prompt == "credits") :
+			print ""
+			print title+" - "+subtitle+" was made by "+author
+			print website
+			print "You are currently on scene "+scene		
 		else :
 			print "Try using an ACTUAL command moron"  #Might change this before release...
 		if (scene != sceneb) or (scenestate != scenestateb) :
