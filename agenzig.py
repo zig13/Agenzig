@@ -48,7 +48,7 @@ elif os.access(advsfolder, os.R_OK):
 		repeat = 1
 		if choice == "" :
 			print ""
-		elif choice.isdigit() == 1 : #This section basicalyl does the reverse of the above one to determine what adventure the inputted number refers to
+		elif choice.isdigit() == 1 : #This section basically does the reverse of the above one to determine what adventure the inputted number refers to
 			sel = int(choice)
 			if sel <= opt :
 				advs2 = os.listdir(advsfolder)
@@ -95,15 +95,20 @@ while done == 0 :
 		sel = int(choice)
 		if sel == opt :
 			charname = raw_input("Please enter a name for your character: " )
-			genderin = raw_input("Is your character Male of Female? " ) #Gender could be relevent to NPC dialogue and stuff. Currently adventure devs would have to use gender as a requirement for a choice but I might add functionality for male/female/neutral scenes
-			genderin = genderin.lower()
-			if (genderin == "male") or (genderin == "m") or (genderin == "ma") or (genderin == "mas") :
-				chargender = "male"
-			elif (genderin == "female") or (genderin == "f") or (genderin == "fe") or (genderin == "fem") :
-				chargender = "female"
-			else :
-				print "I'll take that to mean your character is gender neutral" #I'm not exactly happy with this as i'd rather not pin people down to a gender - even if they have three options
-				chargender = "neutral"
+			if main['Categories']['totalcategories'] != "0" :
+				totalcats = main['Categories']['totalcategories']
+				remcats = int(totalcats)
+				while remcats != 0 :
+					print "Please select your character's "+main['Categories'][str(remcats)]['catname']+" from the options below:"
+					totalvals = main['Categories'][str(remcats)]['catvalues']
+					remvals = int(totalvals)
+					count = 0
+					while remvals != 0 :
+						count = count + 1
+						print str(count)+") "+main['Categories'][str(remcats)][str(remvals)]['valname']
+						remvals = remvals-1
+					valchoice = raw_input()
+					remcats = remcats-1
 			charfile = "%s.azc" %(charname)
 			done = 1
 		else:
@@ -126,7 +131,6 @@ if sel == opt : #Making a new character
 	csetup = main['Character Setup']
 	character['Basics'] = {}
 	character['Basics']['charname'] = charname
-	character['Basics']['gender'] = chargender
 	character['Basics']['scene'] = csetup['initialscene']
 	import random
 	#Setting vitals
@@ -310,17 +314,17 @@ while 7 != 3 : #Basically, you're not getting out of this loop...
 			print scenechoices
 		elif  (prompt == "status") or (prompt == "s") :
 			if statusgen != 1 :
-				if health > ((int(main['Attribute Categories']['healthy'])/10)*12) :
+				if health > ((int(main['Attribute Bases']['healthy'])/10)*12) :
 					stathealth = "You are EXTREMELY Healthy\n"
-				elif (health > int(main['Attribute Categories']['healthy'])) and (health <=  ((int(main['Attribute Categories']['healthy']))/10)*12) :
+				elif (health > int(main['Attribute Bases']['healthy'])) and (health <=  ((int(main['Attribute Bases']['healthy']))/10)*12) :
 					stathealth = "You are Unnaturally Healthy\n"
-				elif (health <= int(main['Attribute Categories']['healthy'])) and (health >= ((int(main['Attribute Categories']['healthy']))/10)*8) :
+				elif (health <= int(main['Attribute Bases']['healthy'])) and (health >= ((int(main['Attribute Bases']['healthy']))/10)*8) :
 					stathealth = "You are Healthy\n"
-				elif health >= ((int(main['Attribute Categories']['healthy']))/10)*6 :
+				elif health >= ((int(main['Attribute Bases']['healthy']))/10)*6 :
 					stathealth = "You are Hurt\n"
-				elif health >= ((int(main['Attribute Categories']['healthy']))/10)*4 :
+				elif health >= ((int(main['Attribute Bases']['healthy']))/10)*4 :
 					stathealth = "You are Injured\n"
-				elif health >= ((int(main['Attribute Categories']['healthy']))/10)*2 :
+				elif health >= ((int(main['Attribute Bases']['healthy']))/10)*2 :
 					stathealth = "You are Severely Injured\n"
 				elif health > 0 :
 					stathealth = "You are Near Death\n"
@@ -330,183 +334,183 @@ while 7 != 3 : #Basically, you're not getting out of this loop...
 					statfatigue = "You are Extraordinarily Energetic\n"
 				elif fatigue == 0 :
 					statfatigue = "You are Full of Energy\n"
-				elif fatigue <= ((int(main['Attribute Categories']['debilitatingfatigue']))/10)*1 :
+				elif fatigue <= ((int(main['Attribute Bases']['debilitatingfatigue']))/10)*1 :
 					statfatigue = "You are Mildly Fatigued\n"
-				elif fatigue <= ((int(main['Attribute Categories']['debilitatingfatigue']))/10)*2 :
+				elif fatigue <= ((int(main['Attribute Bases']['debilitatingfatigue']))/10)*2 :
 					statfatigue = "You are Weary\n"
-				elif fatigue <= ((int(main['Attribute Categories']['debilitatingfatigue']))/10)*4 :
+				elif fatigue <= ((int(main['Attribute Bases']['debilitatingfatigue']))/10)*4 :
 					statfatigue = "You are Tired\n"
-				elif fatigue <= ((int(main['Attribute Categories']['debilitatingfatigue']))/10)*6 :
+				elif fatigue <= ((int(main['Attribute Bases']['debilitatingfatigue']))/10)*6 :
 					statfatigue = "You are Worn Out\n"
-				elif fatigue <= ((int(main['Attribute Categories']['debilitatingfatigue']))/10)*8 :
+				elif fatigue <= ((int(main['Attribute Bases']['debilitatingfatigue']))/10)*8 :
 					statfatigue = "You are Exhausted\n"
-				elif fatigue > int(main['Attribute Categories']['debilitatingfatigue']) :
+				elif fatigue > int(main['Attribute Bases']['debilitatingfatigue']) :
 					statfatigue = "You are Totally Cream Crackered\n"
 				else :
 					statfatigue = "You are beyond exhausation\n"
-				if (strength >= int(main['Attribute Categories']['strong'])/10*9) and (strength <= int(main['Attribute Categories']['strong'])/10*11) :
+				if (strength >= int(main['Attribute Bases']['strong'])/10*9) and (strength <= int(main['Attribute Bases']['strong'])/10*11) :
 					statstrength = "You are Strong\n"
-				elif strength > int(main['Attribute Categories']['strong'])/10*11 :
-					if strength < int(main['Attribute Categories']['strong'])/10*13.3 :
+				elif strength > int(main['Attribute Bases']['strong'])/10*11 :
+					if strength < int(main['Attribute Bases']['strong'])/10*13.3 :
 						statstrength = "You are Very Strong\n"
-					elif strength < int(main['Attribute Categories']['strong'])/10*15.6 :
+					elif strength < int(main['Attribute Bases']['strong'])/10*15.6 :
 						statstrength = "You are Mighty\n"
-					elif strength < int(main['Attribute Categories']['strong'])/10*17.9 :
+					elif strength < int(main['Attribute Bases']['strong'])/10*17.9 :
 						statstrength = "You are Immensely Strong\n"
-					elif strength < int(main['Attribute Categories']['strong'])/10*20 :
+					elif strength < int(main['Attribute Bases']['strong'])/10*20 :
 						statstrength = "You are Incredibly Strong\n"
 					else :
 						statstrength = "You are Herculean\n"
 				else :
-					if strength > int(main['Attribute Categories']['strong'])/10*6.7 :
+					if strength > int(main['Attribute Bases']['strong'])/10*6.7 :
 						statstrength = "You are Diminished\n"
-					elif strength > int(main['Attribute Categories']['strong'])/10*4.4 :
+					elif strength > int(main['Attribute Bases']['strong'])/10*4.4 :
 						statstrength = "You are Weak\n"
-					elif strength > int(main['Attribute Categories']['strong'])/10*2.1 :
+					elif strength > int(main['Attribute Bases']['strong'])/10*2.1 :
 						statstrength = "You are Feeble\n"
 					elif strength > 0 :
 						statstrength = "You are Frail\n"
 					else :
 						statstrength = "You are Incapacitated\n"		
-				if (knowledge >= int(main['Attribute Categories']['knowlegable'])/10*9) and (knowledge <= int(main['Attribute Categories']['knowlegable'])/10*11) :
+				if (knowledge >= int(main['Attribute Bases']['knowlegable'])/10*9) and (knowledge <= int(main['Attribute Bases']['knowlegable'])/10*11) :
 					statknowledge = "You are Knowledgable\n"
-				elif knowledge > int(main['Attribute Categories']['knowlegable'])/10*11 :
-					if knowledge < int(main['Attribute Categories']['knowlegable'])/10*13.3 :
+				elif knowledge > int(main['Attribute Bases']['knowlegable'])/10*11 :
+					if knowledge < int(main['Attribute Bases']['knowlegable'])/10*13.3 :
 						statknowledge = "You are Very knowledgable\n"
-					elif knowledge < int(main['Attribute Categories']['knowlegable'])/10*15.6 :
+					elif knowledge < int(main['Attribute Bases']['knowlegable'])/10*15.6 :
 						statknowledge = "You are Highly Educated\n"
-					elif knowledge < int(main['Attribute Categories']['knowlegable'])/10*17.9 :
+					elif knowledge < int(main['Attribute Bases']['knowlegable'])/10*17.9 :
 						statknowledge = "You are Learned\n"
-					elif knowledge < int(main['Attribute Categories']['knowlegable'])/10*20 :
+					elif knowledge < int(main['Attribute Bases']['knowlegable'])/10*20 :
 						statknowledge = "You are Enlightened\n"
 					else :
 						statknowledge = "You are Omniscient\n"
 				else :
-					if knowledge > int(main['Attribute Categories']['knowlegable'])/10*6.7 :
+					if knowledge > int(main['Attribute Bases']['knowlegable'])/10*6.7 :
 						statknowledge = "You are Poorly Educated\n"
-					elif knowledge > int(main['Attribute Categories']['knowlegable'])/10*4.4 :
+					elif knowledge > int(main['Attribute Bases']['knowlegable'])/10*4.4 :
 						statknowledge = "You are Dumb\n"
-					elif knowledge > int(main['Attribute Categories']['knowlegable'])/10*2.1 :
+					elif knowledge > int(main['Attribute Bases']['knowlegable'])/10*2.1 :
 						statknowledge = "You are Ignorant\n"
 					elif knowledge > 0 :
 						statknowledge = "You are Naive\n"
 					else :
 						statknowledge = "You are Vegetative\n"
-				if (dexterity >= int(main['Attribute Categories']['knowlegable'])/10*9) and (dexterity <= int(main['Attribute Categories']['knowlegable'])/10*11) :
+				if (dexterity >= int(main['Attribute Bases']['knowlegable'])/10*9) and (dexterity <= int(main['Attribute Bases']['knowlegable'])/10*11) :
 					statdexterity = "You are Dexterous\n"
-				elif dexterity > int(main['Attribute Categories']['knowlegable'])/10*11 :
-					if dexterity < int(main['Attribute Categories']['knowlegable'])/10*13.3 :
+				elif dexterity > int(main['Attribute Bases']['knowlegable'])/10*11 :
+					if dexterity < int(main['Attribute Bases']['knowlegable'])/10*13.3 :
 						statdexterity = "You are Deft\n"
-					elif dexterity < int(main['Attribute Categories']['knowlegable'])/10*15.6 :
+					elif dexterity < int(main['Attribute Bases']['knowlegable'])/10*15.6 :
 						statdexterity = "You are Precise\n"
-					elif dexterity < int(main['Attribute Categories']['knowlegable'])/10*17.9 :
+					elif dexterity < int(main['Attribute Bases']['knowlegable'])/10*17.9 :
 						statdexterity = "You are Highly Dexterous\n"
-					elif dexterity < int(main['Attribute Categories']['knowlegable'])/10*20 :
+					elif dexterity < int(main['Attribute Bases']['knowlegable'])/10*20 :
 						statdexterity = "You are Extremely Deft\n"
 					else :
 						statdexterity = "You Move Faster Than The Eye Can See\n"
 				else :
-					if dexterity > int(main['Attribute Categories']['knowlegable'])/10*6.7 :
+					if dexterity > int(main['Attribute Bases']['knowlegable'])/10*6.7 :
 						statdexterity = "You are Gawky\n"
-					elif dexterity > int(main['Attribute Categories']['knowlegable'])/10*4.4 :
+					elif dexterity > int(main['Attribute Bases']['knowlegable'])/10*4.4 :
 						statdexterity = "You are Ungainly\n"
-					elif dexterity > int(main['Attribute Categories']['knowlegable'])/10*2.1 :
+					elif dexterity > int(main['Attribute Bases']['knowlegable'])/10*2.1 :
 						statdexterity = "You are Clumsy\n"
 					elif dexterity > 0 :
 						statdexterity = "You are Highly Cumbersome\n"
 					else :
 						statdexterity = "You are Completely Uncoordinated\n"
-				if (willpower >= int(main['Attribute Categories']['determined'])/10*9) and (willpower <= int(main['Attribute Categories']['determined'])/10*11) :
+				if (willpower >= int(main['Attribute Bases']['determined'])/10*9) and (willpower <= int(main['Attribute Bases']['determined'])/10*11) :
 					statwillpower = "You are Determined\n"
-				elif willpower > int(main['Attribute Categories']['determined'])/10*11 :
-					if willpower < int(main['Attribute Categories']['determined'])/10*13.3 :
+				elif willpower > int(main['Attribute Bases']['determined'])/10*11 :
+					if willpower < int(main['Attribute Bases']['determined'])/10*13.3 :
 						statwillpower = "You are Steadfast\n"
-					elif willpower < int(main['Attribute Categories']['determined'])/10*15.6 :
+					elif willpower < int(main['Attribute Bases']['determined'])/10*15.6 :
 						statwillpower = "You are Unshakable\n"
-					elif willpower < int(main['Attribute Categories']['determined'])/10*17.9 :
+					elif willpower < int(main['Attribute Bases']['determined'])/10*17.9 :
 						statwillpower = "You are Highly Dexterous\n"
-					elif willpower < int(main['Attribute Categories']['determined'])/10*20 :
+					elif willpower < int(main['Attribute Bases']['determined'])/10*20 :
 						statwillpower = "You are Extremely Deft\n"
 					else :
 						statwillpower = "You Move Faster Than The Eye Can See\n"
 				else :
-					if willpower > int(main['Attribute Categories']['determined'])/10*6.7 :
+					if willpower > int(main['Attribute Bases']['determined'])/10*6.7 :
 						statwillpower = "You are Suggestable\n"
-					elif willpower > int(main['Attribute Categories']['determined'])/10*4.4 :
+					elif willpower > int(main['Attribute Bases']['determined'])/10*4.4 :
 						statwillpower = "You are Weak-willed\n"
-					elif willpower > int(main['Attribute Categories']['determined'])/10*2.1 :
+					elif willpower > int(main['Attribute Bases']['determined'])/10*2.1 :
 						statwillpower = "You are Obedient\n"
 					elif willpower > 0 :
 						statwillpower = "You are Robotic\n"
 					else :
 						statwillpower = "You are Completely Uncoordinated\n"	
-				if (constitution >= int(main['Attribute Categories']['built'])/10*9) and (constitution <= int(main['Attribute Categories']['built'])/10*11) :
+				if (constitution >= int(main['Attribute Bases']['built'])/10*9) and (constitution <= int(main['Attribute Bases']['built'])/10*11) :
 					statconstitution = "You are Built\n"
-				elif constitution > int(main['Attribute Categories']['built'])/10*11 :
-					if constitution < int(main['Attribute Categories']['built'])/10*13.3 :
+				elif constitution > int(main['Attribute Bases']['built'])/10*11 :
+					if constitution < int(main['Attribute Bases']['built'])/10*13.3 :
 						statconstitution = "You are Fortified\n"
-					elif constitution < int(main['Attribute Categories']['built'])/10*15.6 :
+					elif constitution < int(main['Attribute Bases']['built'])/10*15.6 :
 						statconstitution = "You are Highly Resilient\n"
-					elif constitution < int(main['Attribute Categories']['built'])/10*17.9 :
+					elif constitution < int(main['Attribute Bases']['built'])/10*17.9 :
 						statconstitution = "You are Unassailable\n"
-					elif constitution < int(main['Attribute Categories']['built'])/10*20 :
+					elif constitution < int(main['Attribute Bases']['built'])/10*20 :
 						statconstitution = "You are Impenetrable\n"
 					else :
 						statconstitution = "You are WICKED SICK\n"
 				else :
-					if constitution > int(main['Attribute Categories']['built'])/10*6.7 :
+					if constitution > int(main['Attribute Bases']['built'])/10*6.7 :
 						statconstitution = "You are Underweight\n"
-					elif constitution > int(main['Attribute Categories']['built'])/10*4.4 :
+					elif constitution > int(main['Attribute Bases']['built'])/10*4.4 :
 						statconstitution = "You are Stunted\n"
-					elif constitution > int(main['Attribute Categories']['built'])/10*2.1 :
+					elif constitution > int(main['Attribute Bases']['built'])/10*2.1 :
 						statconstitution = "You are Scrawny\n"
 					elif constitution > 0 :
 						statconstitution = "You are Falling Apart\n"
 					else :
 						statconstitution = "You are Incorporeal\n"
-				if (charisma >= int(main['Attribute Categories']['charismatic'])/10*9) and (charisma <= int(main['Attribute Categories']['charismatic'])/10*11) :
+				if (charisma >= int(main['Attribute Bases']['charismatic'])/10*9) and (charisma <= int(main['Attribute Bases']['charismatic'])/10*11) :
 					statcharisma = "You are Charismatic\n"
-				elif charisma > int(main['Attribute Categories']['charismatic'])/10*11 :
-					if charisma < int(main['Attribute Categories']['charismatic'])/10*13.3 :
+				elif charisma > int(main['Attribute Bases']['charismatic'])/10*11 :
+					if charisma < int(main['Attribute Bases']['charismatic'])/10*13.3 :
 						statcharisma = "You are Persuasive\n"
-					elif charisma < int(main['Attribute Categories']['charismatic'])/10*15.6 :
+					elif charisma < int(main['Attribute Bases']['charismatic'])/10*15.6 :
 						statcharisma = "You are Imposing\n"
-					elif charisma < int(main['Attribute Categories']['charismatic'])/10*17.9 :
+					elif charisma < int(main['Attribute Bases']['charismatic'])/10*17.9 :
 						statcharisma = "You are Distinguished\n"
-					elif charisma < int(main['Attribute Categories']['charismatic'])/10*20 :
+					elif charisma < int(main['Attribute Bases']['charismatic'])/10*20 :
 						statcharisma = "You are Eminent\n"
 					else :
 						statcharisma = "You are Awe-inspiring\n"
 				else :
-					if charisma > int(main['Attribute Categories']['charismatic'])/10*6.7 :
+					if charisma > int(main['Attribute Bases']['charismatic'])/10*6.7 :
 						statcharisma = "You are Unheeded\n"
-					elif charisma > int(main['Attribute Categories']['charismatic'])/10*4.4 :
+					elif charisma > int(main['Attribute Bases']['charismatic'])/10*4.4 :
 						statcharisma = "You are Unlikeable\n"
-					elif charisma > int(main['Attribute Categories']['charismatic'])/10*2.1 :
+					elif charisma > int(main['Attribute Bases']['charismatic'])/10*2.1 :
 						statcharisma = "You are Irritating\n"
 					elif charisma > 0 :
 						statcharisma = "You are Galling\n"
 					else :
 						statcharisma = "You are Widely Hated\n"
-				if (perception >= int(main['Attribute Categories']['perceptive'])/10*9) and (perception <= int(main['Attribute Categories']['perceptive'])/10*11) :
+				if (perception >= int(main['Attribute Bases']['perceptive'])/10*9) and (perception <= int(main['Attribute Bases']['perceptive'])/10*11) :
 					statperception = "You are Perceptive\n"
-				elif perception > int(main['Attribute Categories']['perceptive'])/10*11 :
-					if perception < int(main['Attribute Categories']['perceptive'])/10*13.3 :
+				elif perception > int(main['Attribute Bases']['perceptive'])/10*11 :
+					if perception < int(main['Attribute Bases']['perceptive'])/10*13.3 :
 						statperception = "You are Keen-eyed\n"
-					elif perception < int(main['Attribute Categories']['perceptive'])/10*15.6 :
+					elif perception < int(main['Attribute Bases']['perceptive'])/10*15.6 :
 						statperception = "You are Scanning\n"
-					elif perception < int(main['Attribute Categories']['perceptive'])/10*17.9 :
+					elif perception < int(main['Attribute Bases']['perceptive'])/10*17.9 :
 						statperception = "You are Distinguished\n"
-					elif perception < int(main['Attribute Categories']['perceptive'])/10*20 :
+					elif perception < int(main['Attribute Bases']['perceptive'])/10*20 :
 						statperception = "You are Eminent\n"
 					else :
 						statperception = "You are Omnipercipient\n"
 				else :
-					if perception > int(main['Attribute Categories']['perceptive'])/10*6.7 :
+					if perception > int(main['Attribute Bases']['perceptive'])/10*6.7 :
 						statperception = "You are Unheeded\n"
-					elif perception > int(main['Attribute Categories']['perceptive'])/10*4.4 :
+					elif perception > int(main['Attribute Bases']['perceptive'])/10*4.4 :
 						statperception = "You are Illusioned\n"
-					elif perception > int(main['Attribute Categories']['perceptive'])/10*2.1 :
+					elif perception > int(main['Attribute Bases']['perceptive'])/10*2.1 :
 						statperception = "You are Irritating\n"
 					elif perception > 0 :
 						statperception = "You are Galling\n"
