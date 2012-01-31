@@ -95,8 +95,13 @@ while done == 0 :
 		sel = int(choice)
 		if sel == opt :
 			charname = raw_input("Please enter a name for your character: " )
-			if main['Categories']['totalcategories'] != "0" :
+			charfile = charfolder+sep+charname+".azc"
+			character = ConfigObj(charfile, unrepr=True)
+			character['Basics'] = {}
+			character['Basics']['charname'] = charname
+			if main['Categories']['totalcategories'] != 0 :
 				totalcats = main['Categories']['totalcategories']
+				character['Categories'] = {}
 				remcats = int(totalcats)
 				while remcats != 0 :
 					print "Please select your character's "+main['Categories'][str(remcats)]['catname']+" from the options below:"
@@ -108,13 +113,18 @@ while done == 0 :
 						print str(count)+") "+main['Categories'][str(remcats)][str(remvals)]['valname']
 						remvals = remvals-1
 					valchoice = raw_input()
+					character['Categories'][str(remcats)] = {}
+					character['Categories'][str(remcats)]['catname'] = main['Categories'][str(remcats)]['catname']
+					character['Categories'][str(remcats)]['valcode'] = ((totalvals) + 1) - int(valchoice)
+					character['Categories'][str(remcats)]['valname'] = main['Categories'][str(remcats)][str(((totalvals) + 1) - int(valchoice))]['valname']
 					remcats = remcats-1
-			charfile = "%s.azc" %(charname)
+				remcats = int(totalcats)
 			done = 1
 		else:
 			if sel <= opt :
 				chars2 = os.listdir(charfolder)
 				charfile = str(chars2.pop((sel-1)))
+				character = ConfigObj(charfile, unrepr=True)
 				charname = charfile.rstrip('c') #A bit crude but does the job
 				charname = charname.rstrip('z')
 				charname = charname.rstrip('a')
@@ -125,8 +135,6 @@ while done == 0 :
 				print ""
 	else:
 		print "Input must be a number"
-charfile = "%s%s.azc" %(charfolder,charname)
-character = ConfigObj(charfile, unrepr=True)
 if sel == opt : #Making a new character
 	csetup = main['Character Setup']
 	character['Basics'] = {}
