@@ -605,11 +605,17 @@ while 7 != 3 : #Basically, you're not getting out of this loop...
 			print "'status': view your health, attributes and equipment"
 			print "'about': show information about the adventure you are playing"
 			print "'help': view these commands again"
+			print "'quit': shut down the game engine"
 		elif (prompt == "about") or (prompt == "credits") :
 			print ""
 			print title+" - "+subtitle+" was made by "+author
 			print website
-			print "You are currently on scene "+scene		
+			print "You are currently on scene "+scene
+		elif (prompt == "quit") or (prompt == "exit") or (prompt == "x") or (prompt == "leave") :
+			print "Are you sure you want to quit?"
+			confirm = raw_input(">")				
+			if (confirm == "yes") or (confirm == "y") or (confirm == "sure") or (confirm == "please") :
+				exit(0)
 		else :
 			print "Try using an ACTUAL command moron"  #Might change this before release...
 		if (scene != sceneb) or (scenestate != scenestateb) :
