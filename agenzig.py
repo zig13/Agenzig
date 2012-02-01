@@ -123,7 +123,7 @@ while done == 0 :
 		else:
 			if sel <= opt :
 				chars2 = os.listdir(charfolder)
-				charfile = str(chars2.pop((sel-1)))
+				charfile = charfolder+sep+str(chars2.pop((sel-1)))
 				character = ConfigObj(charfile, unrepr=True)
 				charname = charfile.rstrip('c') #A bit crude but does the job
 				charname = charname.rstrip('z')
@@ -137,9 +137,7 @@ while done == 0 :
 		print "Input must be a number"
 if sel == opt : #Making a new character
 	csetup = main['Character Setup']
-	character['Basics'] = {}
-	character['Basics']['charname'] = charname
-	character['Basics']['scene'] = csetup['initialscene']
+	character['Basics']['scene'] = str(csetup['initialscene'])
 	import random
 	#Setting vitals
 	character['Vitals'] = {}
@@ -182,7 +180,7 @@ if sel == opt : #Making a new character
 	print "New character created"
 	print ""
 #Setting main and character varibles for easy access
-scene = character['Basics']['scene']
+scene = str(character['Basics']['scene'])
 title = main['Details']['title']
 subtitle = "an Agenzig adventure"
 author = "by "+main['Details']['author']
