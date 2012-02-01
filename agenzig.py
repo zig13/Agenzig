@@ -42,9 +42,9 @@ elif os.access(advsfolder, os.R_OK):
 				print "%s) %s" %(opt,advs.pop())
 				advsno = advsno-1
 			print ""
-			choice = raw_input("Please type a number corresponding to the adventure you wish to play" )
+			choice = raw_input("Please type a number corresponding to the adventure you wish to play >" )
 		else :
-			choice = raw_input("")
+			choice = raw_input(">")
 		repeat = 1
 		if choice == "" :
 			print ""
@@ -86,7 +86,7 @@ while done == 0 :
 		print ""
 		print "%s) New Character" %(opt)
 		print ""
-		choice = raw_input("Please type a number corresponding to the above option you require" )
+		choice = raw_input("Please type a number corresponding to the above option you require >" )
 	else :
 		print "No characters found"
 		print "Initiating character creation"
@@ -94,7 +94,7 @@ while done == 0 :
 	if choice.isdigit() == 1 :
 		sel = int(choice)
 		if sel == opt :
-			charname = raw_input("Please enter a name for your character: " )
+			charname = raw_input("Please enter a name for your character >" )
 			charfile = charfolder+sep+charname+".azc"
 			character = ConfigObj(charfile, unrepr=True)
 			character['Basics'] = {}
@@ -112,7 +112,7 @@ while done == 0 :
 						count = count + 1
 						print str(count)+") "+main['Categories'][str(remcats)][str(remvals)]['valname']
 						remvals = remvals-1
-					valchoice = raw_input()
+					valchoice = raw_input(">")
 					character['Categories'][str(remcats)] = {}
 					character['Categories'][str(remcats)]['catname'] = main['Categories'][str(remcats)]['catname']
 					character['Categories'][str(remcats)]['valcode'] = ((totalvals) + 1) - int(valchoice)
@@ -311,7 +311,7 @@ while 7 != 3 : #Basically, you're not getting out of this loop...
 	itemused = 0
 	from decimal import *
 	while scenechanged == 0 :
-		prompt = raw_input("") #The main prompt!
+		prompt = raw_input(">") #The main prompt!
 		prompt = prompt.lower()
 		if prompt == "" :
 			pass
