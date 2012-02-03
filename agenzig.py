@@ -591,7 +591,7 @@ while 7 != 3 : #Basically, you're not getting out of this loop...
 					usecode = int(usecode)
 					if usecode <= opt :
 						useditem = str(tempinventory.pop((usecode-1)))
-						print useditem
+						print items[useditem]['usetext']
 						itemused = 1
 					else :
 						print "You are only carrying "+str(len(inventory))+" types of item"
