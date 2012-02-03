@@ -1,0 +1,36 @@
+[1]
+name = 'Hunting Leathers'
+equipslots = [1,2,3,4]
+slotuse = all
+enhancements = 2
+[[Enhancements]]
+[[[1]]]
+armourttype = 1
+multiplier = 1
+[[[2]]]
+attribute = 7
+boost = 1
+
+[2]
+name = 'Steel Dagger'
+equipslots = [10]
+slotuse = all
+enhancements = 2
+[[Enhancements]]
+[[[1]]]
+attackstyle = 1
+[[[2]]]
+attackstyle = 2
+
+[3]
+name = 'Sling'
+equipslots = [11]
+slotuse = all
+enhancements = 2
+[[Enhancements]]
+[[[1]]]
+attackstyle = 3
+[[[2]]]
+attackstyle = 4
+
+
