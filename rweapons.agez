@@ -1,9 +1,0 @@
-[1]
-description = 'Sling'
-slashclass = 0
-pierceclass = 1
-crushclass = 3
-fireclass = 0
-magiclass = 0
-range = 5
-speed = 0.32
