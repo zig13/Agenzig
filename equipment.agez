@@ -18,9 +18,9 @@ slotuse = all
 enhancements = 2
 [[Enhancements]]
 [[[1]]]
-attackstyle = 1
+cability = 1
 [[[2]]]
-attackstyle = 2
+cability = 2
 
 [3]
 name = 'Sling'
@@ -29,8 +29,8 @@ slotuse = all
 enhancements = 2
 [[Enhancements]]
 [[[1]]]
-attackstyle = 3
+cability = 3
 [[[2]]]
-attackstyle = 4
+cability = 4
 
 
