@@ -2,7 +2,7 @@ total = 2
 [1]
 name = 'Health'
 xmin = 0
-base = 100
+baseval = 100
 lessthanmin = 'How are you alive?'
 base = 'Healthy'
 one = 'Near Death'
