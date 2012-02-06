@@ -1,7 +1,7 @@
 [1]
 name = 'Hunting Leathers'
 equipslots = [1,2,3,4]
-slotuse = all
+slotuse = 'all'
 enhancements = 2
 [[Enhancements]]
 [[[1]]]
@@ -14,7 +14,7 @@ boost = 1
 [2]
 name = 'Steel Dagger'
 equipslots = [10]
-slotuse = all
+slotuse = 'all'
 enhancements = 2
 [[Enhancements]]
 [[[1]]]
@@ -25,7 +25,7 @@ cability = 2
 [3]
 name = 'Sling'
 equipslots = [11]
-slotuse = all
+slotuse = 'all'
 enhancements = 2
 [[Enhancements]]
 [[[1]]]
