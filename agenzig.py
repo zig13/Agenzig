@@ -171,9 +171,7 @@ if sel == opt : #Making a new character
 			character['Currency']['currencythree'] = csetup['initialcurrencythree']
 	#Setting inventory
 	character['Items'] = {}
-	character['Items']['armour'] = csetup['initialarmour']
-	character['Items']['Mweapon'] = csetup['initialMweapon']
-	character['Items']['Rweapon'] = csetup['initialRweapon']
+	character['Items']['equipment'] = csetup['initialequipment']
 	character['Items']['inventory'] = csetup['initialinventory']
 	character['Scene States'] = {}
 	character.write()
@@ -204,9 +202,7 @@ willpower = int(character['Attributes']['willpower'])
 constitution = int(character['Attributes']['constitution'])
 charisma = int(character['Attributes']['charisma'])
 perception = int(character['Attributes']['perception'])
-armour = int(character['Items']['armour'])
-Mweapon = int(character['Items']['Mweapon'])
-Rweapon = int(character['Items']['Rweapon'])
+equipment = character['Items']['equipment']
 inventory = character['Items']['inventory']
 # Loading other files
 scenefile = advfolder+sep+"scenes.agez"
