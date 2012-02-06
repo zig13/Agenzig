@@ -1,0 +1,28 @@
+vitals = 2
+[1]
+name = 'Health'
+xmin = 0
+base = 100
+lessthanmin = 'How are you alive?'
+base = 'Healthy'
+one = 'Near Death'
+two = 'Severely Injured'
+three = 'Injured'
+four = 'Hurt'
+five = 'Unnaturally Healthy'
+six = 'EXTREMELY Healthy'
+
+[2]
+name = 'Fatigue'
+min = 0
+xmax = 70
+baseval = 0
+lessthanmin = 'Extraordinarily Energetic'
+morethanmax = 'How are you alive?'
+base = 'Full of Energy'
+one = 'Mildly Fatigued'
+two = 'Weary'
+three = 'Tired'
+four = 'Worn Out'
+five = 'Exhausted'
+six = 'Totally Cream Crackered'
