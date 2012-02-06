@@ -1,0 +1,101 @@
+attributes = 7
+[1]
+name = 'Strength'
+baseval = 20
+exlow = 'Incapacitated'
+lowfour = 'Frail'
+lowthree = 'Feeble'
+lowtwo = 'Weak'
+lowone ='Diminished'
+base = 'Strong'
+highone = 'Very Strong'
+hightwo = 'Mighty'
+highthree = 'Immensely Strong'
+highfour = 'Incredibly Strong'
+exhigh = 'Herculean'
+[2]
+name = 'Knowledge'
+baseval = 20
+exlow = 'Vegetative'
+lowfour = 'Naive'
+lowthree = 'Ignorant'
+lowtwo = 'Dumb'
+lowone = 'Poorly Educated'
+base = 'Knowledgable'
+highone = 'Very Knowledgable'
+hightwo = 'Highly Educated'
+highthree = 'Learned'
+highfour = 'Enlightened'
+exhigh = 'Omniscient'
+[3]
+name = 'Dexterity'
+baseval = 20
+exlow = 'Completely Uncoordinated'
+lowfour = 'Highly Cumbersome'
+lowthree = 'Clumsy'
+lowtwo = 'Ungainly'
+lowone = 'Gawky'
+base = 'Dexterous'
+highone = 'Deft'
+hightwo = 'Precise'
+highthree = 'Highly Dexterous'
+highfour = 'Extremely Deft
+exhigh = 'Faster Than The Eye Can See'
+[4]
+name = 'Willpower'
+baseval = 20
+exlow = 'Robotic'
+lowfour = 'Subservient'
+lowthree = 'Slavish'
+lowtwo = 'Weak-willed'
+lowone = 'Suggestable'
+base = 'Determined'
+highone = 'Steadfast'
+hightwo = 'Unshakable'
+highthree = 'Undeterable'
+highfour = 'Extremely Strong Willed'
+exhigh = 'UNSTOPPABLE!'
+[5]
+name = 'Constitution'
+baseval = 20
+exlow = 'Incorporeal'
+lowfour = 'Falling Apart'
+lowthree = 'Scrawny'
+lowtwo = 'Stunted'
+lowone = 'Underweight'
+base = 'Built'
+highone = 'Fortified'
+hightwo = 'Highly Resilient'
+highthree = 'Unassailable'
+highfour = 'Impenetrable'
+exhigh = 'WICKED SICK!'
+[6]
+name = 'Charisma'
+baseval = 20
+exlow = 'Widely Hated'
+lowfour = 'Enfuriating"
+lowthree = 'Galling'
+lowtwo = 'Irritating"
+lowone = 'Unlikeable'
+base = 'Charismatic'
+highone = 'Persuasive'
+hightwo = 'Imposing'
+highthree = 'Distinguished'
+highfour = 'Eminent'
+exhigh = 'Awe-inspiring'
+[7]
+name = 'Perception'
+baseval = 20
+exlow = 'Blind'
+lowfour = 'Near-blind'
+lowthree = 'Viusually Impaired'
+lowtwo = 'DColour-blind'
+lowone = 'Unfocussed'
+base = 'Perceptive'
+highone = 'Keen-eyed'
+hightwo = 'Scanning'
+highthree = 'Eagle-eyed'
+highfour = 'Extremely Perceptive'
+exhigh = 'Omnipercipient'
+
+
