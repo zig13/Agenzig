@@ -522,30 +522,30 @@ while 7 != 3 : #Basically, you're not getting out of this loop...
 						statperception = "You are Galling\n"
 					else :
 						statperception = "You are Blind\n"							
-				if armour != 0 :
-					statarmour = "You are wearing "+str(armours[str(armour)]['description'])+"\n"
-				else :
-					armour = ""
-				if Mweapon != 0 :
-					statmweapon = mweapons[str(Mweapon)]['description']
-					mw = 1
-				else :
-					mw = 0
-				if Rweapon != 0 :
-					statrweapon = rweapons[str(Rweapon)]['description']
-					rw = 1
-				else :
-					rw = 0
-				if mw == 1 :
-					if rw == 1 :
-						statweapons = "You are wielding a "+statmweapon+" and a "+statrweapon+"\n"
-					else :
-						statweapons = "You are wielding a "+statmweapon+"\n"
-				elif rw == 1 :
-					statweapons = "You are wielding a "+statrweapon+"\n"
-				else :
-					statweapons = ""
-				status = "Current Status:\n"+stathealth+statfatigue+"\n"+statstrength+statknowledge+statdexterity+statwillpower+statconstitution+"\n"+statarmour+statweapons
+#				if armour != 0 :
+#					statarmour = "You are wearing "+str(armours[str(armour)]['description'])+"\n"
+#				else :
+#					armour = ""
+#				if Mweapon != 0 :
+#					statmweapon = mweapons[str(Mweapon)]['description']
+#					mw = 1
+#				else :
+#					mw = 0
+#				if Rweapon != 0 :
+#					statrweapon = rweapons[str(Rweapon)]['description']
+#					rw = 1
+#				else :
+#					rw = 0
+#				if mw == 1 :
+#					if rw == 1 :
+#						statweapons = "You are wielding a "+statmweapon+" and a "+statrweapon+"\n"
+#					else :
+#						statweapons = "You are wielding a "+statmweapon+"\n"
+#				elif rw == 1 :
+#					statweapons = "You are wielding a "+statrweapon+"\n"
+#				else :
+#					statweapons = ""
+				status = "Current Status:\n"+stathealth+statfatigue+"\n"+statstrength+statknowledge+statdexterity+statwillpower+statconstitution
 				statusgen = 1
 			print ""
 			print status
