@@ -211,6 +211,10 @@ choicefile = advfolder+sep+"choices.agez"
 choices = ConfigObj(choicefile, unrepr=True)
 confrontationfile = advfolder+sep+"confrontations.agez"
 confrontations = ConfigObj(confrontationfile, unrepr=True)
+attributefile = advfolder+sep+"attributes.agez"
+attributes = ConfigObj(attributefile, unrepr=True)
+vitalfile = advfolder+sep+"vitals.agez"
+vitals = ConfigObj(vitalfile, unrepr=True)
 itemfile = advfolder+sep+"items.agez"
 items = ConfigObj(infile=itemfile, unrepr=True)
 equipmentfile = advfolder+sep+"equipment.agez"
@@ -311,6 +315,27 @@ while 7 != 3 : #Basically, you're not getting out of this loop...
 		elif (prompt == "choices") or (prompt == "c") :
 			print ""
 			print scenechoices
+		elif (prompt == 'test') or (prompt == "t") :
+			if (statusgen != 1) :
+				vittotal = vitals['total']
+				atttotal = attributes['total']
+				opt = 0
+				equipmentlist = "You have equipped:\n"
+				tempequipment = list(equipment)
+				tempequipment.reverse()
+				while equiptotal > 0 :
+					aequipno = tempequipment.pop()
+					equiptotal = len(tempequipment)
+					aequipocc = tempequipment.count(aequipno)+1
+					opt = opt+1
+					aequipdesc = equips[str(aequipno)]['name']
+					equipmentlist = equipmentlist+aequipdesc+"\n"
+				if opt == 0 :
+					equipmentlist = "You have nothing equipped"
+				else :
+					tempequipment = list(equipment)
+				equiplistgen = 1
+			print equipmentlist
 		elif  (prompt == "status") or (prompt == "s") :
 			if statusgen != 1 :
 				if health > ((int(main['Attribute Bases']['healthy'])/10)*12) :
