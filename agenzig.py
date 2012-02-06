@@ -213,12 +213,8 @@ confrontationfile = advfolder+sep+"confrontations.agez"
 confrontations = ConfigObj(confrontationfile, unrepr=True)
 itemfile = advfolder+sep+"items.agez"
 items = ConfigObj(infile=itemfile, unrepr=True)
-armourfile = advfolder+sep+"armour.agez"
-armours = ConfigObj(armourfile, unrepr=True)
-mweaponfile = advfolder+sep+"mweapons.agez"
-mweapons = ConfigObj(mweaponfile, unrepr=True)
-rweaponfile = advfolder+sep+"rweapons.agez"
-rweapons = ConfigObj(rweaponfile, unrepr=True)
+equipmentfile = advfolder+sep+"equipment.agez"
+equips = ConfigObj(equipmentfile, unrepr=True)
 fight = 0
 if sel!= opt :
 	print "Continuing adventure"
@@ -304,6 +300,7 @@ while 7 != 3 : #Basically, you're not getting out of this loop...
 	scenechanged = 0
 	statusgen = 0
 	invlistgen = 0
+	equiplistgen = 0
 	itemused = 0
 	from decimal import *
 	while scenechanged == 0 :
@@ -518,39 +515,36 @@ while 7 != 3 : #Basically, you're not getting out of this loop...
 						statperception = "You are Galling\n"
 					else :
 						statperception = "You are Blind\n"							
-#				if armour != 0 :
-#					statarmour = "You are wearing "+str(armours[str(armour)]['description'])+"\n"
-#				else :
-#					armour = ""
-#				if Mweapon != 0 :
-#					statmweapon = mweapons[str(Mweapon)]['description']
-#					mw = 1
-#				else :
-#					mw = 0
-#				if Rweapon != 0 :
-#					statrweapon = rweapons[str(Rweapon)]['description']
-#					rw = 1
-#				else :
-#					rw = 0
-#				if mw == 1 :
-#					if rw == 1 :
-#						statweapons = "You are wielding a "+statmweapon+" and a "+statrweapon+"\n"
-#					else :
-#						statweapons = "You are wielding a "+statmweapon+"\n"
-#				elif rw == 1 :
-#					statweapons = "You are wielding a "+statrweapon+"\n"
-#				else :
-#					statweapons = ""
 				status = "Current Status:\n"+stathealth+statfatigue+"\n"+statstrength+statknowledge+statdexterity+statwillpower+statconstitution
 				statusgen = 1
 			print ""
 			print status
-		elif (prompt == "inventory") or (prompt == "i") or (prompt.startswith("use ") and  (len(prompt) > 4)) :
+		elif (prompt == 'equipment') or (prompt == "e") :
+			if (equiplistgen != 1) :
+				equiptotal = len(equipment)
+				opt = 0
+				equipmentlist = "You have equipped:\n"
+				tempequipment = list(equipment)
+				tempequipment.reverse()
+				while equiptotal > 0 :
+					aequipno = tempequipment.pop()
+					equiptotal = len(tempequipment)
+					aequipocc = tempequipment.count(aequipno)+1
+					opt = opt+1
+					aequipdesc = equips[str(aequipno)]['name']
+					equipmentlist = equipmentlist+aequipdesc+"\n"
+				if opt == 0 :
+					equipmentlist = "You have nothing equipped"
+				else :
+					tempequipment = list(equipment)
+				equiplistgen = 1
+			print equipmentlist
+		elif (prompt == "inventory") or (prompt == "i") or (prompt.startswith("use ") and  (len(prompt) > 4)) or (prompt.startswith("equip ") and  (len(prompt) > 6)) :
 			if prompt.startswith("use ") :
 				printinv = 0
 			else :
 				printinv = 1
-			if (invlistgen != 1)  or (itemused == 1) :
+			if (invlistgen != 1) :
 				itemstotal = len(inventory)
 				printeditems = []
 				opt = 0
@@ -598,6 +592,7 @@ while 7 != 3 : #Basically, you're not getting out of this loop...
 			print "Command List"
 			print "'choices': review availible options"
 			print "'inventory': view your inventory"
+			print "'equipment': view what items you have equipped"
 			print "'status': view your health, attributes and equipment"
 			print "'about': show information about the adventure you are playing"
 			print "'help': view these commands again"
@@ -616,3 +611,6 @@ while 7 != 3 : #Basically, you're not getting out of this loop...
 			print "Try using an ACTUAL command moron"  #Might change this before release...
 		if (scene != sceneb) or (scenestate != scenestateb) :
 			scenechanged = 1
+		if itemused == 1 :
+			invlistgen = 0
+			itemused = 0
