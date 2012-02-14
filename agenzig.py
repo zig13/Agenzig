@@ -22,12 +22,22 @@ sep = str(os.sep) #The character used by the current os to denote the demotion t
 #Hopefully the use of these will help make the engine cross-platform
 mainfile = dot+sep+"main.agez"
 advsfolder = "%s%sAdventures%s" %(dot,sep,sep)
+gviewer = 0
+aplayer = 0
 if os.access(mainfile, os.R_OK) :
 	main = ConfigObj(mainfile, unrepr=True)
 	advname = main['Details']['title']
 	charfolder = dot+sep+"Characters"+sep
 	advfolder = dot+sep
 elif os.access(advsfolder, os.R_OK):
+	if os.access(dot+sep+"gqview"+sep, os.R_OK) :
+		gviewer = 1
+		if os.access(dot+sep+"agenzigsplash.azg", os.R_OK) :
+			os.startfile(dot+sep+"agenzigsplash.azg")
+	if os.access(dot+sep+"aplayer"+sep, os.R_OK) :
+		aplayer = 1
+		if os.access(dot+sep+"agenzigtheme.aza", os.R_OK) :
+			os.startfile(dot+sep+"agenzigsplash.aza")
 	done = 0
 	repeat = 0
 	while done == 0 :
@@ -52,7 +62,7 @@ elif os.access(advsfolder, os.R_OK):
 			sel = int(choice)
 			if sel <= opt :
 				advs2 = os.listdir(advsfolder)
-				advfolder = advsfolder+str(advs2.pop((sel-1)))
+				advfolder = advsfolder+str(advs2.pop((sel-1)))+sep
 				mainfile = advfolder+sep+"main.agez"
 				done = 1
 			else:
@@ -71,6 +81,15 @@ else :
 	print "Adventures folder missing and no main file found"
 	raw_input("If you don't know what this means, then you should probably reinstall") #More informative than a crash...
 	exit(0)
+graphics = advfolder+"Graphics"+sep
+if (gviewer == 1) or (os.access(dot+sep+"gqview"+sep, os.R_OK)) :
+	gviewer = 1
+	if os.access(dot+sep+"agenzigsplash.azg", os.R_OK) :
+		os.startfile(dot+sep+"agenzigsplash.azg")
+if (aplayer == 1) or (os.access(dot+sep+"aplayer"+sep, os.R_OK)) :
+	aplayer = 1
+	if os.access(dot+sep+"agenzigtheme.aza", os.R_OK) :
+		os.startfile(dot+sep+"agenzigsplash.aza")
 done = 0
 while done == 0 :
 	chars = os.listdir(charfolder)
@@ -220,6 +239,10 @@ items = ConfigObj(infile=itemfile, unrepr=True)
 equipmentfile = advfolder+sep+"equipment.agez"
 equips = ConfigObj(equipmentfile, unrepr=True)
 fight = 0
+
+vittotal = vitals['total']
+attotal = attributes['total']
+
 if sel!= opt :
 	print "Continuing adventure"
 	print ""
@@ -317,25 +340,70 @@ while 7 != 3 : #Basically, you're not getting out of this loop...
 			print scenechoices
 		elif (prompt == 'test') or (prompt == "t") :
 			if (statusgen != 1) :
-				vittotal = vitals['total']
-				atttotal = attributes['total']
-				opt = 0
-				equipmentlist = "You have equipped:\n"
-				tempequipment = list(equipment)
-				tempequipment.reverse()
-				while equiptotal > 0 :
-					aequipno = tempequipment.pop()
-					equiptotal = len(tempequipment)
-					aequipocc = tempequipment.count(aequipno)+1
-					opt = opt+1
-					aequipdesc = equips[str(aequipno)]['name']
-					equipmentlist = equipmentlist+aequipdesc+"\n"
-				if opt == 0 :
-					equipmentlist = "You have nothing equipped"
-				else :
-					tempequipment = list(equipment)
-				equiplistgen = 1
-			print equipmentlist
+				statuslist = "You are:\n"
+				vitno = 0
+				while vitno != vittotal :
+					vitno = vitno+1
+					svitno = str(vitno)
+					if (vitals[svitno]['view'] == 'all') or ((vitals[svitno]['view'] == 'notzero') and (character['Vitals'][svitno] != 0)) :
+						if (character['Vitals'][svitno] >= vitals[svitno]['baseval']/10*9) and (character['Vitals'][svitno] <= vitals[svitno]['baseval'] /10 * 11) :
+							vitlevel = vitals[svitno]['base']
+						elif character['Vitals'][svitno] > vitals[svitno]['baseval']/10*11 :
+							if character['Vitals'][svitno] <= vitals[svitno]['baseval']/10*13 :
+								vitlevel = vitals[svitno]['highone']
+							elif character['Vitals'][svitno] <= vitals[svitno]['baseval']/10*15 :
+								vitlevel = vitals[svitno]['hightwo']
+							elif character['Vitals'][svitno] <= vitals[svitno]['baseval']/10*17 :
+								vitlevel = vitals[svitno]['highthree']
+							elif character['Vitals'][svitno] <= vitals[svitno]['baseval']/10*19 :
+								vitlevel = vitals[svitno]['highfour']
+							else :
+								vitlevel = vitals[svitno]['exhigh']
+						else :
+							if character['Vitals'][svitno] >= vitals[svitno]['baseval']/10*7 :
+								vitlevel = vitals[svitno]['lowone']
+							elif character['Vitals'][svitno] >= vitals[svitno]['baseval']/10*5 :
+								vitlevel = vitals[svitno]['lowtwo']
+							elif character['Vitals'][svitno] >= vitals[svitno]['baseval']/10*3 :
+								vitlevel = vitals[svitno]['lowthree']
+							elif character['Vitals'][svitno] >= vitals[svitno]['baseval']/10*1 :
+								vitlevel = vitals[svitno]['lowfour']
+							else :
+								vitlevel = vitals[svitno]['exlow']
+					statuslist = statuslist+vitlevel+"\n"
+				attno = 0
+				statuslist = statuslist+"\n"
+				while attno != attotal :
+					attno = attno+1
+					sattno = str(attno)
+					if (attributes[sattno]['view'] == 'all') or ((attributes[sattno]['view'] == 'notzero') and (character['Attributes'][sattno] != 0)) :
+						if (character['Attributes'][sattno] >= attributes[sattno]['baseval']/10*9) and (character['Attributes'][sattno] <= attributes[sattno]['baseval'] /10 * 11) :
+							attlevel = attributes[sattno]['base']
+						elif character['Attributes'][sattno] > attributes[sattno]['baseval']/10*11 :
+							if character['Attributes'][sattno] <= attributes[sattno]['baseval']/10*13 :
+								attlevel = attributes[sattno]['highone']
+							elif character['Attributes'][sattno] <= attributes[sattno]['baseval']/10*15 :
+								attlevel = attributes[sattno]['hightwo']
+							elif character['Attributes'][sattno] <= attributes[sattno]['baseval']/10*17 :
+								attlevel = attributes[sattno]['highthree']
+							elif character['Attributes'][sattno] <= attributes[sattno]['baseval']/10*19 :
+								attlevel = attributes[sattno]['highfour']
+							else :
+								attlevel = attributes[sattno]['exhigh']
+						else :
+							if character['Attributes'][sattno] >= attributes[sattno]['baseval']/10*7 :
+								attlevel = attributes[sattno]['lowone']
+							elif character['Attributes'][sattno] >= attributes[sattno]['baseval']/10*5 :
+								attlevel = attributes[sattno]['lowtwo']
+							elif character['Attributes'][sattno] >= attributes[sattno]['baseval']/10*3 :
+								attlevel = attributes[sattno]['lowthree']
+							elif character['Attributes'][sattno] >= attributes[sattno]['baseval']/10*1 :
+								attlevel = attributes[sattno]['lowfour']
+							else :
+								attlevel = attributes[sattno]['exlow']
+					statuslist = statuslist+attlevel+"\n"
+				statusgen = 1
+			print statuslist
 		elif  (prompt == "status") or (prompt == "s") :
 			if statusgen != 1 :
 				if health > ((int(main['Attribute Bases']['healthy'])/10)*12) :
