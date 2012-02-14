@@ -1,6 +1,7 @@
 total = 2
 [1]
 name = 'Health'
+view = 'all' #Can be all, never or notzero
 xmin = 0
 baseval = 100
 lessthanmin = 'How are you alive?'
@@ -14,6 +15,7 @@ six = 'EXTREMELY Healthy'
 
 [2]
 name = 'Fatigue'
+view = 'all' #Can be all, never or notzero
 min = 0
 xmax = 70
 baseval = 0

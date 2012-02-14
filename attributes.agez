@@ -1,6 +1,7 @@
 total = 7
 [1]
 name = 'Strength'
+view = 'all' #Can be all, never or notzero
 baseval = 20
 exlow = 'Incapacitated'
 lowfour = 'Frail'
@@ -15,6 +16,7 @@ highfour = 'Incredibly Strong'
 exhigh = 'Herculean'
 [2]
 name = 'Knowledge'
+view = 'all' #Can be all, never or notzero
 baseval = 20
 exlow = 'Vegetative'
 lowfour = 'Naive'
@@ -29,6 +31,7 @@ highfour = 'Enlightened'
 exhigh = 'Omniscient'
 [3]
 name = 'Dexterity'
+view = 'all' #Can be all, never or notzero
 baseval = 20
 exlow = 'Completely Uncoordinated'
 lowfour = 'Highly Cumbersome'
@@ -43,6 +46,7 @@ highfour = 'Extremely Deft'
 exhigh = 'Faster Than The Eye Can See'
 [4]
 name = 'Willpower'
+view = 'all' #Can be all, never or notzero
 baseval = 20
 exlow = 'Robotic'
 lowfour = 'Subservient'
@@ -57,6 +61,7 @@ highfour = 'Extremely Strong Willed'
 exhigh = 'UNSTOPPABLE!'
 [5]
 name = 'Constitution'
+view = 'all' #Can be all, never or notzero
 baseval = 20
 exlow = 'Incorporeal'
 lowfour = 'Falling Apart'
@@ -71,6 +76,7 @@ highfour = 'Impenetrable'
 exhigh = 'WICKED SICK!'
 [6]
 name = 'Charisma'
+view = 'all' #Can be all, never or notzero
 baseval = 20
 exlow = 'Widely Hated'
 lowfour = 'Enfuriating'
@@ -85,6 +91,7 @@ highfour = 'Eminent'
 exhigh = 'Awe-inspiring'
 [7]
 name = 'Perception'
+view = 'all' #Can be all, never or notzero
 baseval = 20
 exlow = 'Blind'
 lowfour = 'Near-blind'
