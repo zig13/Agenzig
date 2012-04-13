@@ -24,20 +24,23 @@ name = 'Fatigue'
 view = 'lessthanbase' #Can be all, never or lessthanbase
 baseval = 70
 maxval = 80
-lessthanmin = 'Extraordinarily Energetic'
 base = 'Full of Energy'
-descriptors = 6
+descriptors = 7
 	[[1]]
-	text = 'Extraordinarily Energetic'
-	[[2]]
-	text = 'Mildly Fatigued'
-	[[3]]
-	text = 'Weary'
-	[[4]]
-	text = 'Tired'
-	[[5]]
-	text = 'Worn Out'
-	[[6]]
-	text = 'Exhausted'
-	[[7]]
 	text = 'Totally Cream Crackered'
+	[[2]]
+	text = 'Exhausted'
+	[[3]]
+	text = 'Worn Out'	
+	[[4]]
+	text = 'Tired'	
+	[[5]]
+	text = 'Weary'	
+	[[6]]
+	text = 'Mildly Fatigued'
+	[[7]]
+	text = 'Extraordinarily Energetic'
+
+
+
+
