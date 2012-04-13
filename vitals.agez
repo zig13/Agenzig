@@ -1,30 +1,43 @@
 total = 2
 [1]
 name = 'Health'
-view = 'all' #Can be all, never or notzero
-xmin = 0
+view = 'all' #Can be all, never or lessthanbase
 baseval = 100
-lessthanmin = 'How are you alive?'
+maxval = 130
 base = 'Healthy'
-one = 'Near Death'
-two = 'Severely Injured'
-three = 'Injured'
-four = 'Hurt'
-five = 'Unnaturally Healthy'
-six = 'EXTREMELY Healthy'
+descriptors = 6
+	[[1]]
+	text = 'Near Death'
+	[[2]]
+	text = 'Severely Injured'
+	[[3]]
+	text = 'Injured'
+	[[4]]
+	text = 'Hurt'
+	[[5]]
+	text = 'Unnaturally Healthy'
+	[[6]]
+	text = 'EXTREMELY Healthy'
 
 [2]
 name = 'Fatigue'
-view = 'all' #Can be all, never or notzero
-min = 0
-xmax = 70
-baseval = 0
+view = 'lessthanbase' #Can be all, never or lessthanbase
+baseval = 70
+maxval = 80
 lessthanmin = 'Extraordinarily Energetic'
-morethanmax = 'How are you alive?'
 base = 'Full of Energy'
-one = 'Mildly Fatigued'
-two = 'Weary'
-three = 'Tired'
-four = 'Worn Out'
-five = 'Exhausted'
-six = 'Totally Cream Crackered'
+descriptors = 6
+	[[1]]
+	text = 'Extraordinarily Energetic'
+	[[2]]
+	text = 'Mildly Fatigued'
+	[[3]]
+	text = 'Weary'
+	[[4]]
+	text = 'Tired'
+	[[5]]
+	text = 'Worn Out'
+	[[6]]
+	text = 'Exhausted'
+	[[7]]
+	text = 'Totally Cream Crackered'
