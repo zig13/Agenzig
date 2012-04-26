@@ -345,31 +345,21 @@ while 7 != 3 : #Basically, you're not getting out of this loop...
 				while vitno != vittotal :
 					vitno = vitno+1
 					svitno = str(vitno)
-					if (vitals[svitno]['view'] == 'all') or ((vitals[svitno]['view'] == 'notzero') and (character['Vitals'][svitno] != 0)) :
-						if (character['Vitals'][svitno] >= vitals[svitno]['baseval']/10*9) and (character['Vitals'][svitno] <= vitals[svitno]['baseval'] /10 * 11) :
-							vitlevel = vitals[svitno]['base']
-						elif character['Vitals'][svitno] > vitals[svitno]['baseval']/10*11 :
-							if character['Vitals'][svitno] <= vitals[svitno]['baseval']/10*13 :
-								vitlevel = vitals[svitno]['highone']
-							elif character['Vitals'][svitno] <= vitals[svitno]['baseval']/10*15 :
-								vitlevel = vitals[svitno]['hightwo']
-							elif character['Vitals'][svitno] <= vitals[svitno]['baseval']/10*17 :
-								vitlevel = vitals[svitno]['highthree']
-							elif character['Vitals'][svitno] <= vitals[svitno]['baseval']/10*19 :
-								vitlevel = vitals[svitno]['highfour']
-							else :
-								vitlevel = vitals[svitno]['exhigh']
+					if (vitals[svitno]['view'] == 'all') or ((vitals[svitno]['view'] == 'lessthanbase') and (character['Vitals'][svitno] > vitals[svitno]['baseval'])) :
+						if (vitals[svitno]['maxval'] == 0 ) :
+							mbratio = 1.25
+						elif vitals[svitno]['maxval'] >= vitals[svitno]['baseval'] :
+							mbratio = vitals[svitno]['maxval']/vitals[svitno]['baseval'] advname
 						else :
-							if character['Vitals'][svitno] >= vitals[svitno]['baseval']/10*7 :
-								vitlevel = vitals[svitno]['lowone']
-							elif character['Vitals'][svitno] >= vitals[svitno]['baseval']/10*5 :
-								vitlevel = vitals[svitno]['lowtwo']
-							elif character['Vitals'][svitno] >= vitals[svitno]['baseval']/10*3 :
-								vitlevel = vitals[svitno]['lowthree']
-							elif character['Vitals'][svitno] >= vitals[svitno]['baseval']/10*1 :
-								vitlevel = vitals[svitno]['lowfour']
-							else :
-								vitlevel = vitals[svitno]['exlow']
+							print "vitals.agez of %s is corrupt" %(advname)
+							print "Base value of %s exceeds max value" %(vitals[svitno]['name'])
+							raw_input("Press enter to continue and inevitably crash")
+						if character['Vitals'][svitno] > vitals[svitno]['baseval'] :
+							print "fhfthjtf"
+						elif character['Vitals'][svitno] > vitals[svitno]['baseval'] :
+							print "gdsghdrh"
+						else :
+							vitlevel = vitals[svitno]['base']
 					statuslist = statuslist+vitlevel+"\n"
 				attno = 0
 				statuslist = statuslist+"\n"
