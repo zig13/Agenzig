@@ -349,7 +349,7 @@ while 7 != 3 : #Basically, you're not getting out of this loop...
 						if (vitals[svitno]['maxval'] == 0 ) :
 							mbratio = 1.25
 						elif vitals[svitno]['maxval'] >= vitals[svitno]['baseval'] :
-							mbratio = vitals[svitno]['maxval']/vitals[svitno]['baseval'] advname
+							mbratio = vitals[svitno]['maxval']/vitals[svitno]['baseval']
 						else :
 							print "vitals.agez of %s is corrupt" %(advname)
 							print "Base value of %s exceeds max value" %(vitals[svitno]['name'])
