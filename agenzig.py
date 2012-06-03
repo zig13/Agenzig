@@ -342,7 +342,6 @@ while 7 != 3 : #Basically, you're not getting out of this loop...
 			print scenechoices
 		elif (prompt == 'test') or (prompt == "t") :
 			if (statusgen != 1) :
-				print "Is going right way"
 				statuslist = "You are:\n"
 				vitno = 0
 				while vitno != vittotal :
