@@ -161,8 +161,10 @@ if sel == opt : #Making a new character
 	#Setting vitals
 	character['Vitals'] = {}
 	character['Vitals']['health'] = csetup['initialhealth']
+	character['Vitals']['1'] = csetup['initialhealth'] #bodge
 	if 'initialfatigue' in csetup.scalars :
 		character['Vitals']['fatigue'] = csetup['initialfatigue']
+		character['Vitals']['2'] = csetup['initialfatigue'] #bodge
 	#Setting attributes
 	character['Attributes'] = {}
 	character['Attributes']['strength'] = random.randint(int(csetup['minstrength']), int(csetup['maxstrength']))
@@ -340,6 +342,7 @@ while 7 != 3 : #Basically, you're not getting out of this loop...
 			print scenechoices
 		elif (prompt == 'test') or (prompt == "t") :
 			if (statusgen != 1) :
+				print "Is going right way"
 				statuslist = "You are:\n"
 				vitno = 0
 				while vitno != vittotal :
