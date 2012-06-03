@@ -2,8 +2,8 @@ total = 2
 [1]
 name = 'Health'
 view = 'all' #Can be all, never or lessthanbase
-baseval = 100
-maxval = 130
+baseval = 1000
+maxval = 1300
 base = 'Healthy'
 descriptors = 6
 	[[1]]
