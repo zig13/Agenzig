@@ -1,6 +1,6 @@
 ﻿#-------------------------------------------------------------------------------
 # Name:        Agenzig Main Script
-# Purpose:     Text-based adventure game engine
+# Purpose:     Text-based adventure game engine (i.e. reads actual adventure from config files)
 #
 # Author:      Thomas Sturges-Allard
 #
@@ -348,23 +348,35 @@ while 7 != 3 : #Basically, you're not getting out of this loop...
 					vitno = vitno+1
 					svitno = str(vitno)
 					if (vitals[svitno]['view'] == 'all') or ((vitals[svitno]['view'] == 'lessthanbase') and (character['Vitals'][svitno] > vitals[svitno]['baseval'])) :
-						if (vitals[svitno]['maxval'] == 0 ) :
-							mbratio = 1.25
-						elif vitals[svitno]['maxval'] >= vitals[svitno]['baseval'] :
-							mbratio = vitals[svitno]['maxval']/vitals[svitno]['baseval']
+						if vitals[svitno]['maxval'] >= vitals[svitno]['baseval'] :
+							mbratio = vitals[svitno]['maxval']/vitals[svitno]['baseval'] #Needs replacing with proper formula
 						else :
 							print "vitals.agez of %s is corrupt" %(advname)
 							print "Base value of %s exceeds max value" %(vitals[svitno]['name'])
 							raw_input("Press enter to continue and inevitably crash")
-						if character['Vitals'][svitno] > vitals[svitno]['baseval'] :
-							print "fhfthjtf"
-						elif character['Vitals'][svitno] > vitals[svitno]['baseval'] :
-							print "gdsghdrh"
-						else :
-							vitlevel = vitals[svitno]['base']
-					statuslist = statuslist+vitlevel+"\n"
+						if vitals[svitno]['descriptors'] > vitals[svitno]['maxval'] :
+							print "vitals.agez of %s is corrupt" %(advname)
+							print "More descriptors are availible for %s than values!" %(vitals[svitno]['name'])
+							raw_input("Press enter to continue and inevitably crash")
+						lowdesc = int(round(((Decimal(vitals[svitno]['descriptors'])-1)*mbratio)/2))
+						highdesc = vitals[svitno]['descriptors'] - lowdesc
+						basedescno = lowdesc+1
+						baserange = int(round(((Decimal(vitals[svitno]['maxval'])/vitals[svitno]['descriptors'])-1)/2))
+						lowdescrange = int(round(((Decimal(vitals[svitno]['baseval'])-baserange)-1)/lowdesc))
+						highdescrange = int(round((Decimal(vitals[svitno]['maxval'])-(vitals[svitno]['baseval']+baserange))/highdesc))
+						if (character['Vitals'][svitno] >= vitals[svitno]['baseval']-baserange) and (character['Vitals'][svitno] <= vitals[svitno]['baseval']+baserange) :
+							print basedescno
+							vitlevel = vitals[svitno][str(basedescno)]['text']
+						elif character['Vitals'][svitno] < vitals[svitno]['baseval']-baserange :
+							descno = character['Vitals'][svitno]/lowdescrange
+							vitlevel = vitals[svitno][descno]['text']
+						elif character['Vitals'][svitno] > vitals[svitno]['baseval']+baserange :
+							descno = ((character['Vitals'][svitno]-(vitals[svitno]['baseval']+baserange))/highdescrange)+basedescno
+							print descno
+							vitlevel = vitals[svitno][descno]['text']
+						statuslist = statuslist+vitlevel+"\n"
 				attno = 0
-				statuslist = statuslist+"\n"
+				attotal = 0 #Disables attribute section. Will eventually copy code from vitals
 				while attno != attotal :
 					attno = attno+1
 					sattno = str(attno)
