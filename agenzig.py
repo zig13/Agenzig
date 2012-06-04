@@ -347,7 +347,7 @@ while 7 != 3 : #Basically, you're not getting out of this loop...
 				while vitno != vittotal :
 					vitno = vitno+1
 					svitno = str(vitno)
-					if (vitals[svitno]['view'] == 'all') or ((vitals[svitno]['view'] == 'lessthanbase') and (character['Vitals'][svitno] > vitals[svitno]['baseval'])) :
+					if (vitals[svitno]['view'] == 'all') or ((vitals[svitno]['view'] == 'lessthanbase') and (character['Vitals'][svitno] < vitals[svitno]['baseval'])) :
 						if vitals[svitno]['maxval'] >= vitals[svitno]['baseval'] :
 							mbratio = vitals[svitno]['maxval']/vitals[svitno]['baseval'] #Needs replacing with proper formula
 						else :
@@ -359,20 +359,18 @@ while 7 != 3 : #Basically, you're not getting out of this loop...
 							print "More descriptors are availible for %s than values!" %(vitals[svitno]['name'])
 							raw_input("Press enter to continue and inevitably crash")
 						lowdesc = int(round(((Decimal(vitals[svitno]['descriptors'])-1)*mbratio)/2))
-						highdesc = vitals[svitno]['descriptors'] - lowdesc
+						highdesc = vitals[svitno]['descriptors'] - (lowdesc+1)
 						basedescno = lowdesc+1
 						baserange = int(round(((Decimal(vitals[svitno]['maxval'])/vitals[svitno]['descriptors'])-1)/2))
 						lowdescrange = int(round(((Decimal(vitals[svitno]['baseval'])-baserange)-1)/lowdesc))
 						highdescrange = int(round((Decimal(vitals[svitno]['maxval'])-(vitals[svitno]['baseval']+baserange))/highdesc))
 						if (character['Vitals'][svitno] >= vitals[svitno]['baseval']-baserange) and (character['Vitals'][svitno] <= vitals[svitno]['baseval']+baserange) :
-							print basedescno
 							vitlevel = vitals[svitno][str(basedescno)]['text']
 						elif character['Vitals'][svitno] < vitals[svitno]['baseval']-baserange :
-							descno = character['Vitals'][svitno]/lowdescrange
+							descno = str(int(round(Decimal(character['Vitals'][svitno])/lowdescrange)))
 							vitlevel = vitals[svitno][descno]['text']
 						elif character['Vitals'][svitno] > vitals[svitno]['baseval']+baserange :
-							descno = ((character['Vitals'][svitno]-(vitals[svitno]['baseval']+baserange))/highdescrange)+basedescno
-							print descno
+							descno = str(int(round(((Decimal(character['Vitals'][svitno])-(vitals[svitno]['baseval']+baserange))/highdescrange)))+basedescno)
 							vitlevel = vitals[svitno][descno]['text']
 						statuslist = statuslist+vitlevel+"\n"
 				attno = 0
