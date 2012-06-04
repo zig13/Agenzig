@@ -4,8 +4,7 @@ name = 'Health'
 view = 'all' #Can be all, never or lessthanbase
 baseval = 1000
 maxval = 1300
-base = 'Healthy'
-descriptors = 6
+descriptors = 7
 	[[1]]
 	text = 'Near Death'
 	[[2]]
@@ -15,17 +14,18 @@ descriptors = 6
 	[[4]]
 	text = 'Hurt'
 	[[5]]
-	text = 'Unnaturally Healthy'
+	text = 'Healthy'
 	[[6]]
+	text = 'Unnaturally Healthy'
+	[[7]]
 	text = 'EXTREMELY Healthy'
 
 [2]
 name = 'Fatigue'
-view = 'lessthanbase' #Can be all, never or lessthanbase
+view = 'all' #Can be all, never or lessthanbase
 baseval = 70
 maxval = 80
-base = 'Full of Energy'
-descriptors = 7
+descriptors = 8
 	[[1]]
 	text = 'Totally Cream Crackered'
 	[[2]]
@@ -39,6 +39,8 @@ descriptors = 7
 	[[6]]
 	text = 'Mildly Fatigued'
 	[[7]]
+	text = 'Full of Energy'
+	[[8]]
 	text = 'Extraordinarily Energetic'
 
 
