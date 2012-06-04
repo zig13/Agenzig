@@ -21,7 +21,7 @@ perceptive = 20
 [Character Setup]
 initialscene = '1'
 initialhealth = 950
-initialfatigue = 5
+initialfatigue = 70
 minstrength = 15
 maxstrength = 25
 minknowledge = 15
