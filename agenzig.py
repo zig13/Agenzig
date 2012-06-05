@@ -328,6 +328,7 @@ while 7 != 3 : #Basically, you're not getting out of this loop...
 	scenestateb = scene
 	scenechanged = 0
 	statusgen = 0
+	sstatusgen = 0
 	invlistgen = 0
 	equiplistgen = 0
 	itemused = 0
@@ -407,7 +408,7 @@ while 7 != 3 : #Basically, you're not getting out of this loop...
 				statusgen = 1
 			print statuslist
 		elif  (prompt == "status") or (prompt == "s") :
-			if statusgen != 1 :
+			if sstatusgen != 1 :
 				if health > ((int(main['Attribute Bases']['healthy'])/10)*12) :
 					stathealth = "You are EXTREMELY Healthy\n"
 				elif (health > int(main['Attribute Bases']['healthy'])) and (health <=  ((int(main['Attribute Bases']['healthy']))/10)*12) :
@@ -611,7 +612,7 @@ while 7 != 3 : #Basically, you're not getting out of this loop...
 					else :
 						statperception = "You are Blind\n"							
 				status = "Current Status:\n"+stathealth+statfatigue+"\n"+statstrength+statknowledge+statdexterity+statwillpower+statconstitution
-				statusgen = 1
+				sstatusgen = 1
 			print ""
 			print status
 		elif (prompt == 'equipment') or (prompt == "e") :
