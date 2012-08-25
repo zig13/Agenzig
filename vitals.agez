@@ -4,45 +4,42 @@ name = 'Health'
 view = 'all' #Can be all, never or lessthanbase
 baseval = 1000
 maxval = 1300
-descriptors = 7
-	[[1]]
-	text = 'Near Death'
-	[[2]]
-	text = 'Severely Injured'
-	[[3]]
-	text = 'Injured'
-	[[4]]
-	text = 'Hurt'
-	[[5]]
-	text = 'Healthy'
-	[[6]]
-	text = 'Unnaturally Healthy'
-	[[7]]
-	text = 'EXTREMELY Healthy'
+	[[Descriptors]]
+	base = 'Healthy'
+		[[[lessthanbase]]]
+		total = 4
+			[[[[1]]]]
+			text = 'Near Death'
+			[[[[2]]]]
+			text = 'Severely Injured'
+			[[[[3]]]]
+			text = 'Injured'
+			[[[[4]]]]
+			text = 'Hurt'
+		[[[morethanbase]]]
+		total = 2
+			[[[[1]]]]
+			text = 'Unnaturally Healthy'
+			[[[[2]]]]
+			text = 'EXTREMELY Healthy'
 
 [2]
 name = 'Fatigue'
-view = 'all' #Can be all, never or lessthanbase
+view = 'lessthanbase' #Can be all, never or lessthanbase
 baseval = 70
-maxval = 80
-descriptors = 8
-	[[1]]
-	text = 'Totally Cream Crackered'
-	[[2]]
-	text = 'Exhausted'
-	[[3]]
-	text = 'Worn Out'	
-	[[4]]
-	text = 'Tired'	
-	[[5]]
-	text = 'Weary'	
-	[[6]]
-	text = 'Mildly Fatigued'
-	[[7]]
-	text = 'Full of Energy'
-	[[8]]
-	text = 'Extraordinarily Energetic'
-
-
-
+[[Descriptors]]
+		[[[lessthanbase]]]
+		total = 6
+			[[[[1]]]]
+			text = 'Totally Cream Crackered'
+			[[[[2]]]]
+			text = 'Exhausted'
+			[[[[3]]]]
+			text = 'Worn Out'
+			[[[[4]]]]
+			text = 'Tired'
+			[[[[5]]]]
+			text = 'Weary'
+			[[[[6]]]]
+			text = 'Mildy Fatigued'
 
