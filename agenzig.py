@@ -344,29 +344,29 @@ while 7 != 3 : #Basically, you're not getting out of this loop...
 		elif (prompt == 'test') or (prompt == "t") :
 			if (statusgen != 1) :
 				statuslist = "You are:\n"
+				statchanged = 0
 				vitno = 0
 				while vitno != vittotal :
 					vitno = vitno+1
 					svitno = str(vitno)
-					if (vitals[svitno]['view'] == 'all') or ((vitals[svitno]['view'] == 'lessthanbase') and (character['Vitals'][svitno] < vitals[svitno]['baseval'])) :
-						if vitals[svitno]['maxval'] >= vitals[svitno]['baseval'] :
-							mbratio = vitals[svitno]['maxval']/vitals[svitno]['baseval'] #Needs replacing with proper formula
-						else :
-							print "vitals.agez of %s is corrupt" %(advname)
-							print "Base value of %s exceeds max value" %(vitals[svitno]['name'])
-							raw_input("Press enter to continue and inevitably crash")
-						if vitals[svitno]['descriptors'] > vitals[svitno]['maxval'] :
-							print "vitals.agez of %s is corrupt" %(advname)
-							print "More descriptors are availible for %s than values!" %(vitals[svitno]['name'])
-							raw_input("Press enter to continue and inevitably crash")
-						lowdesc = int(round(((Decimal(vitals[svitno]['descriptors'])-1)*mbratio)/2))
-						highdesc = vitals[svitno]['descriptors'] - (lowdesc+1)
-						basedescno = lowdesc+1
-						baserange = int(round(((Decimal(vitals[svitno]['maxval'])/vitals[svitno]['descriptors'])-1)/2))
-						lowdescrange = int(round(((Decimal(vitals[svitno]['baseval'])-baserange)-1)/lowdesc))
-						highdescrange = int(round((Decimal(vitals[svitno]['maxval'])-(vitals[svitno]['baseval']+baserange))/highdesc))
+					ltbexists = 1
+					try:
+						vitals[svitno]['Descriptors']['lessthanbase']
+					except KeyError, e:
+						ltbexists = 0
+					mtbexists = 1
+					try:
+						vitals[svitno]['Descriptors']['morethanbase']
+					except KeyError, e:
+						mtbexists = 0
+					if vitals[svitno]['view'] == 'never' :
+						pass
+					elif (vitals[svitno]['view'] == 'all') and (vitals[svitno]['maxval'] >= vitals[svitno]['baseval']) and (mtbexists == 1) and (ltbexists == 1) :
+						baserange = int(round((Decimal(vitals[svitno]['maxval'])/(vitals[svitno]['Descriptors']['lessthanbase']['total'] + vitals[svitno]['Descriptors']['morethanbase']['total']))/2))
+						lowdescrange = int(round(((Decimal(vitals[svitno]['baseval'])-baserange)-1)/vitals[svitno]['Descriptors']['lessthanbase']['total']))
+						highdescrange = int(round((Decimal(vitals[svitno]['maxval'])-(vitals[svitno]['baseval']+baserange))/vitals[svitno]['Descriptors']['morethanbase']['total']))
 						if (character['Vitals'][svitno] >= vitals[svitno]['baseval']-baserange) and (character['Vitals'][svitno] <= vitals[svitno]['baseval']+baserange) :
-							vitlevel = vitals[svitno][str(basedescno)]['text']
+							vitlevel = vitals[svitno]['Descriptors']['base']
 						elif character['Vitals'][svitno] < vitals[svitno]['baseval']-baserange :
 							descno = str(int(round(Decimal(character['Vitals'][svitno])/lowdescrange)))
 							vitlevel = vitals[svitno][descno]['text']
@@ -374,6 +374,14 @@ while 7 != 3 : #Basically, you're not getting out of this loop...
 							descno = str(int(round(((Decimal(character['Vitals'][svitno])-(vitals[svitno]['baseval']+baserange))/highdescrange)))+basedescno)
 							vitlevel = vitals[svitno][descno]['text']
 						statuslist = statuslist+vitlevel+"\n"
+					elif ((vitals[svitno]['view'] == 'lessthanbase') and (ltbexists == 1)) :
+						if character['Vitals'][svitno] < vitals[svitno]['baseval'] :
+							lowdescrange = int(round((Decimal(vitals[svitno]['baseval'])-1)/vitals[svitno]['Descriptors']['lessthanbase']['total']))
+							descno = str(int(round(Decimal(character['Vitals'][svitno])/lowdescrange)))
+							vitlevel = vitals[svitno][descno]['text']
+							statuslist = statuslist+vitlevel+"\n"
+					else :
+						print "vitals.agez is corrupt (vital number %s)" %(svitno)
 				attno = 0
 				attotal = 0 #Disables attribute section. Will eventually copy code from vitals
 				while attno != attotal :
@@ -710,3 +718,6 @@ while 7 != 3 : #Basically, you're not getting out of this loop...
 		if itemused == 1 :
 			invlistgen = 0
 			itemused = 0
+		statchanged = 0
+		if statchanged == 1 :
+			statusgen = 0
