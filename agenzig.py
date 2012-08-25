@@ -368,17 +368,18 @@ while 7 != 3 : #Basically, you're not getting out of this loop...
 						if (character['Vitals'][svitno] >= vitals[svitno]['baseval']-baserange) and (character['Vitals'][svitno] <= vitals[svitno]['baseval']+baserange) :
 							vitlevel = vitals[svitno]['Descriptors']['base']
 						elif character['Vitals'][svitno] < vitals[svitno]['baseval']-baserange :
-							descno = str(int(round(Decimal(character['Vitals'][svitno])/lowdescrange)))
-							vitlevel = vitals[svitno][descno]['text']
+							descno = str(int(round(Decimal(character['Vitals'][svitno])/lowdescrange))+1)
+							vitlevel = vitals[svitno]['Descriptors']['lessthanbase'][descno]['text']
 						elif character['Vitals'][svitno] > vitals[svitno]['baseval']+baserange :
 							descno = str(int(round(((Decimal(character['Vitals'][svitno])-(vitals[svitno]['baseval']+baserange))/highdescrange)))+basedescno)
-							vitlevel = vitals[svitno][descno]['text']
+							vitlevel = vitals[svitno]['Descriptors']['lessthanbase'][descno]['text']
 						statuslist = statuslist+vitlevel+"\n"
 					elif ((vitals[svitno]['view'] == 'lessthanbase') and (ltbexists == 1)) :
 						if character['Vitals'][svitno] < vitals[svitno]['baseval'] :
 							lowdescrange = int(round((Decimal(vitals[svitno]['baseval'])-1)/vitals[svitno]['Descriptors']['lessthanbase']['total']))
-							descno = str(int(round(Decimal(character['Vitals'][svitno])/lowdescrange)))
-							vitlevel = vitals[svitno][descno]['text']
+							descno = str(int(round(Decimal(character['Vitals'][svitno])/lowdescrange))+1)
+							print descno
+							vitlevel = vitals[svitno]['Descriptors']['lessthanbase'][descno]['text']
 							statuslist = statuslist+vitlevel+"\n"
 					else :
 						print "vitals.agez is corrupt (vital number %s)" %(svitno)
