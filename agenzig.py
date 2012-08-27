@@ -202,7 +202,7 @@ if sel == opt : #Making a new character
 scene = str(character['Basics']['scene'])
 title = main['Details']['title']
 subtitle = "an Agenzig adventure"
-author = "by "+main['Details']['author']
+author = main['Details']['author']
 website = "For more information, go to "+main['Details']['website']
 if 'currencyonename' in main['Details'].scalars :
 		currencyonename = main['Details']['currencyonename']
@@ -702,7 +702,7 @@ while 7 != 3 : #Basically, you're not getting out of this loop...
 			print "'about': show information about the adventure you are playing"
 			print "'help': view these commands again"
 			print "'quit': shut down the game engine"
-		elif (prompt == "about") or (prompt == "credits") :
+		elif (prompt == "about") or (prompt == "credits") or (prompt == "a"):
 			print ""
 			print title+" - "+subtitle+" was made by "+author
 			print website
