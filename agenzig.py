@@ -332,7 +332,8 @@ while 7 != 3 : #Basically, you're not getting out of this loop...
 	invlistgen = 0
 	equiplistgen = 0
 	itemused = 0
-	from decimal import *
+	from decimal import Decimal
+	from math import ceil
 	while scenechanged == 0 :
 		prompt = raw_input(">") #The main prompt!
 		prompt = prompt.lower()
@@ -361,24 +362,25 @@ while 7 != 3 : #Basically, you're not getting out of this loop...
 						mtbexists = 0
 					if vitals[svitno]['view'] == 'never' :
 						pass
-					elif (vitals[svitno]['view'] == 'all') and (vitals[svitno]['maxval'] >= vitals[svitno]['baseval']) and (mtbexists == 1) and (ltbexists == 1) :
-						baserange = int(round((Decimal(vitals[svitno]['maxval'])/(vitals[svitno]['Descriptors']['lessthanbase']['total'] + vitals[svitno]['Descriptors']['morethanbase']['total']))/2))
-						lowdescrange = int(round(((Decimal(vitals[svitno]['baseval'])-baserange)-1)/vitals[svitno]['Descriptors']['lessthanbase']['total']))
-						highdescrange = int(round((Decimal(vitals[svitno]['maxval'])-(vitals[svitno]['baseval']+baserange))/vitals[svitno]['Descriptors']['morethanbase']['total']))
-						if (character['Vitals'][svitno] >= vitals[svitno]['baseval']-baserange) and (character['Vitals'][svitno] <= vitals[svitno]['baseval']+baserange) :
+					elif (vitals[svitno]['view'] == 'all') and (vitals[svitno]['maxval'] >= vitals[svitno]['baseval']) and (mtbexists == 1) and (ltbexists == 1) :	
+						baserange = ((Decimal(vitals[svitno]['maxval']-vitals[svitno]['baseval'])/vitals[svitno]['Descriptors']['morethanbase']['total'])+(Decimal(vitals[svitno]['baseval']-1)/vitals[svitno]['Descriptors']['lessthanbase']['total']))/2
+						basemin = int(round(vitals[svitno]['baseval']-((baserange-1)/2)))
+						basemax = int(round(vitals[svitno]['baseval']+((baserange-1)/2)))
+						if (character['Vitals'][svitno] >= basemin) and (character['Vitals'][svitno] <= basemax) :
 							vitlevel = vitals[svitno]['Descriptors']['base']
-						elif character['Vitals'][svitno] < vitals[svitno]['baseval']-baserange :
-							descno = str(int(round(Decimal(character['Vitals'][svitno])/lowdescrange))+1)
+						elif character['Vitals'][svitno] < basemin :
+							lowdescsec = Decimal(basemin-1)/vitals[svitno]['Descriptors']['lessthanbase']['total']
+							descno = str(int(ceil(character['Vitals'][svitno]/lowdescsec)))
 							vitlevel = vitals[svitno]['Descriptors']['lessthanbase'][descno]['text']
-						elif character['Vitals'][svitno] > vitals[svitno]['baseval']+baserange :
-							descno = str(int(round(((Decimal(character['Vitals'][svitno])-(vitals[svitno]['baseval']+baserange))/highdescrange)))+basedescno)
+						elif character['Vitals'][svitno] > basemax :
+							highdescsec = Decimal(vitals[svitno]['maxval']-basemax)/vitals[svitno]['Descriptors']['morethanbase']['total']
+							descno = str(int(ceil(character['Vitals'][svitno]/highdescsec)))
 							vitlevel = vitals[svitno]['Descriptors']['lessthanbase'][descno]['text']
 						statuslist = statuslist+vitlevel+"\n"
 					elif ((vitals[svitno]['view'] == 'lessthanbase') and (ltbexists == 1)) :
 						if character['Vitals'][svitno] < vitals[svitno]['baseval'] :
-							lowdescrange = int(round((Decimal(vitals[svitno]['baseval'])-1)/vitals[svitno]['Descriptors']['lessthanbase']['total']))
-							descno = str(int(round(Decimal(character['Vitals'][svitno])/lowdescrange))+1)
-							print descno
+							lowdescsec = (Decimal(vitals[svitno]['baseval'])-1)/vitals[svitno]['Descriptors']['lessthanbase']['total']
+							descno = str(int(ceil(character['Vitals'][svitno]/lowdescsec)))
 							vitlevel = vitals[svitno]['Descriptors']['lessthanbase'][descno]['text']
 							statuslist = statuslist+vitlevel+"\n"
 					else :
