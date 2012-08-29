@@ -371,16 +371,22 @@ while 7 != 3 : #Basically, you're not getting out of this loop...
 						elif character['Vitals'][svitno] < basemin :
 							lowdescsec = Decimal(basemin-1)/vitals[svitno]['Descriptors']['lessthanbase']['total']
 							descno = str(int(ceil(character['Vitals'][svitno]/lowdescsec)))
+							if descno < 1 :
+								descno = 1
 							vitlevel = vitals[svitno]['Descriptors']['lessthanbase'][descno]['text']
 						elif character['Vitals'][svitno] > basemax :
 							highdescsec = Decimal(vitals[svitno]['maxval']-basemax)/vitals[svitno]['Descriptors']['morethanbase']['total']
 							descno = str(int(ceil(character['Vitals'][svitno]/highdescsec)))
+							if descno < 1 :
+								descno = 1
 							vitlevel = vitals[svitno]['Descriptors']['lessthanbase'][descno]['text']
 						statuslist = statuslist+vitlevel+"\n"
 					elif ((vitals[svitno]['view'] == 'lessthanbase') and (ltbexists == 1)) :
 						if character['Vitals'][svitno] < vitals[svitno]['baseval'] :
 							lowdescsec = (Decimal(vitals[svitno]['baseval'])-1)/vitals[svitno]['Descriptors']['lessthanbase']['total']
 							descno = str(int(ceil(character['Vitals'][svitno]/lowdescsec)))
+							if descno < 1 :
+								descno = 1
 							vitlevel = vitals[svitno]['Descriptors']['lessthanbase'][descno]['text']
 							statuslist = statuslist+vitlevel+"\n"
 					else :
