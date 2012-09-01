@@ -2,7 +2,7 @@ total = 7
 [1]
 name = 'Strength'
 type = 'both' #Can be both, pc or npc
-view = notzero #Can be notzero, never or notone
+view = 'notzero' #Can be notzero, never or notone
 baseval = 20
 maxval = 50
 	[[Descriptors]]
@@ -10,16 +10,17 @@ maxval = 50
 		[[[lessthanbase]]]
 		total = 5
 			[[[[1]]]]
-			text = Incapacitated
+			text = 'Incapacitated'
 			[[[[2]]]]
-			text = Frail
+			text = 'Frail'
 			[[[[3]]]]
-			text = Feeble
+			text = 'Feeble'
 			[[[[4]]]]
 			text = 'Weak'
 			[[[[5]]]]
 			text = 'Diminished'
-		[[[morethanbase]]
+		[[[morethanbase]]]
+		total = 5
 			[[[[1]]]]
 			text = 'Very Strong'
 			[[[[2]]]]
@@ -33,7 +34,7 @@ maxval = 50
 [2]
 name = 'Knowledge'
 type = 'pc' #Can be both, pc or npc
-view = notzero #Can be notzero, never or notone
+view = 'notzero' #Can be notzero, never or notone
 baseval = 20
 maxval = 50
 exlow = 'Vegetative'
@@ -50,7 +51,7 @@ exhigh = 'Omniscient'
 [3]
 name = 'Dexterity'
 type = 'both' #Can be both, pc or npc
-view = notzero #Can be notzero, never or notone
+view = 'notzero' #Can be notzero, never or notone
 baseval = 20
 maxval = 50
 exlow = 'Completely Uncoordinated'
@@ -67,7 +68,7 @@ exhigh = 'Faster Than The Eye Can See'
 [4]
 name = 'Willpower'
 type = 'both' #Can be both, pc or npc
-view = notzero #Can be notzero, never or notone
+view = 'notzero' #Can be notzero, never or notone
 baseval = 20
 maxval = 50
 exlow = 'Robotic'
@@ -84,7 +85,7 @@ exhigh = 'UNSTOPPABLE!'
 [5]
 name = 'Constitution'
 type = 'both' #Can be both, pc or npc
-view = notzero #Can be notzero, never or notone
+view = 'notzero' #Can be notzero, never or notone
 baseval = 20
 maxval = 50
 exlow = 'Incorporeal'
@@ -101,7 +102,7 @@ exhigh = 'WICKED SICK!'
 [6]
 name = 'Charisma'
 type = 'pc' #Can be both, pc or npc
-view = notzero #Can be notzero, never or notone
+view = 'notzero' #Can be notzero, never or notone
 baseval = 20
 maxval = 50
 exlow = 'Widely Hated'
@@ -118,7 +119,7 @@ exhigh = 'Awe-inspiring'
 [7]
 name = 'Perception'
 type = 'both' #Can be both, pc or npc
-view = notzero #Can be notzero, never or notone
+view = 'notzero' #Can be notzero, never or notone
 baseval = 20
 maxval = 50
 exlow = 'Blind'
