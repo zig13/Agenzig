@@ -1,4 +1,4 @@
-total = 7
+total = 4
 [1]
 name = 'Strength'
 type = 'both' #Can be both, pc or npc
@@ -37,83 +37,128 @@ type = 'pc' #Can be both, pc or npc
 view = 'notzero' #Can be notzero, never or notone
 baseval = 20
 maxval = 50
- [[Descriptors]]
- base = 'Knowledgeable'
-	[[[lessthanabase]]]
-	total = 5
-		[[[[1]]]]
-		text = 'Vegetative'
-		[[[[2]]]]
-		text = 'Naive'
-		[[[[3]]]]
-		text = 'Ignorant'
-		[[[[4]]]]
-		text = 'Dumb'
-		[[[[5]]]]
-		text = 'Poorly Educated'
-	[[[morethanbase]]]
-	total = 5
-		[[[[1]]]]
-		text = 'Very Knowledgeable'
-		[[[[2]]]]
-		text = 'Highly Educated'
-		[[[[3]]]]
-		text = 'Learned'
-		[[[[4]]]]
-		text = 'Enlightened'
-		[[[[5]]]]
-		text = 'Omniscient'
+	[[Descriptors]]
+	base = 'Knowledgeable'
+		[[[lessthanbase]]]
+		total = 5
+			[[[[1]]]]
+			text = 'Vegetative'
+			[[[[2]]]]
+			text = 'Naive'
+			[[[[3]]]]
+			text = 'Ignorant'
+			[[[[4]]]]
+			text = 'Dumb'
+			[[[[5]]]]
+			text = 'Poorly Educated'
+		[[[morethanbase]]]
+		total = 5
+			[[[[1]]]]
+			text = 'Very Knowledgeable'
+			[[[[2]]]]
+			text = 'Highly Educated'
+			[[[[3]]]]
+			text = 'Learned'
+			[[[[4]]]]
+			text = 'Enlightened'
+			[[[[5]]]]
+			text = 'Omniscient'
 [3]
 name = 'Dexterity'
 type = 'both' #Can be both, pc or npc
 view = 'notzero' #Can be notzero, never or notone
 baseval = 20
 maxval = 50
-exlow = 'Completely Uncoordinated'
-lowfour = 'Highly Cumbersome'
-lowthree = 'Clumsy'
-lowtwo = 'Ungainly'
-lowone = 'Gawky'
-base = 'Dexterous'
-highone = 'Deft'
-hightwo = 'Precise'
-highthree = 'Highly Dexterous'
-highfour = 'Extremely Deft'
-exhigh = 'Faster Than The Eye Can See'
+	[[Descriptors]]
+	base = 'Dexterous'
+		[[[lessthanbase]]]
+		total = 5
+			[[[[1]]]]
+			text = 'Completely Uncoordinated'
+			[[[[2]]]]
+			text = 'Highly Cumbersome'
+			[[[[3]]]]
+			text = 'Clumsy'
+			[[[[4]]]]
+			text = 'Ungainly'
+			[[[[5]]]]
+			text = 'Gawky'
+		[[[morethanbase]]]
+		total = 5
+			[[[[1]]]]
+			text = 'Deft'
+			[[[[2]]]]
+			text = 'Precise'
+			[[[[3]]]]
+			text = 'Highly Dexterous'
+			[[[[4]]]]
+			text = 'Extremely Deft'
+			[[[[5]]]]
+			text = 'Faster Than The Eye Can See'
 [4]
 name = 'Willpower'
 type = 'both' #Can be both, pc or npc
 view = 'notzero' #Can be notzero, never or notone
 baseval = 20
 maxval = 50
-exlow = 'Robotic'
-lowfour = 'Subservient'
-lowthree = 'Slavish'
-lowtwo = 'Weak-willed'
-lowone = 'Suggestable'
-base = 'Determined'
-highone = 'Steadfast'
-hightwo = 'Unshakable'
-highthree = 'Undeterable'
-highfour = 'Extremely Strong Willed'
-exhigh = 'UNSTOPPABLE!'
+	[[Descriptors]]
+	base = 'Determined'
+		[[[lessthanbase]]]
+		total = 5
+			[[[[1]]]]
+			text = 'Robotic'
+			[[[[2]]]]
+			text = 'Subservient'
+			[[[[3]]]]
+			text = 'Slavish'
+			[[[[4]]]]
+			text = 'Weak-willed'
+			[[[[5]]]]
+			text = 'Suggestable'
+		[[[morethanbase]]]
+		total = 5
+			[[[[1]]]]
+			text = 'Steadfast'
+			[[[[2]]]]
+			text = 'Unshakable'
+			[[[[3]]]]
+			text = 'Undeterable'
+			[[[[4]]]]
+			text = 'Extremely Strong Willed'
+			[[[[5]]]]
+			text = 'UNSTOPPABLE!'
 [5]
 name = 'Constitution'
 type = 'both' #Can be both, pc or npc
 view = 'notzero' #Can be notzero, never or notone
 baseval = 20
 maxval = 50
-exlow = 'Incorporeal'
-lowfour = 'Falling Apart'
-lowthree = 'Scrawny'
-lowtwo = 'Stunted'
-lowone = 'Underweight'
-base = 'Built'
-highone = 'Fortified'
-hightwo = 'Highly Resilient'
-highthree = 'Unassailable'
-highfour = 'Impenetrable'
-exhigh = 'WICKED SICK!'
+	[[Descriptors]]
+	base = 'Built'
+		[[[lessthanbase]]]
+		total = 5
+			[[[[1]]]]
+			text = 'Incorporeal'
+			[[[[2]]]]
+			text = 'Falling Apart'
+			[[[[3]]]]
+			text = 'Scrawny'
+			[[[[4]]]]
+			text = 'Stunted'
+			[[[[5]]]]
+			text = 'Underweight'
+		[[[morethanbase]]]
+		total = 5
+			[[[[1]]]]
+			text = 'Fortified'
+			[[[[2]]]]
+			text = 'Highly Resilient'
+			[[[[3]]]]
+			text = 'Unassailable'
+			[[[[4]]]]
+			text = 'Impenetrable'
+			[[[[5]]]]
+			text = 'WICKED SICK!'
 [6]
 name = 'Charisma'
 type = 'pc' #Can be both, pc or npc
