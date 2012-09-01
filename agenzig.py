@@ -371,57 +371,70 @@ while 7 != 3 : #Basically, you're not getting out of this loop...
 						elif character['Vitals'][svitno] < basemin :
 							lowdescsec = Decimal(basemin-1)/vitals[svitno]['Descriptors']['lessthanbase']['total']
 							descno = str(int(ceil(character['Vitals'][svitno]/lowdescsec)))
-							if descno < 1 :
-								descno = 1
+							if int(descno) < 1 :
+								descno = '1'
 							vitlevel = vitals[svitno]['Descriptors']['lessthanbase'][descno]['text']
 						elif character['Vitals'][svitno] > basemax :
 							highdescsec = Decimal(vitals[svitno]['maxval']-basemax)/vitals[svitno]['Descriptors']['morethanbase']['total']
 							descno = str(int(ceil(character['Vitals'][svitno]/highdescsec)))
-							if descno < 1 :
-								descno = 1
+							if int(descno) < 1 :
+								descno = '1'
 							vitlevel = vitals[svitno]['Descriptors']['lessthanbase'][descno]['text']
 						statuslist = statuslist+vitlevel+"\n"
 					elif ((vitals[svitno]['view'] == 'lessthanbase') and (ltbexists == 1)) :
 						if character['Vitals'][svitno] < vitals[svitno]['baseval'] :
 							lowdescsec = (Decimal(vitals[svitno]['baseval'])-1)/vitals[svitno]['Descriptors']['lessthanbase']['total']
 							descno = str(int(ceil(character['Vitals'][svitno]/lowdescsec)))
-							if descno < 1 :
-								descno = 1
+							if int(descno) < 1 :
+								descno = '1'
 							vitlevel = vitals[svitno]['Descriptors']['lessthanbase'][descno]['text']
 							statuslist = statuslist+vitlevel+"\n"
 					else :
 						print "vitals.agez is corrupt (vital number %s)" %(svitno)
-				attno = 0
-				attotal = 0 #Disables attribute section. Will eventually copy code from vitals
 				while attno != attotal :
 					attno = attno+1
 					sattno = str(attno)
-					if (attributes[sattno]['view'] == 'all') or ((attributes[sattno]['view'] == 'notzero') and (character['Attributes'][sattno] != 0)) :
-						if (character['Attributes'][sattno] >= attributes[sattno]['baseval']/10*9) and (character['Attributes'][sattno] <= attributes[sattno]['baseval'] /10 * 11) :
-							attlevel = attributes[sattno]['base']
-						elif character['Attributes'][sattno] > attributes[sattno]['baseval']/10*11 :
-							if character['Attributes'][sattno] <= attributes[sattno]['baseval']/10*13 :
-								attlevel = attributes[sattno]['highone']
-							elif character['Attributes'][sattno] <= attributes[sattno]['baseval']/10*15 :
-								attlevel = attributes[sattno]['hightwo']
-							elif character['Attributes'][sattno] <= attributes[sattno]['baseval']/10*17 :
-								attlevel = attributes[sattno]['highthree']
-							elif character['Attributes'][sattno] <= attributes[sattno]['baseval']/10*19 :
-								attlevel = attributes[sattno]['highfour']
-							else :
-								attlevel = attributes[sattno]['exhigh']
-						else :
-							if character['Attributes'][sattno] >= attributes[sattno]['baseval']/10*7 :
-								attlevel = attributes[sattno]['lowone']
-							elif character['Attributes'][sattno] >= attributes[sattno]['baseval']/10*5 :
-								attlevel = attributes[sattno]['lowtwo']
-							elif character['Attributes'][sattno] >= attributes[sattno]['baseval']/10*3 :
-								attlevel = attributes[sattno]['lowthree']
-							elif character['Attributes'][sattno] >= attributes[sattno]['baseval']/10*1 :
-								attlevel = attributes[sattno]['lowfour']
-							else :
-								attlevel = attributes[sattno]['exlow']
-					statuslist = statuslist+attlevel+"\n"
+					ltbexists = 1
+					try:
+						attributes[sattno]['Descriptors']['lessthanbase']
+					except KeyError, e:
+						ltbexists = 0
+					mtbexists = 1
+					try:
+						vitals[sattno]['Descriptors']['morethanbase']
+					except KeyError, e:
+						mtbexists = 0
+					if attributes[sattno]['view'] == 'never' :
+						pass
+					elif (attributes[sattno]['view'] == 'all') and (attributes[sattno]['maxval'] >= attributes[sattno]['baseval']) and (mtbexists == 1) and (ltbexists == 1) :	
+						baserange = ((Decimal(attributes[sattno]['maxval']-attributes[sattno]['baseval'])/attributes[sattno]['Descriptors']['morethanbase']['total'])+(Decimal(attributes[sattno]['baseval']-1)/attributes[sattno]['Descriptors']['lessthanbase']['total']))/2
+						basemin = int(round(attributes[sattno]['baseval']-((baserange-1)/2)))
+						basemax = int(round(attributes[sattno]['baseval']+((baserange-1)/2)))
+						if (character['Attributes'][sattno] >= basemin) and (character['Attributes'][sattno] <= basemax) :
+							attlevel = attributes[sattno]['Descriptors']['base']
+						elif character['Attributes'][sattno] < basemin :
+							lowdescsec = Decimal(basemin-1)/attributes[sattno]['Descriptors']['lessthanbase']['total']
+							descno = str(int(ceil(character['Attributes'][sattno]/lowdescsec)))
+							if descno < 1 :
+								descno = 1
+							attlevel = attributes[sattno]['Descriptors']['lessthanbase'][descno]['text']
+						elif character['Attributes'][sattno] > basemax :
+							highdescsec = Decimal(attributes[sattno]['maxval']-basemax)/attributes[sattno]['Descriptors']['morethanbase']['total']
+							descno = str(int(ceil(character['Attributes'][sattno]/highdescsec)))
+							if int(descno) < 1 :
+								descno = '1'
+							attlevel = attributes[sattno]['Descriptors']['lessthanbase'][descno]['text']
+						statuslist = statuslist+attlevel+"\n"
+					elif ((attributes[sattno]['view'] == 'lessthanbase') and (ltbexists == 1)) :
+						if character['Attributes'][sattno] < attributes[sattno]['baseval'] :
+							lowdescsec = (Decimal(attributes[sattno]['baseval'])-1)/attributes[sattno]['Descriptors']['lessthanbase']['total']
+							descno = str(int(ceil(character['Attributes'][sattno]/lowdescsec)))
+							if int(descno) < 1 :
+								descno = '1'
+							attlevel = attributes[sattno]['Descriptors']['lessthanbase'][descno]['text']
+							statuslist = statuslist+attlevel+"\n"
+					else :
+						print "attributes.agez is corrupt (attribute number %s)" %(sattno)
 				statusgen = 1
 			print statuslist
 		elif  (prompt == "status") or (prompt == "s") :
