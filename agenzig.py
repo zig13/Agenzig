@@ -182,6 +182,14 @@ if sel == opt : #Making a new character
 	character['Attributes']['Initial Values']['constitution'] = character['Attributes']['constitution']
 	character['Attributes']['Initial Values']['charisma'] = character['Attributes']['charisma']
 	character['Attributes']['Initial Values']['perception'] = character['Attributes']['perception']
+	#Setting bodge attributes
+	character['Attributes']['1'] = character['Attributes']['strength']
+	character['Attributes']['2'] = character['Attributes']['knowledge']
+	character['Attributes']['3'] = character['Attributes']['dexterity']
+	character['Attributes']['4'] = character['Attributes']['willpower']
+	character['Attributes']['5'] = character['Attributes']['constitution']
+	character['Attributes']['6'] = character['Attributes']['charisma']
+	character['Attributes']['7'] = character['Attributes']['perception']	
 	#Setting currencies
 	if 'currencyonename' in main['Details'].scalars :
 		character['Currency'] = {}
@@ -391,6 +399,8 @@ while 7 != 3 : #Basically, you're not getting out of this loop...
 							statuslist = statuslist+vitlevel+"\n"
 					else :
 						print "vitals.agez is corrupt (vital number %s)" %(svitno)
+				statuslist = statuslist+"\n"
+				attno = 0
 				while attno != attotal :
 					attno = attno+1
 					sattno = str(attno)
@@ -401,12 +411,12 @@ while 7 != 3 : #Basically, you're not getting out of this loop...
 						ltbexists = 0
 					mtbexists = 1
 					try:
-						vitals[sattno]['Descriptors']['morethanbase']
+						attributes[sattno]['Descriptors']['morethanbase']
 					except KeyError, e:
 						mtbexists = 0
 					if attributes[sattno]['view'] == 'never' :
 						pass
-					elif (attributes[sattno]['view'] == 'all') and (attributes[sattno]['maxval'] >= attributes[sattno]['baseval']) and (mtbexists == 1) and (ltbexists == 1) :	
+					elif (attributes[sattno]['view'] == 'notzero') and (attributes[sattno]['maxval'] >= attributes[sattno]['baseval']) and (mtbexists == 1) and (ltbexists == 1) :	
 						baserange = ((Decimal(attributes[sattno]['maxval']-attributes[sattno]['baseval'])/attributes[sattno]['Descriptors']['morethanbase']['total'])+(Decimal(attributes[sattno]['baseval']-1)/attributes[sattno]['Descriptors']['lessthanbase']['total']))/2
 						basemin = int(round(attributes[sattno]['baseval']-((baserange-1)/2)))
 						basemax = int(round(attributes[sattno]['baseval']+((baserange-1)/2)))
