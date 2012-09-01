@@ -1,6 +1,7 @@
 total = 2
 [1]
 name = 'Health'
+type = 'both' #Can be both, pc or npc
 view = 'all' #Can be all, never or lessthanbase
 baseval = 1000
 maxval = 1300
@@ -25,6 +26,7 @@ maxval = 1300
 
 [2]
 name = 'Fatigue'
+type = 'pc' #Can be both, pc or npc
 view = 'lessthanbase' #Can be all, never or lessthanbase
 baseval = 70
 [[Descriptors]]
