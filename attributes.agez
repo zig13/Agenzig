@@ -37,17 +37,32 @@ type = 'pc' #Can be both, pc or npc
 view = 'notzero' #Can be notzero, never or notone
 baseval = 20
 maxval = 50
-exlow = 'Vegetative'
-lowfour = 'Naive'
-lowthree = 'Ignorant'
-lowtwo = 'Dumb'
-lowone = 'Poorly Educated'
-base = 'Knowledgable'
-highone = 'Very Knowledgable'
-hightwo = 'Highly Educated'
-highthree = 'Learned'
-highfour = 'Enlightened'
-exhigh = 'Omniscient'
+ [[Descriptors]]
+ base = 'Knowledgeable'
+	[[[lessthanabase]]]
+	total = 5
+		[[[[1]]]]
+		text = 'Vegetative'
+		[[[[2]]]]
+		text = 'Naive'
+		[[[[3]]]]
+		text = 'Ignorant'
+		[[[[4]]]]
+		text = 'Dumb'
+		[[[[5]]]]
+		text = 'Poorly Educated'
+	[[[morethanbase]]]
+	total = 5
+		[[[[1]]]]
+		text = 'Very Knowledgeable'
+		[[[[2]]]]
+		text = 'Highly Educated'
+		[[[[3]]]]
+		text = 'Learned'
+		[[[[4]]]]
+		text = 'Enlightened'
+		[[[[5]]]]
+		text = 'Omniscient'
 [3]
 name = 'Dexterity'
 type = 'both' #Can be both, pc or npc
