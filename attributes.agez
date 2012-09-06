@@ -1,4 +1,4 @@
-total = 4
+total = 5
 [1]
 name = 'Strength'
 type = 'both' #Can be both, pc or npc
@@ -165,6 +165,12 @@ type = 'pc' #Can be both, pc or npc
 view = 'notzero' #Can be notzero, never or notone
 baseval = 20
 maxval = 50
+	[[Descriptors]]
+	base = 'Built'
+		[[[lessthanbase]]]
+		total = 5
+			[[[[1]]]]
+			text = 'Widely Hated'
 exlow = 'Widely Hated'
 lowfour = 'Enfuriating'
 lowthree = 'Galling'
