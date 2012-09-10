@@ -1,4 +1,4 @@
-total = 5
+total = 7
 [1]
 name = 'Strength'
 type = 'both' #Can be both, pc or npc
@@ -166,38 +166,60 @@ view = 'notzero' #Can be notzero, never or notone
 baseval = 20
 maxval = 50
 	[[Descriptors]]
-	base = 'Built'
+	base = 'Charismatic'
 		[[[lessthanbase]]]
 		total = 5
 			[[[[1]]]]
-			text = 'Widely Hated'
-exlow = 'Widely Hated'
-lowfour = 'Enfuriating'
-lowthree = 'Galling'
-lowtwo = 'Irritating'
-lowone = 'Unlikeable'
-base = 'Charismatic'
-highone = 'Persuasive'
-hightwo = 'Imposing'
-highthree = 'Distinguished'
-highfour = 'Eminent'
-exhigh = 'Awe-inspiring'
+			text = 'Repulsive'
+			[[[[2]]]]
+			text = 'Enfuritating'
+			[[[[3]]]]
+			text = 'Galling'
+			[[[[4]]]]
+			text = 'Irritating'
+			[[[[5]]]]
+			text = 'Unlikeable'
+		[[[morethanbase]]]
+		total = 5
+			[[[[1]]]]
+			text = 'Persuasive'
+			[[[[2]]]]
+			text = 'Imposing'
+			[[[[3]]]]
+			text = 'Distinguished'
+			[[[[4]]]]
+			text = 'Eminent'
+			[[[[5]]]]
+			text = 'Awe-inspiring'
 [7]
 name = 'Perception'
 type = 'both' #Can be both, pc or npc
 view = 'notzero' #Can be notzero, never or notone
 baseval = 20
 maxval = 50
-exlow = 'Blind'
-lowfour = 'Near-blind'
-lowthree = 'Viusually Impaired'
-lowtwo = 'Colour-blind'
-lowone = 'Unfocussed'
-base = 'Perceptive'
-highone = 'Keen-eyed'
-hightwo = 'Scanning'
-highthree = 'Eagle-eyed'
-highfour = 'Extremely Perceptive'
-exhigh = 'Omnipercipient'
-
-
+	[[Descriptors]]
+	base = 'Perceptive'
+		[[[lessthanbase]]]
+		total = 5
+			[[[[1]]]]
+			text = 'Blind'
+			[[[[2]]]]
+			text = 'Near-blind'
+			[[[[3]]]]
+			text = 'Visually Impaired'
+			[[[[4]]]]
+			text = 'Colour-blind'
+			[[[[5]]]]
+			text = 'Unfoccused'
+		[[[morethanbase]]]
+		total = 5
+			[[[[1]]]]
+			text = 'Keen-eyed'
+			[[[[2]]]]
+			text = 'Scanning'
+			[[[[3]]]]
+			text = 'Eagle-eyed'
+			[[[[4]]]]
+			text = 'Extremely Perceptive'
+			[[[[5]]]]
+			text = 'Omnipercipient'
