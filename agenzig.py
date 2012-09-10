@@ -350,7 +350,7 @@ while 7 != 3 : #Basically, you're not getting out of this loop...
 		elif (prompt == "choices") or (prompt == "c") :
 			print ""
 			print scenechoices
-		elif (prompt == 'test') or (prompt == "t") :
+		elif (prompt == 'status') or (prompt == "s") :
 			if (statusgen != 1) :
 				statuslist = "You are:\n"
 				statchanged = 0
