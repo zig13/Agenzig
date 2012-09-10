@@ -17,27 +17,34 @@ except ImportError, e:
 	raw_input("ConfigObj module is required. Please install and try again")
 	exit(0)
 from configobj import *
+from time import sleep
+from subprocess import Popen
 dot = str(os.curdir) #The character used by the current os to denote the current folder. Is '.' in Windows
 sep = str(os.sep) #The character used by the current os to denote the demotion to another folder level. Is '/' in Windows
 #Hopefully the use of these will help make the engine cross-platform
 mainfile = dot+sep+"main.agez"
 advsfolder = "%s%sAdventures%s" %(dot,sep,sep)
-gviewer = 0
-aplayer = 0
+mpc = dot+sep+"mpc-hc.exe"
+aplayer = os.access(mpc, os.R_OK)
+kpic = dot+sep+"kpic.exe"
+gviewer = os.access(kpic, os.R_OK)
 if os.access(mainfile, os.R_OK) :
 	main = ConfigObj(mainfile, unrepr=True)
 	advname = main['Details']['title']
 	charfolder = dot+sep+"Characters"+sep
 	advfolder = dot+sep
 elif os.access(advsfolder, os.R_OK):
-	if os.access(dot+sep+"gqview"+sep, os.R_OK) :
-		gviewer = 1
-		if os.access(dot+sep+"agenzigsplash.azg", os.R_OK) :
-			os.startfile(dot+sep+"agenzigsplash.azg")
-	if os.access(dot+sep+"aplayer"+sep, os.R_OK) :
-		aplayer = 1
-		if os.access(dot+sep+"agenzigtheme.aza", os.R_OK) :
-			os.startfile(dot+sep+"agenzigsplash.aza")
+	if aplayer == True :
+		aztheme = dot+sep+"aztheme.aza"
+		if os.access(theme, os.R_OK) :
+			playtheme = Popen([mpc, aztheme])
+			sleep(0.5)
+	if gviewer == True :
+		azsplash = advfolder+"azsplash.azg"
+		if os.access(azsplash, os.R_OK) :		
+			viewsplash = Popen([kpic, azsplash])
+			sleep(3)
+			viewsplash.kill()
 	done = 0
 	repeat = 0
 	while done == 0 :
@@ -82,14 +89,17 @@ else :
 	raw_input("If you don't know what this means, then you should probably reinstall") #More informative than a crash...
 	exit(0)
 graphics = advfolder+"Graphics"+sep
-if (gviewer == 1) or (os.access(dot+sep+"gqview"+sep, os.R_OK)) :
-	gviewer = 1
-	if os.access(dot+sep+"agenzigsplash.azg", os.R_OK) :
-		os.startfile(dot+sep+"agenzigsplash.azg")
-if (aplayer == 1) or (os.access(dot+sep+"aplayer"+sep, os.R_OK)) :
-	aplayer = 1
-	if os.access(dot+sep+"agenzigtheme.aza", os.R_OK) :
-		os.startfile(dot+sep+"agenzigsplash.aza")
+if aplayer == True :
+	theme = dot+sep+"theme.aza"
+	if os.access(theme, os.R_OK) :
+		playtheme = Popen([mpc, theme])
+		sleep(0.5)
+if gviewer == True :
+	splash = advfolder+"splash.azg"
+	if os.access(splash, os.R_OK) :		
+		viewsplash = Popen([kpic, splash])
+		sleep(3)
+		viewsplash.kill()
 done = 0
 while done == 0 :
 	chars = os.listdir(charfolder)
