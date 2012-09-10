@@ -160,36 +160,25 @@ if sel == opt : #Making a new character
 	import random
 	#Setting vitals
 	character['Vitals'] = {}
-	character['Vitals']['health'] = csetup['initialhealth']
 	character['Vitals']['1'] = csetup['initialhealth'] #bodge
 	if 'initialfatigue' in csetup.scalars :
-		character['Vitals']['fatigue'] = csetup['initialfatigue']
 		character['Vitals']['2'] = csetup['initialfatigue'] #bodge
-	#Setting attributes
-	character['Attributes'] = {}
-	character['Attributes']['strength'] = random.randint(int(csetup['minstrength']), int(csetup['maxstrength']))
-	character['Attributes']['knowledge'] = random.randint(int(csetup['minknowledge']), int(csetup['maxknowledge']))
-	character['Attributes']['dexterity'] = random.randint(int(csetup['mindexterity']), int(csetup['maxdexterity']))
-	character['Attributes']['willpower'] = random.randint(int(csetup['minwillpower']), int(csetup['maxwillpower']))
-	character['Attributes']['constitution'] = random.randint(int(csetup['minconstitution']), int(csetup['maxconstitution']))
-	character['Attributes']['charisma'] = random.randint(int(csetup['mincharisma']), int(csetup['maxcharisma']))
-	character['Attributes']['perception'] = random.randint(int(csetup['minperception']), int(csetup['maxperception']))
-	character['Attributes']['Initial Values'] = {}
-	character['Attributes']['Initial Values']['strength'] = character['Attributes']['strength']
-	character['Attributes']['Initial Values']['knowledge'] = character['Attributes']['knowledge']
-	character['Attributes']['Initial Values']['dexterity'] = character['Attributes']['dexterity']
-	character['Attributes']['Initial Values']['willpower'] = character['Attributes']['willpower']
-	character['Attributes']['Initial Values']['constitution'] = character['Attributes']['constitution']
-	character['Attributes']['Initial Values']['charisma'] = character['Attributes']['charisma']
-	character['Attributes']['Initial Values']['perception'] = character['Attributes']['perception']
 	#Setting bodge attributes
-	character['Attributes']['1'] = character['Attributes']['strength']
-	character['Attributes']['2'] = character['Attributes']['knowledge']
-	character['Attributes']['3'] = character['Attributes']['dexterity']
-	character['Attributes']['4'] = character['Attributes']['willpower']
-	character['Attributes']['5'] = character['Attributes']['constitution']
-	character['Attributes']['6'] = character['Attributes']['charisma']
-	character['Attributes']['7'] = character['Attributes']['perception']	
+	character['Attributes']['1'] = random.randint(int(csetup['minstrength']), int(csetup['maxstrength']))
+	character['Attributes']['2'] = random.randint(int(csetup['minknowledge']), int(csetup['maxknowledge']))
+	character['Attributes']['3'] = random.randint(int(csetup['mindexterity']), int(csetup['maxdexterity']))
+	character['Attributes']['4'] = random.randint(int(csetup['minwillpower']), int(csetup['maxwillpower']))
+	character['Attributes']['5'] = random.randint(int(csetup['minconstitution']), int(csetup['maxconstitution']))
+	character['Attributes']['6'] = random.randint(int(csetup['mincharisma']), int(csetup['maxcharisma']))
+	character['Attributes']['7'] = random.randint(int(csetup['minperception']), int(csetup['maxperception']))
+	character['Attributes']['Initial Values'] = {}
+	character['Attributes']['Initial Values']['1'] = character['Attributes']['strength']
+	character['Attributes']['Initial Values']['2'] = character['Attributes']['knowledge']
+	character['Attributes']['Initial Values']['3'] = character['Attributes']['dexterity']
+	character['Attributes']['Initial Values']['4'] = character['Attributes']['willpower']
+	character['Attributes']['Initial Values']['5'] = character['Attributes']['constitution']
+	character['Attributes']['Initial Values']['6'] = character['Attributes']['charisma']
+	character['Attributes']['Initial Values']['7'] = character['Attributes']['perception']
 	#Setting currencies
 	if 'currencyonename' in main['Details'].scalars :
 		character['Currency'] = {}
