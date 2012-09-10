@@ -78,7 +78,6 @@ elif os.access(advsfolder, os.R_OK):
 		else:
 			print "Input must be a number"
 			print ""
-	from configobj import ConfigObj
 	main = ConfigObj(mainfile, unrepr=True)
 	advname = main['Details']['title']
 	charfolder = dot+sep+advfolder+sep+"Characters"+sep
