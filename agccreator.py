@@ -97,13 +97,18 @@ if __name__ == '__main__':
 	mainfile = dot+sep+"main.agez"
 	advsfolder = "%s%sAdventures%s" %(dot,sep,sep)
 	print "Welcome to the Agenzig Character Creator"
-	if os.access(mainfile, os.R_OK) :
-		main = ConfigObj(mainfile, unrepr=True)
-		advname = main['Details']['title']
-		charfolder = dot+sep+"Characters"+sep
-		advfolder = dot+sep
-		print "You will be creating a character for the %s adventure\n" %(advname)
-	elif os.access(advsfolder, os.R_OK):
+	if (os.access(advsfolder, os.R_OK)) and (str(os.listdir(advsfolder)) != "[]") :
+		if aplayer == True :
+			aztheme = dot+sep+"aztheme.aza"
+			if os.access(aztheme, os.R_OK) :
+				playtheme = Popen([mpc, aztheme])
+				sleep(0.5)
+		if gviewer == True :
+			azsplash = dot+sep+"azsplash.azg"
+			if os.access(azsplash, os.R_OK) :		
+				viewsplash = Popen([kpic, azsplash])
+				sleep(3)
+				viewsplash.kill()
 		done = 0
 		repeat = 0
 		while done == 0 :
@@ -117,33 +122,42 @@ if __name__ == '__main__':
 					opt = opt+1
 					print "%s) %s" %(opt,advs.pop())
 					advsno = advsno-1
-				print ""
-				choice = raw_input("Please type a number corresponding to the adventure you wish to create a character for >" )
+				choice = raw_input("\nPlease type a number corresponding to the adventure you wish to create a character for >" )
 			else :
 				choice = raw_input(">")
 			repeat = 1
 			if choice == "" :
-				print ""
+				pass
 			elif choice.isdigit() == 1 : #This section basically does the reverse of the above one to determine what adventure the inputted number refers to
 				sel = int(choice)
 				if sel <= opt :
 					advs2 = os.listdir(advsfolder)
 					advfolder = advsfolder+str(advs2.pop((sel-1)))+sep
 					mainfile = advfolder+sep+"main.agez"
-					done = 1
+					if os.access(mainfile, os.R_OK) :
+						done = 1
+					else :
+						print "Selected adventure folder does not contain a main file"
 				else:
-					print "Value given is not within option range"
-					print ""
+					print "Value given is not within option range\n"
 			else:
-				print "Input must be a number"
-				print ""
+				print "Input must be a number\n"
 		main = ConfigObj(mainfile, unrepr=True)
 		advname = main['Details']['title']
 		charfolder = dot+sep+advfolder+sep+"Characters"+sep
-		print advname+" succesfully loaded"
-		print ""
+		print advname+" succesfully loaded\n"		
+	elif os.access(mainfile, os.R_OK) :
+		main = ConfigObj(mainfile, unrepr=True)
+		advname = main['Details']['title']
+		charfolder = dot+sep+"Characters"+sep
+		advfolder = dot+sep
+		print "You will be creating a character for the %s adventure\n" %(advname)
 	else :
-		print "Adventures folder missing and no main file found"
+		if os.access(advsfolder, os.R_OK) :
+			print "The Adventures folder exists but contains no Adventure folders"
+		else :
+			print "No Adventures folder found in script directory"
+		print "No main file found in script directory\nIf you only have/play one Agenzig adventure then it's files\n(main.agez, attributes.agez etc) should be in the same directory as agenzig.py.\nIf you have/play multiple adventures then the files for each should be kept\nin a folder inside a folder called 'Adventures' which itself should be\nin the same directory as agenzig.py"
 		raw_input("If you don't know what this means, then you should probably reinstall") #More informative than a crash...
 		exit(0)
 	createchar(advfolder)
