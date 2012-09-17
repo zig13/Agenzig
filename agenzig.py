@@ -122,32 +122,8 @@ while done == 0 :
 	if choice.isdigit() == 1 :
 		sel = int(choice)
 		if sel == opt :
-			charname = raw_input("Please enter a name for your character >" )
-			charfile = charfolder+sep+charname+".azc"
-			character = ConfigObj(charfile, unrepr=True)
-			character['Basics'] = {}
-			character['Basics']['charname'] = charname
-			if main['Categories']['totalcategories'] != 0 :
-				totalcats = main['Categories']['totalcategories']
-				character['Categories'] = {}
-				remcats = int(totalcats)
-				while remcats != 0 :
-					print "Please select your character's "+main['Categories'][str(remcats)]['catname']+" from the options below:"
-					totalvals = main['Categories'][str(remcats)]['catvalues']
-					remvals = int(totalvals)
-					count = 0
-					while remvals != 0 :
-						count = count + 1
-						print str(count)+") "+main['Categories'][str(remcats)][str(remvals)]['valname']
-						remvals = remvals-1
-					valchoice = raw_input(">")
-					character['Categories'][str(remcats)] = {}
-					character['Categories'][str(remcats)]['catname'] = main['Categories'][str(remcats)]['catname']
-					character['Categories'][str(remcats)]['valcode'] = ((totalvals) + 1) - int(valchoice)
-					character['Categories'][str(remcats)]['valname'] = main['Categories'][str(remcats)][str(((totalvals) + 1) - int(valchoice))]['valname']
-					remcats = remcats-1
-				remcats = int(totalcats)
-			done = 1
+			from agccreator import createchar
+			createchar(advfolder)
 		else:
 			if sel <= opt :
 				chars2 = os.listdir(charfolder)
@@ -163,47 +139,6 @@ while done == 0 :
 				print ""
 	else:
 		print "Input must be a number"
-if sel == opt : #Making a new character
-	csetup = main['Character Setup']
-	character['Basics']['scene'] = str(csetup['initialscene'])
-	import random
-	#Setting vitals
-	character['Vitals'] = {}
-	character['Vitals']['1'] = csetup['initialhealth'] #bodge
-	if 'initialfatigue' in csetup.scalars :
-		character['Vitals']['2'] = csetup['initialfatigue'] #bodge
-	#Setting bodge attributes
-	character['Attributes']['1'] = random.randint(int(csetup['minstrength']), int(csetup['maxstrength']))
-	character['Attributes']['2'] = random.randint(int(csetup['minknowledge']), int(csetup['maxknowledge']))
-	character['Attributes']['3'] = random.randint(int(csetup['mindexterity']), int(csetup['maxdexterity']))
-	character['Attributes']['4'] = random.randint(int(csetup['minwillpower']), int(csetup['maxwillpower']))
-	character['Attributes']['5'] = random.randint(int(csetup['minconstitution']), int(csetup['maxconstitution']))
-	character['Attributes']['6'] = random.randint(int(csetup['mincharisma']), int(csetup['maxcharisma']))
-	character['Attributes']['7'] = random.randint(int(csetup['minperception']), int(csetup['maxperception']))
-	character['Attributes']['Initial Values'] = {}
-	character['Attributes']['Initial Values']['1'] = character['Attributes']['strength']
-	character['Attributes']['Initial Values']['2'] = character['Attributes']['knowledge']
-	character['Attributes']['Initial Values']['3'] = character['Attributes']['dexterity']
-	character['Attributes']['Initial Values']['4'] = character['Attributes']['willpower']
-	character['Attributes']['Initial Values']['5'] = character['Attributes']['constitution']
-	character['Attributes']['Initial Values']['6'] = character['Attributes']['charisma']
-	character['Attributes']['Initial Values']['7'] = character['Attributes']['perception']
-	#Setting currencies
-	if 'currencyonename' in main['Details'].scalars :
-		character['Currency'] = {}
-		character['Currency']['currencyone'] = csetup['initialcurrencyone']
-		if 'currencyonename' in main['Details'].scalars :
-			character['Currency']['currencytwo'] = csetup['initialcurrencytwo']
-		if 'currencyonename' in main['Details'].scalars :
-			character['Currency']['currencythree'] = csetup['initialcurrencythree']
-	#Setting inventory
-	character['Items'] = {}
-	character['Items']['equipment'] = csetup['initialequipment']
-	character['Items']['inventory'] = csetup['initialinventory']
-	character['Scene States'] = {}
-	character.write()
-	print "New character created"
-	print ""
 #Setting main and character varibles for easy access
 scene = str(character['Basics']['scene'])
 title = main['Details']['title']
@@ -219,16 +154,15 @@ if 'currencyonename' in main['Details'].scalars :
 		if 'currencythreename' in main['Details'].scalars :
 			currencythreename = main['Details']['currencythreename']
 			currencythree = int(character['Currency']['currencythree'])
-health = int(character['Vitals']['health'])
-if 'initialfatigue' in main['Character Setup'] :
-	fatigue = int(character['Vitals']['fatigue'])
-strength = int(character['Attributes']['strength'])
-knowledge = int(character['Attributes']['knowledge'])
-dexterity = int(character['Attributes']['dexterity'])
-willpower = int(character['Attributes']['willpower'])
-constitution = int(character['Attributes']['constitution'])
-charisma = int(character['Attributes']['charisma'])
-perception = int(character['Attributes']['perception'])
+health = int(character['Vitals']['1']) #bodge
+fatigue = int(character['Vitals']['2'])
+strength = int(character['Attributes']['1'])
+knowledge = int(character['Attributes']['2'])
+dexterity = int(character['Attributes']['3'])
+willpower = int(character['Attributes']['4'])
+constitution = int(character['Attributes']['5'])
+charisma = int(character['Attributes']['6'])
+perception = int(character['Attributes']['7'])
 equipment = character['Items']['equipment']
 inventory = character['Items']['inventory']
 # Loading other files
