@@ -96,11 +96,13 @@ if __name__ == '__main__':
 	sep = str(os.sep) #The character used by the current os to denote the demotion to another folder level. Is '/' in Windows
 	mainfile = dot+sep+"main.agez"
 	advsfolder = "%s%sAdventures%s" %(dot,sep,sep)
+	print "Welcome to the Agenzig Character Creator"
 	if os.access(mainfile, os.R_OK) :
 		main = ConfigObj(mainfile, unrepr=True)
 		advname = main['Details']['title']
 		charfolder = dot+sep+"Characters"+sep
 		advfolder = dot+sep
+		print "You will be creating a character for the %s adventure\n" %(advname)
 	elif os.access(advsfolder, os.R_OK):
 		done = 0
 		repeat = 0
