@@ -16,8 +16,8 @@ def createchar( advfolder ) :
 	from os import sep
 	sep = str(sep)
 	from configobj import ConfigObj
-	charfolder = dot+sep+advfolder+sep+"Characters"+sep
-	charfile = advfolder+charfolder+sep+charname+".azc"
+	charfolder = advfolder+"Characters"+sep
+	charfile = charfolder+charname+".azc"
 	character = ConfigObj(charfile, unrepr=True)
 	mainfile = advfolder+sep+"main.agez"
 	main = ConfigObj(mainfile, unrepr=True)
@@ -45,7 +45,7 @@ def createchar( advfolder ) :
 		remcats = int(totalcats)
 	csetup = main['Character Setup']
 	character['Basics']['scene'] = str(csetup['initialscene'])
-	import random
+	from random import randint
 	#Setting vitals
 	character['Vitals'] = {}
 	character['Vitals']['1'] = csetup['initialhealth'] #bodge
@@ -53,13 +53,13 @@ def createchar( advfolder ) :
 		character['Vitals']['2'] = csetup['initialfatigue'] #bodge
 	#Setting bodge attributes
 	character['Attributes'] = {}
-	character['Attributes']['1'] = random.randint(int(csetup['minstrength']), int(csetup['maxstrength']))
-	character['Attributes']['2'] = random.randint(int(csetup['minknowledge']), int(csetup['maxknowledge']))
-	character['Attributes']['3'] = random.randint(int(csetup['mindexterity']), int(csetup['maxdexterity']))
-	character['Attributes']['4'] = random.randint(int(csetup['minwillpower']), int(csetup['maxwillpower']))
-	character['Attributes']['5'] = random.randint(int(csetup['minconstitution']), int(csetup['maxconstitution']))
-	character['Attributes']['6'] = random.randint(int(csetup['mincharisma']), int(csetup['maxcharisma']))
-	character['Attributes']['7'] = random.randint(int(csetup['minperception']), int(csetup['maxperception']))
+	character['Attributes']['1'] = randint(int(csetup['minstrength']), int(csetup['maxstrength']))
+	character['Attributes']['2'] = randint(int(csetup['minknowledge']), int(csetup['maxknowledge']))
+	character['Attributes']['3'] = randint(int(csetup['mindexterity']), int(csetup['maxdexterity']))
+	character['Attributes']['4'] = randint(int(csetup['minwillpower']), int(csetup['maxwillpower']))
+	character['Attributes']['5'] = randint(int(csetup['minconstitution']), int(csetup['maxconstitution']))
+	character['Attributes']['6'] = randint(int(csetup['mincharisma']), int(csetup['maxcharisma']))
+	character['Attributes']['7'] = randint(int(csetup['minperception']), int(csetup['maxperception']))
 	character['Attributes']['Initial Values'] = {}
 	character['Attributes']['Initial Values']['1'] = character['Attributes']['1']
 	character['Attributes']['Initial Values']['2'] = character['Attributes']['2']
@@ -98,17 +98,6 @@ if __name__ == '__main__':
 	advsfolder = "%s%sAdventures%s" %(dot,sep,sep)
 	print "Welcome to the Agenzig Character Creator"
 	if (os.access(advsfolder, os.R_OK)) and (str(os.listdir(advsfolder)) != "[]") :
-		if aplayer == True :
-			aztheme = dot+sep+"aztheme.aza"
-			if os.access(aztheme, os.R_OK) :
-				playtheme = Popen([mpc, aztheme])
-				sleep(0.5)
-		if gviewer == True :
-			azsplash = dot+sep+"azsplash.azg"
-			if os.access(azsplash, os.R_OK) :		
-				viewsplash = Popen([kpic, azsplash])
-				sleep(3)
-				viewsplash.kill()
 		done = 0
 		repeat = 0
 		while done == 0 :
@@ -122,7 +111,7 @@ if __name__ == '__main__':
 					opt = opt+1
 					print "%s) %s" %(opt,advs.pop())
 					advsno = advsno-1
-				choice = raw_input("\nPlease type a number corresponding to the adventure you wish to create a character for >" )
+				choice = raw_input("\nPlease type a number corresponding to the adventure you wish to create\na character for >" )
 			else :
 				choice = raw_input(">")
 			repeat = 1

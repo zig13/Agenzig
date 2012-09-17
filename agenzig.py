@@ -75,13 +75,13 @@ if (os.access(advsfolder, os.R_OK)) and (str(os.listdir(advsfolder)) != "[]") :
 			print "Input must be a number\n"
 	main = ConfigObj(mainfile, unrepr=True)
 	advname = main['Details']['title']
-	charfolder = dot+sep+advfolder+sep+"Characters"+sep
+	charfolder = advfolder+"Characters"+sep
 	print advname+" succesfully loaded\n"		
 elif os.access(mainfile, os.R_OK) :
 	main = ConfigObj(mainfile, unrepr=True)
 	advname = main['Details']['title']
-	charfolder = dot+sep+"Characters"+sep
 	advfolder = dot+sep
+	charfolder = advfolder+"Characters"+sep
 else :
 	if os.access(advsfolder, os.R_OK) :
 		print "The Adventures folder exists but contains no Adventure folders\n"
@@ -103,6 +103,8 @@ if gviewer == True :
 		sleep(3)
 		viewsplash.kill()
 done = 0
+if not os.path.exists(charfolder):
+    os.makedirs(charfolder)
 while done == 0 :
 	chars = os.listdir(charfolder)
 	chars.reverse()
