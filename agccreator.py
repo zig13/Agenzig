@@ -157,7 +157,7 @@ if __name__ == '__main__':
 			print "The Adventures folder exists but contains no Adventure folders\n"
 		else :
 			print "No Adventures folder found in script directory\n"
-	print "No main file found in script directory\n\nIf you only have/play one Agenzig adventure then it's files\n(main.agez, attributes.agez etc) should be in the same directory as agenzig.py\n\nIf you have/play multiple adventures then the files for each should be kept\nin a subfolder of 'Adventures' which itself should be\nin the same directory as agenzig.py\n"
+		print "No main file found in script directory\n\nIf you only have/play one Agenzig adventure then it's files\n(main.agez, attributes.agez etc) should be in the same directory as agenzig.py\n\nIf you have/play multiple adventures then the files for each should be kept\nin a subfolder of 'Adventures' which itself should be\nin the same directory as agenzig.py\n"
 		raw_input("If you don't know what this means, then you should probably reinstall") #More informative than a crash...
 		exit(0)
 	createchar(advfolder)
