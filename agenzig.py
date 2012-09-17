@@ -58,13 +58,12 @@ elif os.access(advsfolder, os.R_OK):
 				opt = opt+1
 				print "%s) %s" %(opt,advs.pop())
 				advsno = advsno-1
-			print ""
-			choice = raw_input("Please type a number corresponding to the adventure you wish to play >" )
+			choice = raw_input("\nPlease type a number corresponding to the adventure you wish to play >" )
 		else :
 			choice = raw_input(">")
 		repeat = 1
 		if choice == "" :
-			print ""
+			pass
 		elif choice.isdigit() == 1 : #This section basically does the reverse of the above one to determine what adventure the inputted number refers to
 			sel = int(choice)
 			if sel <= opt :
@@ -73,16 +72,13 @@ elif os.access(advsfolder, os.R_OK):
 				mainfile = advfolder+sep+"main.agez"
 				done = 1
 			else:
-				print "Value given is not within option range"
-				print ""
+				print "Value given is not within option range\n"
 		else:
-			print "Input must be a number"
-			print ""
+			print "Input must be a number\n"
 	main = ConfigObj(mainfile, unrepr=True)
 	advname = main['Details']['title']
 	charfolder = dot+sep+advfolder+sep+"Characters"+sep
-	print advname+" succesfully loaded"
-	print ""
+	print advname+" succesfully loaded\n"
 else :
 	print "Adventures folder missing and no main file found"
 	raw_input("If you don't know what this means, then you should probably reinstall") #More informative than a crash...
@@ -111,9 +107,7 @@ while done == 0 :
 			print "%s) %s" %(opt,chars.pop())
 			charsno = charsno-1
 			opt = opt+1
-		print ""
-		print "%s) New Character" %(opt)
-		print ""
+		print "\n%s) New Character\n" %(opt)
 		choice = raw_input("Please type a number corresponding to the above option you require >" )
 	else :
 		print "No characters found"
@@ -129,14 +123,10 @@ while done == 0 :
 				chars2 = os.listdir(charfolder)
 				charfile = charfolder+sep+str(chars2.pop((sel-1)))
 				character = ConfigObj(charfile, unrepr=True)
-				charname = charfile.rstrip('c') #A bit crude but does the job
-				charname = charname.rstrip('z')
-				charname = charname.rstrip('a')
-				charname = charname.rstrip('.')
+				charname = 	character['Basics']['charname']
 				done = 1
 			else:
-				print "Value given is not within option range"
-				print ""
+				print "Value given is not within option range\n"
 	else:
 		print "Input must be a number"
 #Setting main and character varibles for easy access
@@ -186,8 +176,7 @@ vittotal = vitals['total']
 attotal = attributes['total']
 
 if sel!= opt :
-	print "Continuing adventure"
-	print ""
+	print "Continuing adventure\n"
 while 7 != 3 : #Basically, you're not getting out of this loop...
 	if	scene in character['Scene States'] :
 		scenestate = character['Scene States'][scene]
@@ -262,8 +251,7 @@ while 7 != 3 : #Basically, you're not getting out of this loop...
 		achoicedesc = choices[schoicecode]['description']
 		achoice = str(opt)+") "+achoicedesc+"\n"
 		scenechoices = scenechoices+achoice
-	print ""
-	print scenechoices
+	print "\n"+scenechoices
 	sceneb = scene
 	scenestateb = scene
 	scenechanged = 0
@@ -280,8 +268,7 @@ while 7 != 3 : #Basically, you're not getting out of this loop...
 		if prompt == "" :
 			pass
 		elif (prompt == "choices") or (prompt == "c") :
-			print ""
-			print scenechoices
+			print "\n"+scenechoices
 		elif (prompt == 'status') or (prompt == "s") :
 			if (statusgen != 1) :
 				statuslist = "You are:\n"
@@ -430,8 +417,7 @@ while 7 != 3 : #Basically, you're not getting out of this loop...
 					tempinventory = list(inventory)
 				invlistgen = 1
 			if printinv == 1:
-				print ""
-				print inventorylist
+				print "\n"+inventorylist
 			elif printinv == 0 :
 				usecode = prompt.lstrip('u')
 				usecode = usecode.lstrip('s')
@@ -448,8 +434,7 @@ while 7 != 3 : #Basically, you're not getting out of this loop...
 				else :
 					print "USE command must be followed by a number"
 		elif (prompt == "help") or (prompt == "h") or (prompt == "man") :
-			print ""
-			print "Command List"
+			print "\nCommand List"
 			print "'choices': review availible options"
 			print "'inventory': view your inventory"
 			print "'equipment': view what items you have equipped"
@@ -458,8 +443,7 @@ while 7 != 3 : #Basically, you're not getting out of this loop...
 			print "'help': view these commands again"
 			print "'quit': shut down the game engine"
 		elif (prompt == "about") or (prompt == "credits") or (prompt == "a"):
-			print ""
-			print title+" - "+subtitle+" was made by "+author
+			print "\n"+title+" - "+subtitle+" was made by "+author
 			print website
 			print "You are currently on scene "+scene
 		elif (prompt == "quit") or (prompt == "exit") or (prompt == "x") or (prompt == "leave") :
