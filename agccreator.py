@@ -36,7 +36,13 @@ def createchar( advfolder ) :
 				count = count + 1
 				print str(count)+") "+main['Categories'][str(remcats)][str(remvals)]['valname']
 				remvals = remvals-1
-			valchoice = raw_input(">")
+			valchoice = "no"
+			while (valchoice.isdigit()) == False or (int(valchoice) > totalvals) or (valchoice == "0"):
+				valchoice = raw_input(">")
+				if valchoice.isdigit() == False :
+					print "Please enter a number that coresponds to a listed option"
+				elif (int(valchoice) > totalvals) or (valchoice == "0") :
+					print "Number given is not in range of options"
 			character['Categories'][str(remcats)] = {}
 			character['Categories'][str(remcats)]['catname'] = main['Categories'][str(remcats)]['catname']
 			character['Categories'][str(remcats)]['valcode'] = ((totalvals) + 1) - int(valchoice)
