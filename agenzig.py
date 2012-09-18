@@ -186,7 +186,7 @@ attotal = attributes['total']
 
 if sel!= opt :
 	print "Continuing adventure\n"
-while 7 != 3 : #Basically, you're not getting out of this loop...
+while True : #Basically, you're not getting out of this loop...
 	if	scene in character['Scene States'] :
 		scenestate = character['Scene States'][scene]
 	else :
