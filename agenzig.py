@@ -206,7 +206,6 @@ while True : #Basically, you're not getting out of this loop...
 			reqno += 1
 			sreqno = str(reqno)
 			if choices[schoicecode]['Requirements'][sreqno]['type'] == 'attribute' :
-				print "att"
 				attid = choices[schoicecode]['Requirements'][sreqno]['id']
 				evaluator = choices[schoicecode]['Requirements'][sreqno]['evaluator']
 				attvalue = choices[schoicecode]['Requirements'][sreqno]['value']
@@ -215,7 +214,6 @@ while True : #Basically, you're not getting out of this loop...
 					reqpass = 0
 					reqno = reqtotal
 			elif choices[schoicecode]['Requirements'][sreqno]['type'] == 'item' :
-				print "ITEM"
 				evaluator = choices[schoicecode]['Requirements'][sreqno]['evaluator']
 				itemid = int(choices[schoicecode]['Requirements'][sreqno]['id'])
 				if (itemid in inventory) != eval(evaluator) :
