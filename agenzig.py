@@ -193,7 +193,8 @@ while True : #Basically, you're not getting out of this loop...
 		scenestate = str(1)
 	print scenes[scene][scenestate]['description']
 	scenechoicecodes = scenes[scene][scenestate]['choices']
-	choicetotal = len(scenechoicecodes) - 1
+	choicecodes = list(scenes[scene][scenestate]['choices'])
+	choicetotal = len(scenechoicecodes)
 	choiceno = 0
 	while choiceno != choicetotal :
 		choiceno += 1
@@ -226,14 +227,14 @@ while True : #Basically, you're not getting out of this loop...
 					reqpass = 0
 					reqno = reqtotal
 		if reqpass == 0 :
-			scenechoicecodes.remove(choicecode)
-	choicesleft = len(scenechoicecodes)
+			choicecodes.remove(choicecode)
+	choicesleft = len(choicecodes)
 	opt = 0
 	scenechoices = ""
 	while choicesleft != 0 :
 		opt = opt+1
-		schoicecode = str(scenechoicecodes.pop())
-		choicesleft = len(scenechoicecodes)
+		schoicecode = str(choicecodes.pop())
+		choicesleft = len(choicecodes)
 		achoicedesc = choices[schoicecode]['description']
 		achoice = str(opt)+") "+achoicedesc+"\n"
 		scenechoices = scenechoices+achoice
