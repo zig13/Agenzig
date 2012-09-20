@@ -144,15 +144,6 @@ title = main['Details']['title']
 subtitle = "an Agenzig adventure"
 author = main['Details']['author']
 website = "For more information, go to "+main['Details']['website']
-if 'currencyonename' in main['Details'].scalars :
-		currencyonename = main['Details']['currencyonename']
-		currencyone = int(character['Currency']['currencyone'])
-		if 'currencytwoname' in main['Details'].scalars :
-			currencytwoname = main['Details']['currencytwoname']
-			currencytwo = int(character['Currency']['currencytwo'])
-		if 'currencythreename' in main['Details'].scalars :
-			currencythreename = main['Details']['currencythreename']
-			currencythree = int(character['Currency']['currencythree'])
 equipment = character['Items']['equipment']
 inventory = character['Items']['inventory']
 # Loading other files
@@ -171,10 +162,8 @@ items = ConfigObj(infile=itemfile, unrepr=True)
 equipmentfile = advfolder+sep+"equipment.agez"
 equips = ConfigObj(equipmentfile, unrepr=True)
 fight = 0
-
 vittotal = vitals['total']
 attotal = attributes['total']
-
 if sel!= opt :
 	print "Continuing adventure\n"
 while True : #Basically, you're not getting out of this loop...
