@@ -153,15 +153,6 @@ if 'currencyonename' in main['Details'].scalars :
 		if 'currencythreename' in main['Details'].scalars :
 			currencythreename = main['Details']['currencythreename']
 			currencythree = int(character['Currency']['currencythree'])
-health = int(character['Vitals']['1']) #bodge
-fatigue = int(character['Vitals']['2'])
-strength = int(character['Attributes']['1'])
-knowledge = int(character['Attributes']['2'])
-dexterity = int(character['Attributes']['3'])
-willpower = int(character['Attributes']['4'])
-constitution = int(character['Attributes']['5'])
-charisma = int(character['Attributes']['6'])
-perception = int(character['Attributes']['7'])
 equipment = character['Items']['equipment']
 inventory = character['Items']['inventory']
 # Loading other files
@@ -433,7 +424,7 @@ while True : #Basically, you're not getting out of this loop...
 			print "'choices': review availible options"
 			print "'inventory': view your inventory"
 			print "'equipment': view what items you have equipped"
-			print "'status': view your health, attributes and equipment"
+			print "'status': view your vitals and attributes"
 			print "'about': show information about the adventure you are playing"
 			print "'help': view these commands again"
 			print "'quit': shut down the game engine"
