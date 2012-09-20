@@ -188,7 +188,7 @@ if sel!= opt :
 	print "Continuing adventure\n"
 while True : #Basically, you're not getting out of this loop...
 	if	scene in character['Scene States'] :
-		scenestate = character['Scene States'][scene]
+		scenestate = str(character['Scene States'][scene])
 	else :
 		scenestate = str(1)
 	print scenes[scene][scenestate]['description']
@@ -196,60 +196,33 @@ while True : #Basically, you're not getting out of this loop...
 	choicetotal = len(scenechoicecodes) - 1
 	choiceno = 0
 	while choiceno != choicetotal :
-		achoicecode = scenechoicecodes[choiceno]
-		schoicecode = str(achoicecode)
-		if choices[str(schoicecode)]['hasrequirements'] == str(1) :
-			totalreqs = choices[schoicecode]['requirementno']
-			totalreqs = int(totalreqs)
-			requirementpass = 0
-			reqno = 0
-			while reqno != totalreqs :
-				reqno = reqno + 1
-				reqnos = str(reqno)
-				if requirementpass == 0 :
-					factors = ['perception', 'charisma', 'constitution', 'willpower', 'dexterity', 'knowledge', 'strength', 'fatigue', 'health', 'currencythree', 'currencytwo', 'currencyone']
-					factorstotal = len(factors)
-					requirementpass = 1
-					while factorstotal != 0 :
-						factorname = factors.pop()
-						factorstotal = len(factors)
-						factorreqtype = str(factorname)+"reqtype"
-						afactor = eval(str(factorname))
-						if (factorname in choices[schoicecode]['Requirements'][reqnos].scalars) and (requirementpass == 1) :
-							if factorreqtype in choices[schoicecode]['Requirements'][reqnos].scalars :
-								if choices[schoicecode]['Requirements'][reqnos][factorreqtype] == "morethan" :
-									if afactor <= int(choices[schoicecode]['Requirements'][reqnos][factorname]) :
-										requirementpass = 0
-										factorstotal = 0
-								elif choices[schoicecode]['Requirements'][reqnos][factorreqtype] == "lessthan" :
-									if afactor >= int(choices[schoicecode]['Requirements'][reqnos][factorname]) :
-										requirementpass = 0
-										factorstotal = 0
-								elif choices[schoicecode]['Requirements'][reqnos][factorreqtype] == "exact" :
-									if afactor != int(choices[schoicecode]['Requirements'][reqnos][factorname]) :
-										requirementpass = 0
-										factorstotal = 0
-					factors = ['armour', 'Mweapon', 'Rweapon']
-					factorstotal = len(factors)
-					while factorstotal != 0 :
-						factorname = factors.pop()
-						factorstotal = len(factors)
-						havefactor = "have"+str(factorname)
-						afactor = eval(str(factorname))
-						if (havefactor in choices[schoicecode]['Requirements'][reqnos].scalars) and (requirementpass == 1) :
-							if afactor != int(choices[schoicecode]['Requirements'][reqnos][havefactor]) :
-									requirementpass = 0
-									factorstotal = 0
-					if ('haveitem' in choices[schoicecode]['Requirements'][reqnos].scalars) and (requirementpass == 1) :
-						if not choices[schoicecode]['Requirements'][reqnos]['haveitem'] in inventory :
-							requirementpass = 0
-				else :
-					reqnos = totalreqs
-		else :
-			requirementpass = 1
-		choiceno = choiceno + 1
-		if requirementpass == 0 :
-			scenechoicecodes.remove(achoicecode)
+		choiceno += 1
+		choicecode = scenechoicecodes[choiceno-1]
+		schoicecode = str(choicecode)
+		reqtotal = choices[schoicecode]['Requirements']['total']
+		reqno = 0
+		reqpass = 1
+		while reqno != reqtotal :
+			reqno += 1
+			sreqno = str(reqno)
+			if choices[schoicecode]['Requirements'][sreqno]['type'] == 'attribute' :
+				print "att"
+				attid = choices[schoicecode]['Requirements'][sreqno]['id']
+				evaluator = choices[schoicecode]['Requirements'][sreqno]['evaluator']
+				attvalue = choices[schoicecode]['Requirements'][sreqno]['value']
+				check = str(character['Attributes'][attid])+evaluator+str(attvalue)			
+				if eval(check) == False : 
+					reqpass = 0
+					reqno = reqtotal
+			elif choices[schoicecode]['Requirements'][sreqno]['type'] == 'item' :
+				print "ITEM"
+				evaluator = choices[schoicecode]['Requirements'][sreqno]['evaluator']
+				itemid = int(choices[schoicecode]['Requirements'][sreqno]['id'])
+				if (itemid in inventory) != eval(evaluator) :
+					reqpass = 0
+					reqno = reqtotal
+		if reqpass == 0 :
+			scenechoicecodes.remove(choicecode)
 	choicesleft = len(scenechoicecodes)
 	opt = 0
 	scenechoices = ""
