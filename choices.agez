@@ -20,6 +20,7 @@ result = 'You climb up a wall barehanded and drop down the other side to find yo
 		value = 20
 		[[[2]]]
 		type = 'item'
+		id = '6'
 		evaluator = 'True' #Valid options are 'True' and 'False'
 	[[Effects]]
 	total = 1
