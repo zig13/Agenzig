@@ -7,6 +7,18 @@ currencyonename = 'gold coins'
 currencytwoname = 'silver coins'
 currencythreename = 'copper coins'
 
+[Currencies]
+total = 3
+	[[1]]
+	description = 'gold coins'
+	abreviation = 'gc'
+	[[2]]
+	description = 'silver coins'
+	abreviation = 'sc'
+	[[3]]
+	description = 'copper coins'
+	abreviation = 'cc'
+
 [Attribute Bases]
 healthy = 1000
 debilitatingfatigue = 70
@@ -20,29 +32,45 @@ perceptive = 20
 
 [Character Setup]
 initialscene = '1'
-initialhealth = 950
-initialfatigue = 70
-minstrength = 15
-maxstrength = 25
-minknowledge = 15
-maxknowledge = 25
-mindexterity = 15
-maxdexterity = 20
-minwillpower = 15
-maxwillpower = 25
-minconstitution = 15
-maxconstitution = 25
-mincharisma = 15
-maxcharisma = 25
-minperception = 15
-maxperception = 25
-initialarmour = '1'
-initialequipment = [1,2,3]
-initialinventory = [2,5]
-initialcurrencyone = 3
-initialcurrencytwo = 6
-initialcurrencythree = 9
-
+technique = 1
+	[[Vitals]]
+		[[[1]]]
+		val = 950
+		[[[2]]]
+		val = 70
+	[[Attributes]]
+		[[[1]]]
+		minval = 15
+		maxval = 25
+		[[[2]]]
+		minval = 15
+		maxval = 25
+		[[[3]]]
+		minval = 15
+		maxval = 25
+		[[[4]]]
+		minval = 15
+		maxval = 25
+		[[[5]]]
+		minval = 15
+		maxval = 25
+		[[[6]]]
+		minval = 15
+		maxval = 25
+		[[[7]]]
+		minval = 15
+		maxval = 25
+	[[Inventory]]
+	val = [2,5]
+	[[Equipment]]
+	val = [1,2,3]
+	[[Currencies]]
+		[[[1]]]
+		val = 3
+		[[[2]]]
+		val = 6
+		[[[3]]]
+		val = 9
 [Categories]
 totalcategories = 1
 [[1]]

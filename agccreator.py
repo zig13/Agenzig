@@ -51,42 +51,48 @@ def createchar( advfolder ) :
 		remcats = int(totalcats)
 	csetup = main['Character Setup']
 	character['Basics']['scene'] = str(csetup['initialscene'])
-	from random import randint
-	#Setting vitals
-	character['Vitals'] = {}
-	character['Vitals']['1'] = csetup['initialhealth'] #bodge
-	if 'initialfatigue' in csetup.scalars :
-		character['Vitals']['2'] = csetup['initialfatigue'] #bodge
-	#Setting bodge attributes
-	character['Attributes'] = {}
-	character['Attributes']['1'] = randint(int(csetup['minstrength']), int(csetup['maxstrength']))
-	character['Attributes']['2'] = randint(int(csetup['minknowledge']), int(csetup['maxknowledge']))
-	character['Attributes']['3'] = randint(int(csetup['mindexterity']), int(csetup['maxdexterity']))
-	character['Attributes']['4'] = randint(int(csetup['minwillpower']), int(csetup['maxwillpower']))
-	character['Attributes']['5'] = randint(int(csetup['minconstitution']), int(csetup['maxconstitution']))
-	character['Attributes']['6'] = randint(int(csetup['mincharisma']), int(csetup['maxcharisma']))
-	character['Attributes']['7'] = randint(int(csetup['minperception']), int(csetup['maxperception']))
-	character['Attributes']['Initial Values'] = {}
-	character['Attributes']['Initial Values']['1'] = character['Attributes']['1']
-	character['Attributes']['Initial Values']['2'] = character['Attributes']['2']
-	character['Attributes']['Initial Values']['3'] = character['Attributes']['3']
-	character['Attributes']['Initial Values']['4'] = character['Attributes']['4']
-	character['Attributes']['Initial Values']['5'] = character['Attributes']['5']
-	character['Attributes']['Initial Values']['6'] = character['Attributes']['6']
-	character['Attributes']['Initial Values']['7'] = character['Attributes']['7']
-	#Setting currencies
-	if 'currencyonename' in main['Details'].scalars :
+	if csetup['technique'] == 1 : #Will eventually add alternative character creation techniques
+		#Setting vitals
+		character['Vitals'] = {}
+		charvits = list(csetup['Vitals'].keys())
+		charvitstot = len(charvits)
+		charvitsrem = len(charvits)
+		charvits.reverse()
+		while charvitsrem != 0 :
+			charvitno = charvits.pop()
+			charvitsrem = len(charvits)
+			character['Vitals'][charvitno] = csetup['Vitals'][charvitno]['val']
+		#Setting Attributes
+		from random import randint
+		character['Attributes'] = {}
+		character['Attributes']['Initial Values'] = {}
+		charatts = list(csetup['Attributes'].keys())
+		charattstot = len(charatts)
+		charattsrem = len(charatts)
+		charatts.reverse()
+		while charattsrem != 0 :
+			charattno = charatts.pop()
+			charattsrem = len(charatts)
+			character['Attributes'][charattno] = randint(int(csetup['Attributes'][charattno]['minval']), int(csetup['Attributes'][charattno]['maxval']))
+			character['Attributes']['Initial Values'][charattno] = character['Attributes'][charattno]
+		#Setting inventory
+		character['Items'] = {}
+		character['Items']['inventory'] = csetup['Inventory']['val']
+		character['Items']['equipment'] = csetup['Equipment']['val']
+		#Setting currencies
 		character['Currency'] = {}
-		character['Currency']['currencyone'] = csetup['initialcurrencyone']
-		if 'currencyonename' in main['Details'].scalars :
-			character['Currency']['currencytwo'] = csetup['initialcurrencytwo']
-		if 'currencyonename' in main['Details'].scalars :
-			character['Currency']['currencythree'] = csetup['initialcurrencythree']
-	#Setting inventory
-	character['Items'] = {}
-	character['Items']['equipment'] = csetup['initialequipment']
-	character['Items']['inventory'] = csetup['initialinventory']
-	character['Scene States'] = {}
+		currencytot = main['Currencies']['total']
+		currencyno = 0
+		while currencyno != currencytot :
+			currencyno += 1
+			scurrencyno = str(currencyno)
+			if scurrencyno in csetup['Currencies'].keys() :
+				character['Currency'][scurrencyno] = csetup['Currencies'][scurrencyno]['val']
+			else :
+				character['Currency'][scurrencyno] = 0
+		character['Scene States'] = {}
+	elif csetup['technique'] == 2 :
+		pass
 	character.write()
 	print "New character created"
 	print ""		
