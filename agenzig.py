@@ -206,24 +206,32 @@ while True : #Basically, you're not getting out of this loop...
 		while reqno != reqtotal :
 			reqno += 1
 			sreqno = str(reqno)
-			if choices[schoicecode]['Requirements'][sreqno]['type'] == 'attribute' :
-				attid = choices[schoicecode]['Requirements'][sreqno]['id']
+			if choices[schoicecode]['Requirements'][sreqno]['type'] == 'vital' :
+				id = choices[schoicecode]['Requirements'][sreqno]['id']
 				evaluator = choices[schoicecode]['Requirements'][sreqno]['evaluator']
-				attvalue = choices[schoicecode]['Requirements'][sreqno]['value']
-				check = str(character['Attributes'][attid])+evaluator+str(attvalue)			
+				value = choices[schoicecode]['Requirements'][sreqno]['value']
+				check = str(character['Vitals'][id])+evaluator+str(value)			
+				if eval(check) == False : 
+					reqpass = 0
+					reqno = reqtotal
+			elif choices[schoicecode]['Requirements'][sreqno]['type'] == 'attribute' :
+				id = choices[schoicecode]['Requirements'][sreqno]['id']
+				evaluator = choices[schoicecode]['Requirements'][sreqno]['evaluator']
+				value = choices[schoicecode]['Requirements'][sreqno]['value']
+				check = str(character['Attributes'][id])+evaluator+str(value)			
 				if eval(check) == False : 
 					reqpass = 0
 					reqno = reqtotal
 			elif choices[schoicecode]['Requirements'][sreqno]['type'] == 'item' :
 				evaluator = choices[schoicecode]['Requirements'][sreqno]['evaluator']
-				itemid = int(choices[schoicecode]['Requirements'][sreqno]['id'])
-				if (itemid in inventory) != eval(evaluator) :
+				id = int(choices[schoicecode]['Requirements'][sreqno]['id'])
+				if (id in inventory) != eval(evaluator) :
 					reqpass = 0
 					reqno = reqtotal
 			elif choices[schoicecode]['Requirements'][sreqno]['type'] == 'equipment' :
 				evaluator = choices[schoicecode]['Requirements'][sreqno]['evaluator']
-				equipid = int(choices[schoicecode]['Requirements'][sreqno]['id'])
-				if (equipid in equipment) != eval(evaluator) :
+				id = int(choices[schoicecode]['Requirements'][sreqno]['id'])
+				if (id in equipment) != eval(evaluator) :
 					reqpass = 0
 					reqno = reqtotal
 		if reqpass == 0 :
