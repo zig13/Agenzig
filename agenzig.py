@@ -219,6 +219,12 @@ while True : #Basically, you're not getting out of this loop...
 				if (itemid in inventory) != eval(evaluator) :
 					reqpass = 0
 					reqno = reqtotal
+			elif choices[schoicecode]['Requirements'][sreqno]['type'] == 'equipment' :
+				evaluator = choices[schoicecode]['Requirements'][sreqno]['evaluator']
+				equipid = int(choices[schoicecode]['Requirements'][sreqno]['id'])
+				if (equipid in equipment) != eval(evaluator) :
+					reqpass = 0
+					reqno = reqtotal
 		if reqpass == 0 :
 			scenechoicecodes.remove(choicecode)
 	choicesleft = len(scenechoicecodes)
