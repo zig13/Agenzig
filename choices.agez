@@ -14,12 +14,12 @@ result = 'You climb up a wall barehanded and drop down the other side to find yo
 	[[Requirements]]
 	total = 2
 		[[[1]]]
-		type = attribute
+		type = 'attribute'
 		id = '1'
 		evaluator = '>' #Valid options are '==' (equal to), '<=' (less than or equal to), '>=' (greater than or equal to) and '!=' (not equal to)
 		value = 20
 		[[[2]]]
-		type = item
+		type = 'item'
 		evaluator = 'True' #Valid options are 'True' and 'False'
 	[[Effects]]
 	total = 1
