@@ -9,7 +9,7 @@ oneuse = 1
 	giveMweapon = '1'
 [2]
 description = 'Iron Sword'
-usetext = "You install the dagger in a scabard on your belt ready for use"
+usetext = "You install the sword in a scabard on your belt ready for use"
 isarmour = 0
 isMweapon = 1
 isRweapon = 0
