@@ -130,9 +130,10 @@ while done == 0 :
 		else:
 			if sel <= opt :
 				chars2 = os.listdir(charfolder)
-				charfile = charfolder+sep+str(chars2.pop((sel-1)))
+				charfile = str(chars2.pop((sel-1)))
+				charname = charfile[:-4]
+				charfile = charfolder+sep+charfile
 				character = ConfigObj(charfile, unrepr=True)
-				charname = 	character['Basics']['charname']
 				done = 1
 			else:
 				print "Value given is not within option range\n"
@@ -364,6 +365,10 @@ while True : #Basically, you're not getting out of this loop...
 		elif (prompt == "inventory") or (prompt == "i") or (prompt.startswith("use ") and  (len(prompt) > 4)) or (prompt.startswith("equip ") and  (len(prompt) > 6)) :
 			if prompt.startswith("use ") :
 				printinv = 0
+				usecode = prompt[4:]
+			elif prompt.startswith("equip ") :
+				printinv = 0
+				usecode = prompt[6:]
 			else :
 				printinv = 1
 			if (invlistgen != 1) :
@@ -394,14 +399,12 @@ while True : #Basically, you're not getting out of this loop...
 			if printinv == 1:
 				print "\n"+inventorylist
 			elif printinv == 0 :
-				usecode = prompt.lstrip('u')
-				usecode = usecode.lstrip('s')
-				usecode = usecode.lstrip('e')
-				usecode = usecode.lstrip(' ')
-				if choice.isdigit() == 1 :
+				if usecode.isdigit() == 1 :
 					usecode = int(usecode)
 					if usecode <= opt :
 						useditem = str(tempinventory.pop((usecode-1)))
+						if items[useditem]['singleuse'] == 1 :
+							inventory.remove(int(useditem))
 						print items[useditem]['usetext']
 						itemused = 1
 					else :
