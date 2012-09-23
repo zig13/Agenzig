@@ -366,13 +366,15 @@ while True : #Basically, you're not getting out of this loop...
 		elif (prompt == "inventory") or (prompt == "i") or (prompt.startswith("use ") and  (len(prompt) > 4)) or (prompt.startswith("equip ") and  (len(prompt) > 6)) :
 			if prompt.startswith("use ") :
 				printinv = 0
+				comtext = "Use"
 				usecode = prompt[4:]
 			elif prompt.startswith("equip ") :
 				printinv = 0
+				comtext = "Use"
 				usecode = prompt[6:]
 			else :
 				printinv = 1
-			if (invlistgen != 1) :
+			if invlistgen != 1 :
 				itemstotal = len(inventory)
 				printeditems = []
 				opt = 0
@@ -393,10 +395,14 @@ while True : #Basically, you're not getting out of this loop...
 						inventorylist = inventorylist+aitem
 						printeditems.append(aitemno)
 				if opt == 0 :
-					inventorylist = "You are not carrying anything of note"
+					print "You are not carrying anything of note"
+					printinv = 3
 				else :
 					tempinventory = list(inventory)
 				invlistgen = 1
+			elif opt == 0 :
+				print "You are not carrying anything of note"
+				printinv = 3
 			if printinv == 1:
 				print "\n"+inventorylist
 			elif printinv == 0 :
@@ -411,7 +417,7 @@ while True : #Basically, you're not getting out of this loop...
 					else :
 						print "You are only carrying "+str(len(inventory))+" types of item"
 				else :
-					print "USE command must be followed by a number"
+					print comtext+" command must be followed by a number"
 		elif (prompt == "help") or (prompt == "h") or (prompt == "man") :
 			print "\nCommand List"
 			print "'choices': review availible options"
