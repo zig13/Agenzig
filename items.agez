@@ -55,7 +55,6 @@ usetext = "You regain default items"
 singleuse  = 0
 	[[Effects]]
 		[[[1]]]
-		type = additem
+		type = 'additem'
 		id = '2'
 		value = 1
-		
