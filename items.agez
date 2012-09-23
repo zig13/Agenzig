@@ -2,6 +2,8 @@
 description = 'Steel Dagger'
 usetext = "You install the dagger in a scabard on your belt ready for use"
 singleuse = 1
+	[[Requirements]]
+	total = 0
 	[[Effects]]
 	total = 1
 		[[[1]]]
@@ -11,6 +13,14 @@ singleuse = 1
 description = 'Iron Sword'
 usetext = "You install the sword in a scabard on your belt ready for use"
 singleuse = 1
+	[[Requirements]]
+	total = 1
+	failtext = "You are not strong enougth to weild this weapon effectively"
+		[[[1]]]
+		type = 'attribute'
+		id = '1'
+		evaluator = '>'
+		value = 18
 	[[Effects]]
 	total = 1
 		[[[1]]]
@@ -20,6 +30,8 @@ singleuse = 1
 description = 'Hunting Leathers'
 usetext = 'You put on the hunting leathers'
 singleuse = 1
+	[[Requirements]]
+	total = 0
 	[[Effects]]
 	total = 1
 		[[[1]]]
@@ -29,6 +41,8 @@ singleuse = 1
 description = 'Sling'
 usetext = "You move he sling to somewhere accesible and pick up a few rocks as amunition"
 singleuse = 1
+	[[Requirements]]
+	total = 0
 	[[Effects]]
 	total = 1
 		[[[1]]]
@@ -38,6 +52,8 @@ singleuse = 1
 description = 'Can of Blue Bolt'
 usetext = "You down the Blue Bolt"
 singleuse = 1
+	[[Requirements]]
+	total = 0
 	[[Effects]]
 	setfatigue = 0
 	restorehealth = 2
@@ -47,14 +63,26 @@ singleuse = 1
 description = 'Floor Potion'
 usetext = "Despite not knowing it's contents, you drink the potion you found on the floor. You feel more dexterous"
 singleuse = 1
+	[[Requirements]]
+	total = 0
 	[[Effects]]
 	boostdexterity = 4
 [7]
 description = 'Inventory Reset'
 usetext = "You regain default items"
-singleuse  = 0
+singleuse = 0
+	[[Requirements]]
+	total = 0
 	[[Effects]]
 		[[[1]]]
 		type = 'additem'
 		id = '2'
 		value = 1
+[8]
+description = 'A stone'
+usetext = "You see no way to use this item"
+singleuse = 0
+	[[Requirements]]
+	total = 0
+	[[Effects]]
+	total = 0
