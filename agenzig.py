@@ -236,6 +236,7 @@ while True : #Basically, you're not getting out of this loop...
 	invlistgen = 0
 	equiplistgen = 0
 	itemused = 0
+	statchanged = 0
 	from decimal import Decimal
 	from math import ceil
 	while scenechanged == 0 :
@@ -248,7 +249,6 @@ while True : #Basically, you're not getting out of this loop...
 		elif (prompt == 'status') or (prompt == "s") :
 			if (statusgen != 1) :
 				statuslist = "You are:\n"
-				statchanged = 0
 				vitno = 0
 				while vitno != vittotal :
 					vitno = vitno+1
@@ -341,6 +341,7 @@ while True : #Basically, you're not getting out of this loop...
 					else :
 						print "attributes.agez is corrupt (attribute number %s)" %(sattno)
 				statusgen = 1
+				statchanged = 0
 			print statuslist
 		elif (prompt == 'equipment') or (prompt == "e") :
 			if (equiplistgen != 1) :
@@ -405,8 +406,8 @@ while True : #Basically, you're not getting out of this loop...
 						useditem = str(tempinventory.pop((usecode-1)))
 						if items[useditem]['singleuse'] == 1 :
 							inventory.remove(int(useditem))
+							itemused = 1
 						print items[useditem]['usetext']
-						itemused = 1
 					else :
 						print "You are only carrying "+str(len(inventory))+" types of item"
 				else :
@@ -431,11 +432,12 @@ while True : #Basically, you're not getting out of this loop...
 				exit(0)
 		else :
 			print "Try using an ACTUAL command moron"  #Might change this before release...
-		if (scene != sceneb) or (scenestate != scenestateb) :
-			scenechanged = 1
-		if itemused == 1 :
-			invlistgen = 0
-			itemused = 0
-		statchanged = 0
-		if statchanged == 1 :
-			statusgen = 0
+		if (scene != sceneb) or (scenestate != scenestateb) or (itemused == 1) or (statchanged == 1) :
+			character.write()
+			if (scene != sceneb) or (scenestate != scenestateb) :
+				scenechanged = 1
+			if itemused == 1 :
+				invlistgen = 0
+				itemused = 0
+			if statchanged == 1 :
+				statusgen = 0
