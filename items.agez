@@ -25,7 +25,7 @@ singleuse = 1
 	total = 1
 		[[[1]]]
 		type = 'equip'
-		id = '2'
+		id = '4'
 [3]
 description = 'Hunting Leathers'
 usetext = 'You put on the hunting leathers'
