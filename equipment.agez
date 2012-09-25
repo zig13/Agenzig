@@ -8,11 +8,11 @@ slotuse = 'all'
 		type = 'resistance'
 		id = '1'
 		value = 2
-		[[2]]]
+		[[[2]]]
 		type = 'resistance'
 		id = '2'
 		value = 3
-		[[3]]]
+		[[[3]]]
 		type = 'resistance'
 		id = '3'
 		value = 1
