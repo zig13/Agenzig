@@ -2,43 +2,59 @@
 name = 'Hunting Leathers'
 equipslots = [1,2,3,4]
 slotuse = 'all'
-enhancements = 2
-[[Enhancements]]
-[[[1]]]
-armourttype = 1
-multiplier = 1
-[[[2]]]
-attribute = 7
-boost = 1
+	[[Effects]]
+	total = 4
+		[[[1]]]
+		type = 'resistance'
+		id = '1'
+		value = 2
+		[[2]]]
+		type = 'resistance'
+		id = '2'
+		value = 3
+		[[3]]]
+		type = 'resistance'
+		id = '3'
+		value = 1
+		[[[4]]]
+		type = 'attribute'
+		id = 7
+		value = 1
 [2]
 name = 'Steel Dagger'
 equipslots = [10]
 slotuse = 'all'
-enhancements = 2
-[[Enhancements]]
-[[[1]]]
-cability = 1
-[[[2]]]
-cability = 2
+	[[Effects]]
+	total = 2
+		[[[1]]]
+		type = 'cability'
+		id = '1'
+		[[[2]]]
+		type = 'cability'
+		id = '2'
 [3]
 name = 'Sling'
 equipslots = [11]
 slotuse = 'all'
-enhancements = 2
-[[Enhancements]]
-[[[1]]]
-cability = 3
-[[[2]]]
-cability = 4
+	[[Effects]]
+	total = 2
+		[[[1]]]
+		type = 'cability'
+		id = '3'
+		[[[2]]]
+		type = 'cability'
+		id = '4'
 [4]
 name = 'Iron Sword'
 equipslots = [10]
 slotuse = 'all'
-enhancements = 2
-[[Enhancements]]
-[[[1]]]
-cability = 5
-[[[2]]]
-cability = 6
+	[[Effects]]
+	total = 2
+		[[[1]]]
+		type = 'cability'
+		id = '5'
+		[[[2]]]
+		type = 'cability'
+		id = '6'
 
 
