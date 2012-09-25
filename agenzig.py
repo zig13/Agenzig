@@ -400,7 +400,7 @@ while True : #Basically, you're not getting out of this loop...
 				else :
 					tempinventory = []
 					for element in inventory :
-						if element not in tempinventory :
+						if element not in tempinventory : #Removes duplicates as following code assumes no duplicates
 							tempinventory.append(element)
 				invlistgen = 1
 			elif opt == 0 :
@@ -416,7 +416,7 @@ while True : #Basically, you're not getting out of this loop...
 						reqtotal = items[useditem]['Requirements']['total']
 						reqno = 0
 						reqpass = 1
-						while reqno != reqtotal :
+						while reqno != reqtotal : #Checking requirements of the used item
 							reqno += 1
 							sreqno = str(reqno)
 							if items[useditem]['Requirements'][sreqno]['type'] == 'vital' :
@@ -453,7 +453,7 @@ while True : #Basically, you're not getting out of this loop...
 							print items[useditem]['usetext']
 							if items[useditem]['singleuse'] == 1 :
 								inventory.remove(int(useditem))
-						itemused = 1
+								itemused = 1
 					else :
 						print "You are only carrying "+str(len(inventory))+" types of item"
 				else :
