@@ -54,6 +54,7 @@ def createchar( advfolder ) :
 	if csetup['technique'] == 1 : #Will eventually add alternative character creation techniques
 		#Setting vitals
 		character['Vitals'] = {}
+		character['Vitals']['Initial Values'] = {}
 		charvits = list(csetup['Vitals'].keys())
 		charvitstot = len(charvits)
 		charvitsrem = len(charvits)
@@ -62,6 +63,7 @@ def createchar( advfolder ) :
 			charvitno = charvits.pop()
 			charvitsrem = len(charvits)
 			character['Vitals'][charvitno] = csetup['Vitals'][charvitno]['val']
+			character['Vitals']['Initial Values'][charvitno] = character['Vitals'][charvitno]
 		#Setting Attributes
 		from random import randint
 		character['Attributes'] = {}
