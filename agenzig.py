@@ -209,7 +209,7 @@ while True : #Basically, you're not getting out of this loop...
 				if (id in inventory) != eval(evaluator) :
 					reqpass = 0
 					reqno = reqtotal
-			elif choices[schoicecode]['Requirements'][sreqno]['type'] == 'equipment' :
+			elif choices[schoicecode]['Requirements'][sreqno]['type'] == 'equip' :
 				evaluator = choices[schoicecode]['Requirements'][sreqno]['evaluator']
 				id = int(choices[schoicecode]['Requirements'][sreqno]['id'])
 				if (id in equipment) != eval(evaluator) :
@@ -398,7 +398,10 @@ while True : #Basically, you're not getting out of this loop...
 					print "You are not carrying anything of note"
 					printinv = 3
 				else :
-					tempinventory = list(inventory)
+					tempinventory = []
+					for element in inventory :
+						if element not in tempinventory :
+							tempinventory.append(element)
 				invlistgen = 1
 			elif opt == 0 :
 				print "You are not carrying anything of note"
@@ -409,11 +412,48 @@ while True : #Basically, you're not getting out of this loop...
 				if usecode.isdigit() == 1 :
 					usecode = int(usecode)
 					if usecode <= opt :
-						useditem = str(tempinventory.pop((usecode-1)))
-						if items[useditem]['singleuse'] == 1 :
-							inventory.remove(int(useditem))
-							itemused = 1
-						print items[useditem]['usetext']
+						useditem = str(tempinventory[usecode-1])
+						reqtotal = items[useditem]['Requirements']['total']
+						reqno = 0
+						reqpass = 1
+						while reqno != reqtotal :
+							reqno += 1
+							sreqno = str(reqno)
+							if items[useditem]['Requirements'][sreqno]['type'] == 'vital' :
+								id = items[useditem]['Requirements'][sreqno]['id']
+								evaluator = items[useditem]['Requirements'][sreqno]['evaluator']
+								value = items[useditem]['Requirements'][sreqno]['value']
+								check = str(character['Vitals'][id])+evaluator+str(value)			
+								if eval(check) == False : 
+									reqpass = 0
+									reqno = reqtotal
+							elif items[useditem]['Requirements'][sreqno]['type'] == 'attribute' :
+								id = items[useditem]['Requirements'][sreqno]['id']
+								evaluator = items[useditem]['Requirements'][sreqno]['evaluator']
+								value = items[useditem]['Requirements'][sreqno]['value']
+								check = str(character['Attributes'][id])+evaluator+str(value)			
+								if eval(check) == False : 
+									reqpass = 0
+									reqno = reqtotal
+							elif items[useditem]['Requirements'][sreqno]['type'] == 'item' :
+								evaluator = items[useditem]['Requirements'][sreqno]['evaluator']
+								id = int(items[useditem]['Requirements'][sreqno]['id'])
+								if (id in inventory) != eval(evaluator) :
+									reqpass = 0
+									reqno = reqtotal
+							elif items[useditem]['Requirements'][sreqno]['type'] == 'equip' :
+								evaluator = items[useditem]['Requirements'][sreqno]['evaluator']
+								id = int(items[useditem]['Requirements'][sreqno]['id'])
+								if (id in equipment) != eval(evaluator) :
+									reqpass = 0
+									reqno = reqtotal
+						if reqpass == 0 :
+							print items[useditem]['Requirements'][sreqno]['failtext']
+						elif reqpass == 1 :
+							print items[useditem]['usetext']
+							if items[useditem]['singleuse'] == 1 :
+								inventory.remove(int(useditem))
+						itemused = 1
 					else :
 						print "You are only carrying "+str(len(inventory))+" types of item"
 				else :
