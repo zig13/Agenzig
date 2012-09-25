@@ -3,7 +3,12 @@ description = 'Steel Dagger'
 usetext = "You install the dagger in a scabard on your belt ready for use"
 singleuse = 1
 	[[Requirements]]
-	total = 0
+	total = 1
+		[[[1]]]
+		type = 'equip'
+		id = '2'
+		evaluator = 'False'
+		failtext = "You are already using a remarkably similar dagger"
 	[[Effects]]
 	total = 1
 		[[[1]]]
@@ -15,12 +20,17 @@ usetext = "You install the sword in a scabard on your belt ready for use"
 singleuse = 1
 	[[Requirements]]
 	total = 1
-	failtext = "You are not strong enougth to weild this weapon effectively"
 		[[[1]]]
 		type = 'attribute'
 		id = '1'
 		evaluator = '>'
 		value = 18
+		failtext = "You are not strong enougth to weild this weapon effectively"
+		[[[2]]]
+		type = 'equip'
+		id = '4'
+		evaluator = 'False'
+		failtext = "You are already using a remarkably similar sword"
 	[[Effects]]
 	total = 1
 		[[[1]]]
@@ -31,7 +41,12 @@ description = 'Hunting Leathers'
 usetext = 'You put on the hunting leathers'
 singleuse = 1
 	[[Requirements]]
-	total = 0
+	total = 1
+		[[[1]]]
+		type = 'equip'
+		id = '1'
+		evaluator = 'False'
+		failtext = "You are already wearing a remarkably similar outfit"
 	[[Effects]]
 	total = 1
 		[[[1]]]
@@ -42,7 +57,12 @@ description = 'Sling'
 usetext = "You move he sling to somewhere accesible and pick up a few rocks as amunition"
 singleuse = 1
 	[[Requirements]]
-	total = 0
+	total = 1
+		[[[1]]]
+		type = 'equip'
+		id = '3'
+		evaluator = 'False'
+		failtext = "You are already using a remarkably similar sling"
 	[[Effects]]
 	total = 1
 		[[[1]]]
