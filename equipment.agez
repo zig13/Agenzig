@@ -10,7 +10,6 @@ multiplier = 1
 [[[2]]]
 attribute = 7
 boost = 1
-
 [2]
 name = 'Steel Dagger'
 equipslots = [10]
@@ -21,7 +20,6 @@ enhancements = 2
 cability = 1
 [[[2]]]
 cability = 2
-
 [3]
 name = 'Sling'
 equipslots = [11]
@@ -32,5 +30,15 @@ enhancements = 2
 cability = 3
 [[[2]]]
 cability = 4
+[4]
+name = 'Iron Sword'
+equipslots = [10]
+slotuse = 'all'
+enhancements = 2
+[[Enhancements]]
+[[[1]]]
+cability = 5
+[[[2]]]
+cability = 6
 
 
