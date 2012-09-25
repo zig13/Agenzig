@@ -75,10 +75,27 @@ singleuse = 1
 	[[Requirements]]
 	total = 0
 	[[Effects]]
-	setfatigue = 0
-	restorehealth = 2
-	boosthealth = 10
-	restorestrength = 1
+	total = 4
+		[[[1]]]
+		type = 'vitalrestore'
+		id = '1'
+		operator = '+='
+		value = 10
+		[[[2]]]
+		type = 'vital'
+		id = '2'
+		operator = '='
+		value = 70
+		[[[3]]]
+		type = 'vital'
+		id = '1'
+		operator = '+='
+		value = 2
+		[[[4]]]
+		type = 'attributerestore'
+		id = '1'
+		operator = '+='
+		value = 1
 [6]
 description = 'Floor Potion'
 usetext = "Despite not knowing it's contents, you drink the potion you found on the floor. You feel more dexterous"
@@ -86,7 +103,11 @@ singleuse = 1
 	[[Requirements]]
 	total = 0
 	[[Effects]]
-	boostdexterity = 4
+		[[[1]]]
+		type = 'attribute'
+		id = '3'
+		operator = '+='
+		value = 4
 [7]
 description = 'Inventory Reset'
 usetext = "You regain default items"
@@ -96,7 +117,11 @@ singleuse = 0
 	[[Effects]]
 		[[[1]]]
 		type = 'additem'
-		id = '2'
+		id = '5'
+		value = 1
+		[[[2]]]
+		type = 'additem'
+		id = '6'
 		value = 1
 [8]
 description = 'A stone'
