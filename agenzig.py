@@ -447,13 +447,37 @@ while True : #Basically, you're not getting out of this loop...
 								if (id in equipment) != eval(evaluator) :
 									reqpass = 0
 									reqno = reqtotal
-						if reqpass == 0 :
-							print items[useditem]['Requirements'][sreqno]['failtext']
-						elif reqpass == 1 :
+						if reqpass == 1 :
 							print items[useditem]['usetext']
 							if items[useditem]['singleuse'] == 1 :
 								inventory.remove(int(useditem))
 								itemused = 1
+							effecttotal = items[useditem]['Effects']['total']
+							effectno = 0
+							while effectno != effecttotal :
+								effectno += 1
+								seffectno = str(effectno)
+								if (items[useditem]['Effects'][seffectno]['type'] == 'vital') or (items[useditem]['Effects'][seffectno]['type'] == 'vitalrestore'):
+									id = items[useditem]['Effects'][seffectno]['id']
+									operator = items[useditem]['Effects'][seffectno]['operator']
+									value = items[useditem]['Effects'][seffectno]['value']
+									exec("character['Vitals'][id]"+operator+str(value))
+									#eval(compile(("character['Vitals'][id]"+operator+str(value)),'<string>','exec'))
+									statchanged = 1
+									if (items[useditem]['Effects'][seffectno]['type'] == 'vitalrestore') and (character['Vitals'][id] > character['Vitals']['Initial Values'][id]) :
+										character['Vitals'][id] = character['Vitals']['Initial Values'][id]
+								elif (items[useditem]['Effects'][seffectno]['type'] == 'attribute') or (items[useditem]['Effects'][seffectno]['type'] == 'attributerestore'):
+									id = items[useditem]['Effects'][seffectno]['id']
+									operator = items[useditem]['Effects'][seffectno]['operator']
+									value = items[useditem]['Effects'][seffectno]['value']
+									exec("character['Attributes'][id]"+operator+str(value))
+									#eval(compile(("character['Attributes'][id]"+operator+str(value)),'<string>','exec'))
+									statchanged = 1
+									if (items[useditem]['Effects'][seffectno]['type'] == 'attributerestore') and (character['Attributes'][id] > character['Attributes']['Initial Values'][id]) :
+										character['Attributes'][id] = character['Attributes']['Initial Values'][id]
+										print character['Attributes'][id]
+						elif reqpass == 0 :
+							print items[useditem]['Requirements'][sreqno]['failtext']
 					else :
 						print "You are only carrying "+str(len(inventory))+" types of item"
 				else :
