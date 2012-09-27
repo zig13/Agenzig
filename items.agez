@@ -103,6 +103,7 @@ singleuse = 1
 	[[Requirements]]
 	total = 0
 	[[Effects]]
+	total = 1
 		[[[1]]]
 		type = 'attribute'
 		id = '3'
@@ -115,6 +116,7 @@ singleuse = 0
 	[[Requirements]]
 	total = 0
 	[[Effects]]
+	total = 2
 		[[[1]]]
 		type = 'additem'
 		id = '5'
