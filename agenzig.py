@@ -347,23 +347,24 @@ while True : #Basically, you're not getting out of this loop...
 			print statuslist
 		elif (prompt == 'equipment') or (prompt == "e") :
 			if (equiplistgen != 1) :
-				equiptotal = len(equipment)
-				opt = 0
-				equipmentlist = "You have equipped:\n"
-				tempequipment = list(equipment)
-				tempequipment.reverse()
-				while equiptotal > 0 :
-					aequipno = tempequipment.pop()
-					equiptotal = len(tempequipment)
-					aequipocc = tempequipment.count(aequipno)+1
-					opt = opt+1
-					aequipdesc = equips[str(aequipno)]['name']
-					equipmentlist = equipmentlist+aequipdesc+"\n"
-				if opt == 0 :
+				tempequipment = []
+				for element in equipment :
+					if element not in tempequipment : #Removes duplicates as following code assumes no duplicates
+						tempequipment.append(element)
+				equiptotal = len(tempequipment)
+				if equiptotal == 0 :
 					equipmentlist = "You have nothing equipped"
 				else :
-					tempequipment = list(equipment)
-				equiplistgen = 1
+					equiprem = len(tempequipment)
+					equipmentlist = "You have equipped:\n"
+					tempequipment.reverse()
+					while equiprem > 0 :
+						aequipno = tempequipment[equiprem-1]
+						equiptotal = len(tempequipment)
+						equiprem -= 1
+						aequipdesc = equips[str(aequipno)]['name']
+						equipmentlist = equipmentlist+aequipdesc+"\n"
+					equiplistgen = 1
 			print equipmentlist
 		elif (prompt == "inventory") or (prompt == "i") or (prompt.startswith("use ") and  (len(prompt) > 4)) or (prompt.startswith("equip ") and  (len(prompt) > 6)) :
 			if prompt.startswith("use ") :
