@@ -461,8 +461,7 @@ while True : #Basically, you're not getting out of this loop...
 									id = items[useditem]['Effects'][seffectno]['id']
 									operator = items[useditem]['Effects'][seffectno]['operator']
 									value = items[useditem]['Effects'][seffectno]['value']
-									exec("character['Vitals'][id]"+operator+str(value))
-					
+									exec("character['Vitals'][id]"+operator+str(value))					
 									statchanged = 1
 									if (items[useditem]['Effects'][seffectno]['type'] == 'vitalrestore') and (character['Vitals'][id] > character['Vitals']['Initial Values'][id]) :
 										character['Vitals'][id] = character['Vitals']['Initial Values'][id]
@@ -474,7 +473,6 @@ while True : #Basically, you're not getting out of this loop...
 									statchanged = 1
 									if (items[useditem]['Effects'][seffectno]['type'] == 'attributerestore') and (character['Attributes'][id] > character['Attributes']['Initial Values'][id]) :
 										character['Attributes'][id] = character['Attributes']['Initial Values'][id]
-										print character['Attributes'][id]
 						elif reqpass == 0 :
 							print items[useditem]['Requirements'][sreqno]['failtext']
 					else :
