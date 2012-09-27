@@ -146,7 +146,8 @@ title = main['Details']['title']
 subtitle = "an Agenzig adventure"
 author = main['Details']['author']
 website = "For more information, go to "+main['Details']['website']
-equipment = character['Items']['equipment']
+equipslots = character['Items']['equipment'].keys()
+equipment = character['Items']['equipment'].values()
 inventory = character['Items']['inventory']
 # Loading other files
 scenefile = advfolder+sep+"scenes.agez"

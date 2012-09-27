@@ -77,10 +77,18 @@ def createchar( advfolder ) :
 			charattsrem = len(charatts)
 			character['Attributes'][charattno] = randint(int(csetup['Attributes'][charattno]['minval']), int(csetup['Attributes'][charattno]['maxval']))
 			character['Attributes']['Initial Values'][charattno] = character['Attributes'][charattno]
-		#Setting inventory
+		#Setting Inventory & Equipment
 		character['Items'] = {}
 		character['Items']['inventory'] = csetup['Inventory']['val']
-		character['Items']['equipment'] = csetup['Equipment']['val']
+		character['Items']['Equipment'] = {}
+		charequips = csetup['Equipment'].keys()
+		charequipstot = len(charequips)
+		charequipsrem = len(charequips)
+		charequips.reverse()
+		while charequipsrem != 0 :
+			charequipsno = charequips[(charequipsrem-1)]
+			charequipsrem -= 1
+			character['Items']['Equipment'][charequipsno] = csetup['Equipment'][charequipsno]['id']
 		#Setting currencies
 		character['Currency'] = {}
 		currencytot = main['Currencies']['total']
