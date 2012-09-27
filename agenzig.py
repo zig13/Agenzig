@@ -19,6 +19,7 @@ except ImportError, e:
 from configobj import *
 from time import sleep
 from subprocess import Popen
+from itertools import repeat
 dot = str(os.curdir) #The character used by the current os to denote the current folder. Is '.' in Windows
 sep = str(os.sep) #The character used by the current os to denote the demotion to another folder level. Is '/' in Windows
 #Hopefully the use of these will help make the engine cross-platform
@@ -235,7 +236,7 @@ while True : #Basically, you're not getting out of this loop...
 	sstatusgen = 0
 	invlistgen = 0
 	equiplistgen = 0
-	itemused = 0
+	invchanged = 0
 	statchanged = 0
 	from decimal import Decimal
 	from math import ceil
@@ -451,7 +452,7 @@ while True : #Basically, you're not getting out of this loop...
 							print items[useditem]['usetext']
 							if items[useditem]['singleuse'] == 1 :
 								inventory.remove(int(useditem))
-								itemused = 1
+								invchanged = 1
 							effecttotal = items[useditem]['Effects']['total']
 							effectno = 0
 							while effectno != effecttotal :
@@ -473,6 +474,12 @@ while True : #Basically, you're not getting out of this loop...
 									statchanged = 1
 									if (items[useditem]['Effects'][seffectno]['type'] == 'attributerestore') and (character['Attributes'][id] > character['Attributes']['Initial Values'][id]) :
 										character['Attributes'][id] = character['Attributes']['Initial Values'][id]
+								elif items[useditem]['Effects'][seffectno]['type'] == 'additem' :
+									id = items[useditem]['Effects'][seffectno]['id']
+									value = items[useditem]['Effects'][seffectno]['value']
+									for _ in repeat(None, value) :
+										inventory.append(int(id))
+									invchanged = 1
 						elif reqpass == 0 :
 							print items[useditem]['Requirements'][sreqno]['failtext']
 					else :
@@ -499,12 +506,12 @@ while True : #Basically, you're not getting out of this loop...
 				exit(0)
 		else :
 			print "Try using an ACTUAL command moron"  #Might change this before release...
-		if (scene != sceneb) or (scenestate != scenestateb) or (itemused == 1) or (statchanged == 1) :
+		if (scene != sceneb) or (scenestate != scenestateb) or (invchanged == 1) or (statchanged == 1) :
 			character.write()
 			if (scene != sceneb) or (scenestate != scenestateb) :
 				scenechanged = 1
-			if itemused == 1 :
+			if invchanged == 1 :
 				invlistgen = 0
-				itemused = 0
+				invchanged = 0
 			if statchanged == 1 :
 				statusgen = 0
