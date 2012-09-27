@@ -462,7 +462,7 @@ while True : #Basically, you're not getting out of this loop...
 									operator = items[useditem]['Effects'][seffectno]['operator']
 									value = items[useditem]['Effects'][seffectno]['value']
 									exec("character['Vitals'][id]"+operator+str(value))
-									#eval(compile(("character['Vitals'][id]"+operator+str(value)),'<string>','exec'))
+					
 									statchanged = 1
 									if (items[useditem]['Effects'][seffectno]['type'] == 'vitalrestore') and (character['Vitals'][id] > character['Vitals']['Initial Values'][id]) :
 										character['Vitals'][id] = character['Vitals']['Initial Values'][id]
@@ -471,7 +471,6 @@ while True : #Basically, you're not getting out of this loop...
 									operator = items[useditem]['Effects'][seffectno]['operator']
 									value = items[useditem]['Effects'][seffectno]['value']
 									exec("character['Attributes'][id]"+operator+str(value))
-									#eval(compile(("character['Attributes'][id]"+operator+str(value)),'<string>','exec'))
 									statchanged = 1
 									if (items[useditem]['Effects'][seffectno]['type'] == 'attributerestore') and (character['Attributes'][id] > character['Attributes']['Initial Values'][id]) :
 										character['Attributes'][id] = character['Attributes']['Initial Values'][id]
