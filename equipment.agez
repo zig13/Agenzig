@@ -2,6 +2,7 @@
 name = 'Hunting Leathers'
 equipslots = [1,2,3,4]
 slotuse = 'all'
+item = 3
 	[[Effects]]
 	total = 4
 		[[[1]]]
@@ -24,6 +25,7 @@ slotuse = 'all'
 name = 'Steel Dagger'
 equipslots = [10]
 slotuse = 'all'
+item = 1
 	[[Effects]]
 	total = 2
 		[[[1]]]
@@ -36,6 +38,7 @@ slotuse = 'all'
 name = 'Sling'
 equipslots = [11]
 slotuse = 'all'
+item = 4
 	[[Effects]]
 	total = 2
 		[[[1]]]
@@ -48,6 +51,7 @@ slotuse = 'all'
 name = 'Iron Sword'
 equipslots = [10]
 slotuse = 'all'
+item = 2
 	[[Effects]]
 	total = 2
 		[[[1]]]
@@ -56,5 +60,28 @@ slotuse = 'all'
 		[[[2]]]
 		type = 'cability'
 		id = '6'
+[5]
+name = 'Studded Leather'
+equipslots = [1,2,3,4]
+slotuse = 'all'
+item = 9
+	[[Effects]]
+	total = 4
+		[[[1]]]
+		type = 'resistance'
+		id = '1'
+		value = 2
+		[[[2]]]
+		type = 'resistance'
+		id = '2'
+		value = 3
+		[[[3]]]
+		type = 'resistance'
+		id = '3'
+		value = 1
+		[[[4]]]
+		type = 'attribute'
+		id = 7
+		value = 1
 
 
