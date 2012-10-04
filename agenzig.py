@@ -482,6 +482,20 @@ while True : #Basically, you're not getting out of this loop...
 									for _ in repeat(None, value) :
 										inventory.append(int(id))
 									invchanged = 1
+								elif items[useditem]['Effects'][seffectno]['type'] == 'equip' :
+									id = items[useditem]['Effects'][seffectno]['id']
+									slotsused = equips[id]['equipslots']
+									charequips = character['Items']['Equipment']
+									for slotx in slotsused :
+										if str(slotx) in equipslots :
+											replacedequip = str(character['Items']['Equipment'][str(slotx)])
+											replacedequip = str(equips[replacedequip]['item'])
+											inventory.append(replacedequip)
+											slotstoclear = dict(pair for pair in charequips.iteritems() if replacedequip in pair[1])
+											slotstoclear = slotstoclear.keys()
+											for clearslot in slotstoclear :
+												character['Items']['Equipment'][clearslot] = ""
+											character['Items']['Equipment'][str(slotx)] = id
 						elif reqpass == 0 :
 							print items[useditem]['Requirements'][sreqno]['failtext']
 					else :
