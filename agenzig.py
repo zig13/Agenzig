@@ -167,6 +167,16 @@ equips = ConfigObj(equipmentfile, unrepr=True)
 fight = 0
 vittotal = vitals['total']
 attotal = attributes['total']
+scenechanged = 0
+statusgen = 0
+sstatusgen = 0
+invlistgen = 0
+equiplistgen = 0
+invchanged = 0
+statchanged = 0
+equipchanged = 0
+from decimal import Decimal
+from math import ceil
 if sel!= opt :
 	print "Continuing adventure\n"
 while True : #Basically, you're not getting out of this loop...
@@ -232,15 +242,6 @@ while True : #Basically, you're not getting out of this loop...
 	print "\n"+scenechoices
 	sceneb = scene
 	scenestateb = scene
-	scenechanged = 0
-	statusgen = 0
-	sstatusgen = 0
-	invlistgen = 0
-	equiplistgen = 0
-	invchanged = 0
-	statchanged = 0
-	from decimal import Decimal
-	from math import ceil
 	while scenechanged == 0 :
 		prompt = raw_input(">") #The main prompt!
 		prompt = prompt.lower()
@@ -486,16 +487,22 @@ while True : #Basically, you're not getting out of this loop...
 									id = items[useditem]['Effects'][seffectno]['id']
 									slotsused = equips[id]['equipslots']
 									charequips = character['Items']['Equipment']
+									replaceditems = []
 									for slotx in slotsused :
-										if str(slotx) in equipslots :
-											replacedequip = str(character['Items']['Equipment'][str(slotx)])
-											replacedequip = str(equips[replacedequip]['item'])
-											inventory.append(replacedequip)
-											slotstoclear = dict(pair for pair in charequips.iteritems() if replacedequip in pair[1])
-											slotstoclear = slotstoclear.keys()
-											for clearslot in slotstoclear :
-												character['Items']['Equipment'][clearslot] = ""
-											character['Items']['Equipment'][str(slotx)] = id
+										slotx = str(slotx)
+										if slotx in equipslots : #If there is already a piece of equipment occupying the slot
+											replacedequip = charequips[slotx]									
+											if (equips[replacedequip]['equipslots'] != equips[id]['equipslots']) and (equips[replacedequip]['equipslots'] != [slotx]) :
+												for clearslot in equips[replacedequip]['equipslots'] :
+													if clearslot != slotx :
+														del character['Items']['Equipment'][clearslot]
+											replaceditem = str(equips[replacedequip]['item'])
+											if replaceditem not in replaceditems :
+												inventory.append(int(replaceditem))
+												replaceditems.append(replaceditem)
+										charequips[slotx] = id
+									invchanged = 1
+									equipchanged = 1
 						elif reqpass == 0 :
 							print items[useditem]['Requirements'][sreqno]['failtext']
 					else :
@@ -522,7 +529,7 @@ while True : #Basically, you're not getting out of this loop...
 				exit(0)
 		else :
 			print "Try using an ACTUAL command moron"  #Might change this before release...
-		if (scene != sceneb) or (scenestate != scenestateb) or (invchanged == 1) or (statchanged == 1) :
+		if (scene != sceneb) or (scenestate != scenestateb) or (invchanged == 1) or (statchanged == 1) or (equipchanged == 1):
 			character.write()
 			if (scene != sceneb) or (scenestate != scenestateb) :
 				scenechanged = 1
@@ -531,3 +538,5 @@ while True : #Basically, you're not getting out of this loop...
 				invchanged = 0
 			if statchanged == 1 :
 				statusgen = 0
+			if equipchanged == 1 :
+				equiplistgen = 0
