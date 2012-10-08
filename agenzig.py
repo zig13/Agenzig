@@ -489,18 +489,19 @@ while True : #Basically, you're not getting out of this loop...
 									charequips = character['Items']['Equipment']
 									replaceditems = []
 									for slotx in slotsused :
-										slotx = str(slotx)
-										if slotx in equipslots : #If there is already a piece of equipment occupying the slot
-											replacedequip = charequips[slotx]									
+										if str(slotx) in equipslots : #If there is already a piece of equipment occupying the slot
+											replacedequip = charequips[str(slotx)]
 											if (equips[replacedequip]['equipslots'] != equips[id]['equipslots']) and (equips[replacedequip]['equipslots'] != [slotx]) :
 												for clearslot in equips[replacedequip]['equipslots'] :
+													clearslot = str(clearslot)
 													if clearslot != slotx :
 														del character['Items']['Equipment'][clearslot]
+														equipslots = character['Items']['Equipment'].keys()
 											replaceditem = str(equips[replacedequip]['item'])
 											if replaceditem not in replaceditems :
 												inventory.append(int(replaceditem))
 												replaceditems.append(replaceditem)
-										charequips[slotx] = id
+										charequips[str(slotx)] = id
 									invchanged = 1
 									equipchanged = 1
 						elif reqpass == 0 :
@@ -540,3 +541,5 @@ while True : #Basically, you're not getting out of this loop...
 				statusgen = 0
 			if equipchanged == 1 :
 				equiplistgen = 0
+				equipslots = character['Items']['Equipment'].keys()
+				equipment = character['Items']['Equipment'].values()
