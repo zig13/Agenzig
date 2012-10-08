@@ -1,6 +1,6 @@
 [1]
 name = 'Hunting Leathers'
-equipslots = [1,2,3,4]
+equipslots = [1,2,3,4] # Chest, trousers and both arms (long-sleeved)
 slotuse = 'all'
 item = 3
 	[[Effects]]
@@ -62,7 +62,7 @@ item = 2
 		id = '6'
 [5]
 name = 'Studded Leather'
-equipslots = [1,2,3,4]
+equipslots = [1,2] # Chest and trousers slots (sleeveless)
 slotuse = 'all'
 item = 9
 	[[Effects]]
