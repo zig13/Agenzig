@@ -318,20 +318,21 @@ while True : #Basically, you're not getting out of this loop...
 						baserange = ((Decimal(attributes[sattno]['maxval']-attributes[sattno]['baseval'])/attributes[sattno]['Descriptors']['morethanbase']['total'])+(Decimal(attributes[sattno]['baseval']-1)/attributes[sattno]['Descriptors']['lessthanbase']['total']))/2
 						basemin = int(round(attributes[sattno]['baseval']-((baserange-1)/2)))
 						basemax = int(round(attributes[sattno]['baseval']+((baserange-1)/2)))
+						print "basemax", basemax
 						if (character['Attributes'][sattno] >= basemin) and (character['Attributes'][sattno] <= basemax) :
 							attlevel = attributes[sattno]['Descriptors']['base']
 						elif character['Attributes'][sattno] < basemin :
 							lowdescsec = Decimal(basemin-1)/attributes[sattno]['Descriptors']['lessthanbase']['total']
 							descno = str(int(ceil(character['Attributes'][sattno]/lowdescsec)))
 							if descno < 1 :
-								descno = 1
+								descno = '1'
 							attlevel = attributes[sattno]['Descriptors']['lessthanbase'][descno]['text']
 						elif character['Attributes'][sattno] > basemax :
 							highdescsec = Decimal(attributes[sattno]['maxval']-basemax)/attributes[sattno]['Descriptors']['morethanbase']['total']
-							descno = str(int(ceil(character['Attributes'][sattno]/highdescsec)))
+							descno = str(int(ceil((character['Attributes'][sattno]-basemax)/highdescsec)))
 							if int(descno) < 1 :
 								descno = '1'
-							attlevel = attributes[sattno]['Descriptors']['lessthanbase'][descno]['text']
+							attlevel = attributes[sattno]['Descriptors']['morethanbase'][descno]['text']
 						statuslist = statuslist+attlevel+"\n"
 					elif ((attributes[sattno]['view'] == 'lessthanbase') and (ltbexists == 1)) :
 						if character['Attributes'][sattno] < attributes[sattno]['baseval'] :
