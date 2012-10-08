@@ -148,6 +148,12 @@ singleuse = 1
 		id = '5'
 		evaluator = 'False'
 		failtext = "You are already wearing a remarkably similar outfit"
+		[[[2]]]
+		type = 'attribute'
+		id = '1'
+		evaluator = '>'
+		value = 18
+		failtext = "This armour is too heavy for you to wear comfortably"
 	[[Effects]]
 	total = 1
 		[[[1]]]
