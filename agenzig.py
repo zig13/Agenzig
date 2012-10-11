@@ -9,42 +9,52 @@
 # Licence:      Licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License.
 #			http://creativecommons.org/licenses/by-nc-sa/3.0/
 #-------------------------------------------------------------------------------
-
-import os # For checking for the existence of file and folders
 try:
 	import configobj #I'm using configobj instead of the built-in Configeditor as it allows for nested sections and list values
 except ImportError, e:
-	raw_input("ConfigObj module is required. Please install and try again")
-	exit(0)
+	err = raw_input("ConfigObj module is required. Please install and try again")
+	if err != "Override" :
+		exit(0)
 from configobj import *
+from os import curdir, sep, access, listdir, R_OK, makedirs, path, name, system
 from time import sleep
 from subprocess import Popen
 from itertools import repeat
-dot = str(os.curdir) #The character used by the current os to denote the current folder. Is '.' in Windows
-sep = str(os.sep) #The character used by the current os to denote the demotion to another folder level. Is '/' in Windows
+dot = str(curdir) #The character used by the current os to denote the current folder. Is '.' in Windows
+sep = str(sep) #The character used by the current os to denote the demotion to another folder level. Is '/' in Windows
+if name == 'posix': #If OS is linux-based
+	def clr():
+		system('clear') #'Clr' will now execute the windows command 'clear' which clears the terminal in Linux
+elif (name == 'nt') or (name == 'ce') or (name == 'dos') : #If OS is Windows
+	def clr():
+	   system('cls') #'Clr' will now execute the windows command 'cls' which clears the terminal in Windows
+else :
+	def clr():
+		print "\n" * 10
 #Hopefully the use of these will help make the engine cross-platform
-mainfile = dot+sep+"main.agez"
+advfolder = dot+sep
+mainfile = advfolder+"main.agez" #Initially it is assumed that the agez files are in the script directory (i.e. there is one adventure)
 advsfolder = "%s%sAdventures%s" %(dot,sep,sep)
 mpc = dot+sep+"mpc-hc.exe"
-aplayer = os.access(mpc, os.R_OK)
+aplayer = access(mpc, R_OK) #A variable that tests whether Media Player Classic is available
 kpic = dot+sep+"kpic.exe"
-gviewer = os.access(kpic, os.R_OK)
-if (os.access(advsfolder, os.R_OK)) and (str(os.listdir(advsfolder)) != "[]") :
+gviewer = access(kpic, R_OK) #A variable that tests whether KPic is available
+if (access(advsfolder, R_OK)) and (str(listdir(advsfolder)) != "[]") : #If there is a non-empty folder called 'Adventures' in the script folder
 	if aplayer == True :
 		aztheme = dot+sep+"aztheme.aza"
-		if os.access(aztheme, os.R_OK) :
-			playtheme = Popen([mpc, aztheme])
-			sleep(0.5)
+		if access(aztheme, R_OK) :
+			playtheme = Popen([mpc, aztheme]) #Will play the theme for Agenzig if MPC is available and theme (aztheme.aza) exists
+			sleep(0.5) #Gives time for MPC to launch otherwise it would interupt/minimise the splash screen
 	if gviewer == True :
 		azsplash = dot+sep+"azsplash.azg"
-		if os.access(azsplash, os.R_OK) :		
-			viewsplash = Popen([kpic, azsplash])
+		if access(azsplash, R_OK) :		
+			viewsplash = Popen([kpic, azsplash]) #Will display the splash screen for Agenzig if KPic is available and theme (azsplash.azg) exists
 			sleep(3)
 			viewsplash.kill()
-	done = 0
+	advchosen = 0
 	repeat = 0
-	while done == 0 :
-		advs = os.listdir(advsfolder)
+	while advchosen == 0 :
+		advs = listdir(advsfolder)
 		advs.reverse()
 		advsno = len(advs)
 		if repeat == 0 :
@@ -59,55 +69,65 @@ if (os.access(advsfolder, os.R_OK)) and (str(os.listdir(advsfolder)) != "[]") :
 			choice = raw_input(">")
 		repeat = 1
 		if choice == "" :
-			pass
+			pass #If user inputs nothing then nothing happens
 		elif choice.isdigit() == 1 : #This section basically does the reverse of the above one to determine what adventure the inputted number refers to
 			sel = int(choice)
 			if sel <= opt :
-				advs2 = os.listdir(advsfolder)
+				advs2 = listdir(advsfolder)
 				advfolder = advsfolder+str(advs2.pop((sel-1)))+sep
 				mainfile = advfolder+sep+"main.agez"
-				if os.access(mainfile, os.R_OK) :
-					done = 1
+				if access(mainfile, R_OK) :
+					advchosen = 1
 				else :
 					print "Selected adventure folder does not contain a main file"
 			else:
 				print "Value given is not within option range\n"
 		else:
 			print "Input must be a number\n"
-	main = ConfigObj(mainfile, unrepr=True)
-	advname = main['Details']['title']
-	charfolder = advfolder+"Characters"+sep
-	print advname+" succesfully loaded\n"		
-elif os.access(mainfile, os.R_OK) :
-	main = ConfigObj(mainfile, unrepr=True)
-	advname = main['Details']['title']
-	advfolder = dot+sep
-	charfolder = advfolder+"Characters"+sep
-else :
-	if os.access(advsfolder, os.R_OK) :
+	clr()
+elif access(mainfile, R_OK) : # If there is only one adventure that is installed in the script directory
+	pass #Has no specific code of it's own as mainfile is defined at beginning
+else : #Non-valid situations
+	if access(advsfolder, R_OK) :
 		print "The Adventures folder exists but contains no Adventure folders\n"
 	else :
 		print "No Adventures folder found in script directory\n"
 	print "No main file found in script directory\n\nIf you only have/play one Agenzig adventure then it's files\n(main.agez, attributes.agez etc) should be in the same directory as agenzig.py\n\nIf you have/play multiple adventures then the files for each should be kept\nin a subfolder of 'Adventures' which itself should be\nin the same directory as agenzig.py\n"
-	raw_input("If you don't know what this means, then you should probably reinstall") #More informative than a crash...
-	exit(0)
-graphics = advfolder+"Graphics"+sep
+	err = raw_input("If you don't know what this means, then you should probably reinstall") #More informative than a crash...
+	if err != "Override" :
+		exit(0)
+#Below code applies to both valid situations (multiple adventures in seperate folders and single adventure in script folder)
+main = ConfigObj(mainfile, unrepr=True)
+scenefile = advfolder+sep+"scenes.agez"
+if access(scenefile, R_OK) : #Main.agez and scenes.agez are bare minimum for an adventure
+	scenes = ConfigObj(scenefile, unrepr=True)
+	advname = main['Details']['title']
+	charfolder = advfolder+"Characters"+sep
+	print advname+" succesfully loaded\n"
+else :
+	err = raw_input("Scenes file missing! This is not a valid adventure")
+	if err != "Override" :
+		exit(0)
+if access(advfolder+"Graphics"+sep, R_OK) :
+	graphics = advfolder+"Graphics"+sep
+else :
+	graphics = 0
 if aplayer == True :
 	theme = dot+sep+"theme.aza"
-	if os.access(theme, os.R_OK) :
-		playtheme = Popen([mpc, theme])
+	if access(theme, R_OK) :
+		playtheme = Popen([mpc, theme]) #Will play the theme for the adventure if MPC is available and theme exists in adventure folder
 		sleep(0.5)
 if gviewer == True :
 	splash = advfolder+"splash.azg"
-	if os.access(splash, os.R_OK) :		
-		viewsplash = Popen([kpic, splash])
+	if access(splash, R_OK) :		
+		viewsplash = Popen([kpic, splash]) #Will display the splash screen for the adventure if KPic is available and theme exists in adventure folder
 		sleep(3)
 		viewsplash.kill()
-done = 0
-if not os.path.exists(charfolder):
-    os.makedirs(charfolder)
-while done == 0 :
-	chars = os.listdir(charfolder)
+charchosen = 0
+if not path.exists(charfolder):
+    makedirs(charfolder) #Creates a character folder if it does not exist as following code requires it
+while charchosen == 0 :
+	chars = listdir(charfolder)
 	chars.reverse()
 	charsno = len(chars)
 	opt = 1
@@ -129,13 +149,13 @@ while done == 0 :
 			from agccreator import createchar
 			createchar(advfolder)
 		else:
-			if sel <= opt :
-				chars2 = os.listdir(charfolder)
+			if sel < opt :
+				chars2 = listdir(charfolder)
 				charfile = str(chars2.pop((sel-1)))
 				charname = charfile[:-4]
 				charfile = charfolder+sep+charfile
 				character = ConfigObj(charfile, unrepr=True)
-				done = 1
+				charchosen = 1
 			else:
 				print "Value given is not within option range\n"
 	else:
@@ -149,24 +169,45 @@ website = "For more information, go to "+main['Details']['website']
 equipslots = character['Items']['Equipment'].keys()
 equipment = character['Items']['Equipment'].values()
 inventory = character['Items']['inventory']
-# Loading other files
-scenefile = advfolder+sep+"scenes.agez"
-scenes = ConfigObj(scenefile, unrepr=True)
+# Loading other files if they exist
 choicefile = advfolder+sep+"choices.agez"
-choices = ConfigObj(choicefile, unrepr=True)
+if access(choicefile, R_OK) :
+	choices = ConfigObj(choicefile, unrepr=True)
+else :
+	choices = 0
 confrontationfile = advfolder+sep+"confrontations.agez"
-confrontations = ConfigObj(confrontationfile, unrepr=True)
+if access(confrontationfile, R_OK) :
+	confrontations = ConfigObj(confrontationfile, unrepr=True)
+else :
+	confrontations = 0
 attributefile = advfolder+sep+"attributes.agez"
-attributes = ConfigObj(attributefile, unrepr=True)
+if access(attributefile, R_OK) :
+	attributes = ConfigObj(attributefile, unrepr=True)
+else :
+	attributes = 0
 vitalfile = advfolder+sep+"vitals.agez"
-vitals = ConfigObj(vitalfile, unrepr=True)
+if access(vitalfile, R_OK) :
+	vitals = ConfigObj(vitalfile, unrepr=True)
+else :
+	vitals = 0
 itemfile = advfolder+sep+"items.agez"
-items = ConfigObj(infile=itemfile, unrepr=True)
+if access(vitalfile, R_OK) :
+	items = ConfigObj(infile=itemfile, unrepr=True)
+else :
+	items = 0
 equipmentfile = advfolder+sep+"equipment.agez"
-equips = ConfigObj(equipmentfile, unrepr=True)
-fight = 0
-vittotal = vitals['total']
-attotal = attributes['total']
+if access(equipmentfile, R_OK) :
+	equips = ConfigObj(equipmentfile, unrepr=True)
+else :
+	equips = 0
+fight = 0 #Will use to disable combat while is a WIP
+vittotal = len(vitals.keys())
+if vittotal == 0 : #If Vitals file contains no Vitals
+	vitals = 0
+attotal = len(attributes.keys())
+if attotal == 0 : #If Attributes file contains no Attributes
+	attributes = 0
+#These are mostly used for while loops and repetition checks
 scenechanged = 0
 statusgen = 0
 sstatusgen = 0
@@ -175,15 +216,17 @@ equiplistgen = 0
 invchanged = 0
 statchanged = 0
 equipchanged = 0
+#More imports...
 from decimal import Decimal
 from math import ceil
-if sel!= opt :
+if sel!= opt : #If user has chosen an existing character rather than creating a new one
 	print "Continuing adventure\n"
-while True : #Basically, you're not getting out of this loop...
-	if	scene in character['Scene States'] :
+while True : #Primary game loop - all code above is only for setup and never needs to be reset/run-again
+	clr()
+	if	scene in (character['Scene States'].keys()) : #If character file has noted that the scenestate of the current scene is different from default
 		scenestate = str(character['Scene States'][scene])
 	else :
-		scenestate = str(1)
+		scenestate = str(1) #Else set scenestate to default (1)
 	print scenes[scene][scenestate]['description']
 	scenechoicecodes = scenes[scene][scenestate]['choices']
 	choicecodes = list(scenes[scene][scenestate]['choices'])
@@ -242,18 +285,18 @@ while True : #Basically, you're not getting out of this loop...
 	print "\n"+scenechoices
 	sceneb = scene
 	scenestateb = scene
-	while scenechanged == 0 :
+	while scenechanged == 0 : #The second stage loop. This is only left, and the code above run when the scene or scene state changes
 		prompt = raw_input(">") #The main prompt!
-		prompt = prompt.lower()
+		prompt = prompt.lower() #Make input all lower case
 		if prompt == "" :
-			pass
-		elif (prompt == "choices") or (prompt == "c") :
-			print "\n"+scenechoices
-		elif (prompt == 'status') or (prompt == "s") :
+			pass #If user presses enter without typing anything, do nothing
+		elif ((prompt == "choices") or (prompt == "c")) and (choices != 0) :
+			print "\n"+scenechoices #Re-print scene choices
+		elif ((prompt == 'status') or (prompt == "s")) and (vitals != 0) and (attributes != 0):
 			if (statusgen != 1) :
 				statuslist = "You are:\n"
 				vitno = 0
-				while vitno != vittotal :
+				while (vitno != vittotal) and (vitals != 0) :
 					vitno = vitno+1
 					svitno = str(vitno)
 					ltbexists = 1
@@ -299,7 +342,7 @@ while True : #Basically, you're not getting out of this loop...
 						print "vitals.agez is corrupt (vital number %s)" %(svitno)
 				statuslist = statuslist+"\n"
 				attno = 0
-				while attno != attotal :
+				while (attno != attotal) and (attributes != 0) :
 					attno = attno+1
 					sattno = str(attno)
 					ltbexists = 1
@@ -318,7 +361,6 @@ while True : #Basically, you're not getting out of this loop...
 						baserange = ((Decimal(attributes[sattno]['maxval']-attributes[sattno]['baseval'])/attributes[sattno]['Descriptors']['morethanbase']['total'])+(Decimal(attributes[sattno]['baseval']-1)/attributes[sattno]['Descriptors']['lessthanbase']['total']))/2
 						basemin = int(round(attributes[sattno]['baseval']-((baserange-1)/2)))
 						basemax = int(round(attributes[sattno]['baseval']+((baserange-1)/2)))
-						print "basemax", basemax
 						if (character['Attributes'][sattno] >= basemin) and (character['Attributes'][sattno] <= basemax) :
 							attlevel = attributes[sattno]['Descriptors']['base']
 						elif character['Attributes'][sattno] < basemin :
@@ -348,7 +390,7 @@ while True : #Basically, you're not getting out of this loop...
 				statchanged = 0
 			print statuslist
 		elif (prompt == 'equipment') or (prompt == "e") :
-			if (equiplistgen != 1) :
+			if (equiplistgen != 1) : #Checks to see if list of equipment is already generated (i.e. command has been run before) in which case it simply prints it
 				tempequipment = []
 				for element in equipment :
 					if element not in tempequipment : #Removes duplicates as following code assumes no duplicates
@@ -368,15 +410,15 @@ while True : #Basically, you're not getting out of this loop...
 						equipmentlist = equipmentlist+aequipdesc+"\n"
 					equiplistgen = 1
 			print equipmentlist
-		elif (prompt == "inventory") or (prompt == "i") or (prompt.startswith("use ") and  (len(prompt) > 4)) or (prompt.startswith("equip ") and  (len(prompt) > 6)) :
+		elif (prompt == "inventory") or (prompt == "i") or (prompt.startswith("use ") and  (len(prompt) > 4)) or (prompt.startswith("equip ") and  (len(prompt) > 6)) : #Inventory list must be generated for items to be used/equipped so commands are combined
 			if prompt.startswith("use ") :
 				printinv = 0
 				comtext = "Use"
-				usecode = prompt[4:]
+				usecode = prompt[4:] #Strips 'use ' to give item code
 			elif prompt.startswith("equip ") :
 				printinv = 0
 				comtext = "Use"
-				usecode = prompt[6:]
+				usecode = prompt[6:] #Strips 'equip ' to give item code
 			else :
 				printinv = 1
 			if invlistgen != 1 :
