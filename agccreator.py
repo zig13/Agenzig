@@ -11,7 +11,7 @@
 #-------------------------------------------------------------------------------
 def createchar( advfolder ) :
 	charname = raw_input("Please enter a name for your character >" )
-	from os import curdir, sep
+	from os import curdir, sep, name, system
 	dot = str(curdir) #The character used by the current os to denote the current folder. Is '.' in Windows
 	sep = str(sep) #The character used by the current os to denote the demotion to another folder level. Is '/' in Windows
 	from configobj import ConfigObj
@@ -79,7 +79,17 @@ def createchar( advfolder ) :
 		character['Scene States'] = {}
 	elif csetup['technique'] == 2 :
 		pass
+	if name == 'posix': #If OS is linux-based
+		def clr():
+			system('clear') #'Clr' will now execute the windows command 'clear' which clears the terminal in Linux
+	elif (name == 'nt') or (name == 'ce') or (name == 'dos') : #If OS is Windows
+		def clr():
+		   system('cls') #'Clr' will now execute the windows command 'cls' which clears the terminal in Windows
+	else :
+		def clr():
+			print "\n" * 10
 	character.write()
+	clr()
 	print "New character created"
 	print ""		
 if __name__ == '__main__': #If agccreator is run directly code below is run to determine 'advfolder' which is then fed into the above function
