@@ -147,6 +147,7 @@ while charchosen == 0 :
 		sel = int(choice)
 		if sel == opt :
 			from agccreator import createchar
+			clr()
 			createchar(advfolder)
 		else:
 			if sel < opt :
