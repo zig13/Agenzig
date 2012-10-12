@@ -407,11 +407,7 @@ while True : #Primary game loop - all code above is only for setup and never nee
 				else :
 					equiprem = len(tempequipment)
 					equipmentlist = "You have equipped:\n"
-					tempequipment.reverse()
-					while equiprem > 0 :
-						aequipno = tempequipment[equiprem-1]
-						equiptotal = len(tempequipment)
-						equiprem -= 1
+					for aequipno in tempequipment :
 						aequipdesc = equips[str(aequipno)]['name']
 						equipmentlist = equipmentlist+aequipdesc+"\n"
 					equiplistgen = 1
