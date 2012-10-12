@@ -509,22 +509,34 @@ while True : #Primary game loop - all code above is only for setup and never nee
 							while effectno != effecttotal :
 								effectno += 1
 								seffectno = str(effectno)
-								if (items[useditem]['Effects'][seffectno]['type'] == 'vital') or (items[useditem]['Effects'][seffectno]['type'] == 'vitalrestore'):
+								if (items[useditem]['Effects'][seffectno]['type'] == 'vital') or ((items[useditem]['Effects'][seffectno]['type'] == 'vitalrestore') and (items[useditem]['Effects'][seffectno]['value']) > character['Vitals']['Initial Values'][id]):
 									id = items[useditem]['Effects'][seffectno]['id']
-									operator = items[useditem]['Effects'][seffectno]['operator']
-									value = items[useditem]['Effects'][seffectno]['value']
+									if items[useditem]['Effects'][seffectno]['type'] == 'vitalrestore' :
+										operator = '+='
+										if (character['Vitals'][id] + items[useditem]['Effects'][seffectno]['value']) > character['Vitals']['Initial Values'][id] :
+											value = character['Vitals']['Initial Values'][id] - character['Vitals'][id]
+										else : 
+											value = items[useditem]['Effects'][seffectno]['value']											
+									else :
+										operator = items[useditem]['Effects'][seffectno]['operator']
+										value = items[useditem]['Effects'][seffectno]['value']
 									exec("character['Vitals'][id]"+operator+str(value))					
 									statchanged = 1
 									if (items[useditem]['Effects'][seffectno]['type'] == 'vitalrestore') and (character['Vitals'][id] > character['Vitals']['Initial Values'][id]) :
 										character['Vitals'][id] = character['Vitals']['Initial Values'][id]
-								elif (items[useditem]['Effects'][seffectno]['type'] == 'attribute') or (items[useditem]['Effects'][seffectno]['type'] == 'attributerestore'):
+								elif (items[useditem]['Effects'][seffectno]['type'] == 'attribute') or ((items[useditem]['Effects'][seffectno]['type'] == 'attributerestore') and (character['Attributes'][id] < character['Attributes']['Initial Values'][id])):
 									id = items[useditem]['Effects'][seffectno]['id']
-									operator = items[useditem]['Effects'][seffectno]['operator']
-									value = items[useditem]['Effects'][seffectno]['value']
+									if items[useditem]['Effects'][seffectno]['type'] == 'attributerestore' :
+										operator = '+='
+										if (character['Attributes'][id] + items[useditem]['Effects'][seffectno]['value']) > character['Attributes']['Initial Values'][id] :
+											value = character['Attributes']['Initial Values'][id] - character['Attributes'][id]
+										else : 
+											value = items[useditem]['Effects'][seffectno]['value']											
+									else :
+										operator = items[useditem]['Effects'][seffectno]['operator']
+										value = items[useditem]['Effects'][seffectno]['value']
 									exec("character['Attributes'][id]"+operator+str(value))
 									statchanged = 1
-									if (items[useditem]['Effects'][seffectno]['type'] == 'attributerestore') and (character['Attributes'][id] > character['Attributes']['Initial Values'][id]) :
-										character['Attributes'][id] = character['Attributes']['Initial Values'][id]
 								elif items[useditem]['Effects'][seffectno]['type'] == 'additem' :
 									id = items[useditem]['Effects'][seffectno]['id']
 									value = items[useditem]['Effects'][seffectno]['value']
