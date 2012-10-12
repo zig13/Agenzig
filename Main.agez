@@ -8,7 +8,6 @@ currencytwoname = 'silver coins'
 currencythreename = 'copper coins'
 
 [Currencies]
-total = 3
 	[[1]]
 	description = 'gold coins'
 	abreviation = 'gc'
@@ -83,20 +82,17 @@ technique = 1
 		[[[3]]]
 		val = 9
 [Categories]
-totalcategories = 1
 [[1]]
 catname = 'Gender'
-catvalues = 2
-[[[1]]]
-valname = 'Male'
-[[[2]]]
-valname = 'Female'
+	[[[1]]]
+	valname = 'Male'
+	[[[2]]]
+	valname = 'Female'
 [[2]]
 catname = 'Example'
-catvalues = 3
-[[[1]]]
-valname = 'Awesome'
-[[[2]]]
-valname = 'Not Awesome'
-[[[3]]]
-valname = 'Dunno'
+	[[[1]]]
+	valname = 'Awesome'
+	[[[2]]]
+	valname = 'Not Awesome'
+	[[[3]]]
+	valname = 'Dunno'
