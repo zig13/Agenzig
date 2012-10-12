@@ -390,7 +390,12 @@ while True : #Primary game loop - all code above is only for setup and never nee
 				statusgen = 1
 				statchanged = 0
 			print statuslist
-		elif (prompt == 'equipment') or (prompt == "e") :
+		elif (prompt == 'equipment') or (prompt == "e") or (prompt.startswith("unequip ") and  (len(prompt) > 8)) : 
+			if prompt.startswith("unequip ") :
+				printequips = 0
+				eqtoremove = prompt[8:] #Strips 'use ' to give item code
+			else :
+				printequips = 1
 			if (equiplistgen != 1) : #Checks to see if list of equipment is already generated (i.e. command has been run before) in which case it simply prints it
 				tempequipment = []
 				for element in equipment :
@@ -410,7 +415,10 @@ while True : #Primary game loop - all code above is only for setup and never nee
 						aequipdesc = equips[str(aequipno)]['name']
 						equipmentlist = equipmentlist+aequipdesc+"\n"
 					equiplistgen = 1
-			print equipmentlist
+			if printequips == 1 :
+				print equipmentlist
+			elif printinv == 0 :
+				pass
 		elif (prompt == "inventory") or (prompt == "i") or (prompt.startswith("use ") and  (len(prompt) > 4)) or (prompt.startswith("equip ") and  (len(prompt) > 6)) : #Inventory list must be generated for items to be used/equipped so commands are combined
 			if prompt.startswith("use ") :
 				printinv = 0
