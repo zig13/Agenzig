@@ -1,4 +1,3 @@
-total = 2
 [1]
 name = 'Health'
 type = 'both' #Can be both, pc or npc
