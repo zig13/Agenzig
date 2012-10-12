@@ -4,9 +4,29 @@ This is a project to build a text-based adventure game engine in Python. By engi
 
 In addition I intend to utilise external programs - specifically a graphics viewer and an audio player - to allow adventure writers/creators to include graphical and audio content which will be displayed/played when appropriate to complement the text
 
-## Progress
+## Implemented Features
 
-Scenes are loaded and the prompt is presented so the script is very much useable and will not crash (unless files are missing). However features are somewhat limited. Making choices, fighting and using inventory items are not yet implemented. However, character inventory and status (text descriptions of health, fatigue and attributes) can be displayed. For a list of commands enter 'help' into the prompt.
+Scenes are loaded and the prompt is presented so the script is very much useable and will not crash (unless files are missing). However features are somewhat limited. Making choices, fighting and 
+- Basic, sem-random character creation method
+- Printing scenes (athougth currently scenes can only be changed manually)
+- Printing available choices (that your character meets the requirements for)
+- Using inventory items including equipping equipment
+- Printing character inventory
+- Printing character status (text descriptions of health, fatigue and attributes)
+- Printing character equipmentcan be displayed. 
+For a list of commands enter 'help' into the prompt.
+
+## Roadmap
+
+- Unequiping items
+- More commenting
+- Granting the ability to change scene and scene states as an item effect
+- Improve equipment slot system
+- Implement the ability to make choices
+- Allow equipment to grant abilities, armor and attribute boosts
+- Implement non-combat abilities
+- Add a new character creation technique
+- Implement combat
 
 ## Installation/Use
 
