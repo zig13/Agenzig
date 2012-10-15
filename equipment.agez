@@ -83,5 +83,18 @@ item = 9
 		type = 'attribute'
 		id = 7
 		value = 1
+[6]
+name = 'Steel Sword'
+equipslots = [10]
+slotuse = 'all'
+item = 10
+	[[Effects]]
+	total = 2
+		[[[1]]]
+		type = 'cability'
+		id = '5'
+		[[[2]]]
+		type = 'cability'
+		id = '6'
 
 

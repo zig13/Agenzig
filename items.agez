@@ -183,3 +183,27 @@ altdescs = ['studded','armour']
 			[[[[[1]]]]]
 				type = 'equip'
 				id = '5'
+[10]
+description = 'Steel Sword'
+altdescs = ['sword']
+[[Actions]]
+	[[[wield]]]
+		[[[[Details]]]]
+			text = "You install the sword in a scabard on your belt ready for use"
+			singleuse = 1
+		[[[[Requirements]]]]
+			[[[[[1]]]]]
+				type = 'attribute'
+				id = '1'
+				evaluator = '>'
+				value = 19
+				failtext = "You are not strong enougth to weild this weapon effectively"
+			[[[[[2]]]]]
+				type = 'equip'
+				id = '6'
+				evaluator = 'False'
+				failtext = "You are already using a remarkably similar sword"
+		[[[[Effects]]]]
+			[[[[[1]]]]]
+				type = 'equip'
+				id = '6'
