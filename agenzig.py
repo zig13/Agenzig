@@ -443,7 +443,6 @@ while True : #Primary game loop - all code above is only for setup and never nee
 			tempinventory = list(inventory)
 			if (promptcomm != 'equip') and (promptcomm != 'wield') :
 				for aequip in equipment :
-					print equips[aequip]['item']
 					tempinventory.append(equips[aequip]['item'])
 			temp2inventory = []
 			for element in tempinventory :
@@ -451,25 +450,41 @@ while True : #Primary game loop - all code above is only for setup and never nee
 					temp2inventory.append(element)
 			tempinventory = []
 			for element in temp2inventory :
-				if promptcomm in items[element]['Actions'].getkeys :
+				if promptcomm in items[str(element)]['Actions'].keys() :
 					tempinventory.append(element)
 			if len(tempinventory) == 0 :
 				print "No items you possess can be used in that way" #Will soft-code
+				useditem = 0
 			else :
 				potentialitems = []
 				for element in tempinventory :
-					if (promptval == items[element]['description']) or (promptval in items[element]['altdescs']) :
+					if (promptval == items[str(element)]['description']) or (promptval in items[str(element)]['altdescs']) :
 						potentialitems.append(element)
 				if len(potentialitems) == 0 :
-					print "No items you possess match that description"
+					print "No items you possess that match that description can be used in that way" #Will soft-code
+					useditem = 0
 				elif len(potentialitems) == 1 :
 					useditem = potentialitems[0]
 				else :
 					print "Which %s do you mean?" %(promptval)
-			
-			
-			if usecode <= opt :
-				useditem = str(tempinventory[usecode-1])
+					print "Which %s do you want to %s?" %(promptval, promptcomm)
+					potentialitemdescs = []
+					for element in potentialitems :
+						potentialitemdescs.append(items[str(element)]['description'])
+					print '\n'.join(potentialitemdescs)
+					prompt = raw_input(">")
+					prompt = prompt.lower()
+					if prompt.isdigit :
+						if int(prompt) <= len(potentialitems) :
+							useditem = potentialitems[int(prompt)-1]
+						else :
+							useditem = 0
+					else :
+						useditem = 0
+						for element in potentialitems :
+							if (prompt == items[str(element)]['description'].lower) :
+								useditem = element			
+			if useditem != 0 :
 				reqtotal = items[useditem]['Requirements']['total']
 				reqno = 0
 				reqpass = 1
@@ -571,8 +586,6 @@ while True : #Primary game loop - all code above is only for setup and never nee
 							equipchanged = 1
 				elif reqpass == 0 :
 					print items[useditem]['Requirements'][sreqno]['failtext']
-			else :
-				print "You are only carrying "+str(len(inventory))+" types of item"
 		elif (prompt == "help") or (prompt == "h") or (prompt == "man") :
 			print "\nCommand List"
 			print "'choices': review availible options"
