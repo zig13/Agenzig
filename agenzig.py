@@ -564,6 +564,8 @@ while True : #Primary game loop - all code above is only for setup and never nee
 			confirm = raw_input(">")				
 			if (confirm == "yes") or (confirm == "y") or (confirm == "sure") or (confirm == "please") :
 				exit(0)
+		elif promptcomm in main['Details']['usewords'] :
+			print "'%s' must be followed by all or part of the description of an item" %(promptcomm)
 		else :
 			print "Try using an ACTUAL command moron"  #Might change this before release...
 		if (scene != sceneb) or (scenestate != scenestateb) or (invchanged == 1) or (statchanged == 1) or (equipchanged == 1):
