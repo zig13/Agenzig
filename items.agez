@@ -4,7 +4,7 @@ altdescs = ['dagger']
 [[Actions]]
 	[[[wield]]]
 		[[[[Details]]]]
-			usetext = "You install the dagger in a scabard on your belt ready for use"
+			text = "You install the dagger in a scabard on your belt ready for use"
 			singleuse = 1
 		[[[[Requirements]]]]
 			[[[[[1]]]]]
