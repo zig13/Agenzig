@@ -494,32 +494,26 @@ while True : #Primary game loop - all code above is only for setup and never nee
 				reqpass = 1
 				for reqno in itemreqs :
 					sreqno = str(reqno)
+					id = items[useditem]['Actions'][promptcomm]['Requirements'][sreqno]['id']
+					evaluator = items[useditem]['Actions'][promptcomm]['Requirements'][sreqno]['evaluator']
 					if items[useditem]['Actions'][promptcomm]['Requirements'][sreqno]['type'] == 'vital' :
-						id = items[useditem]['Actions'][promptcomm]['Requirements'][sreqno]['id']
-						evaluator = items[useditem]['Actions'][promptcomm]['Requirements'][sreqno]['evaluator']
 						value = items[useditem]['Actions'][promptcomm]['Requirements'][sreqno]['value']
 						check = str(character['Vitals'][id])+evaluator+str(value)			
 						if eval(check) == False : 
 							reqpass = 0
 							break
 					elif items[useditem]['Actions'][promptcomm]['Requirements'][sreqno]['type'] == 'attribute' :
-						id = items[useditem]['Actions'][promptcomm]['Requirements'][sreqno]['id']
-						evaluator = items[useditem]['Actions'][promptcomm]['Requirements'][sreqno]['evaluator']
 						value = items[useditem]['Actions'][promptcomm]['Requirements'][sreqno]['value']
 						check = str(character['Attributes'][id])+evaluator+str(value)			
 						if eval(check) == False : 
 							reqpass = 0
 							break
 					elif items[useditem]['Actions'][promptcomm]['Requirements'][sreqno]['type'] == 'item' :
-						evaluator = items[useditem]['Actions'][promptcomm]['Requirements'][sreqno]['evaluator']
-						id = int(items[useditem]['Actions'][promptcomm]['Requirements'][sreqno]['id'])
-						if (id in inventory) != eval(evaluator) :
+						if (int(id) in inventory) != eval(evaluator) :
 							reqpass = 0
 							break
 					elif items[useditem]['Actions'][promptcomm]['Requirements'][sreqno]['type'] == 'equip' :
-						evaluator = items[useditem]['Actions'][promptcomm]['Requirements'][sreqno]['evaluator']
-						id = int(items[useditem]['Actions'][promptcomm]['Requirements'][sreqno]['id'])
-						if (id in equipment) != eval(evaluator) :
+						if (int(id) in equipment) != eval(evaluator) :
 							reqpass = 0
 							break
 			elif useditem < 0 :
@@ -533,37 +527,25 @@ while True : #Primary game loop - all code above is only for setup and never nee
 				itemeffects = items[useditem]['Actions'][promptcomm]['Effects'].keys()
 				for effectno in itemeffects :
 					seffectno = str(effectno)
-					if (items[useditem]['Actions'][promptcomm]['Effects'][seffectno]['type'] == 'vital') or ((items[useditem]['Actions'][promptcomm]['Effects'][seffectno]['type'] == 'vitalrestore') and (items[useditem]['Actions'][promptcomm]['Effects'][seffectno]['value']) > character['Vitals']['Initial Values'][id]):
-						id = items[useditem]['Actions'][promptcomm]['Effects'][seffectno]['id']
-						if items[useditem]['Actions'][promptcomm]['Effects'][seffectno]['type'] == 'vitalrestore' :
-							operator = '+='
-							if (character['Vitals'][id] + items[useditem]['Actions'][promptcomm]['Effects'][seffectno]['value']) > character['Vitals']['Initial Values'][id] :
-								value = character['Vitals']['Initial Values'][id] - character['Vitals'][id]
-							else : 
-								value = items[useditem]['Actions'][promptcomm]['Effects'][seffectno]['value']											
-						else :
-							operator = items[useditem]['Actions'][promptcomm]['Effects'][seffectno]['operator']
-							value = items[useditem]['Actions'][promptcomm]['Effects'][seffectno]['value']
+					id = items[useditem]['Actions'][promptcomm]['Effects'][seffectno]['id']
+					if items[useditem]['Actions'][promptcomm]['Effects'][seffectno]['type'] != 'equip' : value = items[useditem]['Actions'][promptcomm]['Effects'][seffectno]['value']
+					if items[useditem]['Actions'][promptcomm]['Effects'][seffectno]['type'] == 'vital' :
+						operator = items[useditem]['Actions'][promptcomm]['Effects'][seffectno]['operator']
 						exec("character['Vitals'][id]"+operator+str(value))					
 						statchanged = 1
-						if (items[useditem]['Actions'][promptcomm]['Effects'][seffectno]['type'] == 'vitalrestore') and (character['Vitals'][id] > character['Vitals']['Initial Values'][id]) :
-							character['Vitals'][id] = character['Vitals']['Initial Values'][id]
-					elif (items[useditem]['Actions'][promptcomm]['Effects'][seffectno]['type'] == 'attribute') or ((items[useditem]['Actions'][promptcomm]['Effects'][seffectno]['type'] == 'attributerestore') and (character['Attributes'][id] < character['Attributes']['Initial Values'][id])):
-						id = items[useditem]['Actions'][promptcomm]['Effects'][seffectno]['id']
-						if items[useditem]['Actions'][promptcomm]['Effects'][seffectno]['type'] == 'attributerestore' :
-							operator = '+='
-							if (character['Attributes'][id] + items[useditem]['Actions'][promptcomm]['Effects'][seffectno]['value']) > character['Attributes']['Initial Values'][id] :
-								value = character['Attributes']['Initial Values'][id] - character['Attributes'][id]
-							else : 
-								value = items[useditem]['Actions'][promptcomm]['Effects'][seffectno]['value']											
-						else :
-							operator = items[useditem]['Actions'][promptcomm]['Effects'][seffectno]['operator']
-							value = items[useditem]['Actions'][promptcomm]['Effects'][seffectno]['value']
+					elif (items[useditem]['Actions'][promptcomm]['Effects'][seffectno]['type'] == 'vitalrestore') and (character['Vitals'][id] < character['Vitals']['Initial Values'][id]):
+						exec("character['Vitals'][id]+="+str(value))
+						if character['Vitals'][id] > character['Vitals']['Initial Values'][id] : character['Vitals'][id] = character['Vitals']['Initial Values'][id] 
+						statchanged = 1
+					elif items[useditem]['Actions'][promptcomm]['Effects'][seffectno]['type'] == 'attribute' :
+						operator = items[useditem]['Actions'][promptcomm]['Effects'][seffectno]['operator']
 						exec("character['Attributes'][id]"+operator+str(value))
 						statchanged = 1
+					elif (items[useditem]['Actions'][promptcomm]['Effects'][seffectno]['type'] == 'attributerestore') and (character['Attributes'][id] < character['Attributes']['Initial Values'][id]) :
+						exec("character['Attributes'][id]+="+str(value))
+						if character['Attributes'][id] > character['Attributes']['Initial Values'][id] : character['Attributes'][id] = character['Attributes']['Initial Values'][id] 
+						statchanged = 1
 					elif items[useditem]['Actions'][promptcomm]['Effects'][seffectno]['type'] == 'additem' :
-						id = items[useditem]['Actions'][promptcomm]['Effects'][seffectno]['id']
-						value = items[useditem]['Actions'][promptcomm]['Effects'][seffectno]['value']
 						for _ in repeat(None, value) :
 							inventory.append(int(id))
 						invchanged = 1
