@@ -288,6 +288,7 @@ while True : #Primary game loop - all code above is only for setup and never nee
 	scenestateb = scene
 	while scenechanged == 0 : #The second stage loop. This is only left, and the code above run when the scene or scene state changes
 		prompt = raw_input(">") #The main prompt!
+		#clr()
 		prompt = prompt.lower() #Make input all lower case
 		splitprompt = prompt.split(' ',1)
 		promptcomm = splitprompt[0]
@@ -399,7 +400,7 @@ while True : #Primary game loop - all code above is only for setup and never nee
 		elif (prompt == 'equipment') or (prompt == "e") or (((promptcomm == "unequip") or (promptcomm == "unwield")) and  (promptval != 0)) : 
 			if prompt.startswith("unequip ") :
 				printequips = 0
-				eqtoremove = prompt[8:] #Strips 'use ' to give item code
+				eqtoremove = prompt[8:] #Strips 'unequip ' to give item code
 			else :
 				printequips = 1
 			if (equiplistgen != 1) : #Checks to see if list of equipment is already generated (i.e. command has been run before) in which case it simply prints it
@@ -453,7 +454,8 @@ while True : #Primary game loop - all code above is only for setup and never nee
 				if promptcomm in items[str(element)]['Actions'].keys() :
 					tempinventory.append(element)
 			if len(tempinventory) == 0 :
-				print "No items you possess can be used in that way" #Will soft-code
+				#clr()
+				print "No items you possess can be used in that way\n" #Will soft-code
 				useditem = 0
 			else :
 				potentialitems = []
@@ -461,131 +463,133 @@ while True : #Primary game loop - all code above is only for setup and never nee
 					if (promptval == items[str(element)]['description']) or (promptval in items[str(element)]['altdescs']) :
 						potentialitems.append(element)
 				if len(potentialitems) == 0 :
-					print "No items you possess that match that description can be used in that way" #Will soft-code
+					#clr()
+					print "No items you possess that match that description can be used in that way\n" #Will soft-code
 					useditem = 0
 				elif len(potentialitems) == 1 :
 					useditem = potentialitems[0]
 				else :
-					print "Which %s do you mean?" %(promptval)
 					print "Which %s do you want to %s?" %(promptval, promptcomm)
 					potentialitemdescs = []
 					for element in potentialitems :
 						potentialitemdescs.append(items[str(element)]['description'])
 					print '\n'.join(potentialitemdescs)
 					prompt = raw_input(">")
-					prompt = prompt.lower()
-					if prompt.isdigit :
+					if prompt.isdigit() :
 						if int(prompt) <= len(potentialitems) :
 							useditem = potentialitems[int(prompt)-1]
 						else :
+							#clr()
+							print "You only possess %s %s that can be %s\n" %(len(potentialitems), promptval, promptcomm)
 							useditem = 0
 					else :
-						useditem = 0
+						useditem = -1
 						for element in potentialitems :
-							if (prompt == items[str(element)]['description'].lower) :
-								useditem = element			
-			if useditem != 0 :
-				reqtotal = items[useditem]['Requirements']['total']
-				reqno = 0
+							if (prompt.lower() == items[str(element)]['description'].lower()) :
+								useditem = element
+			reqpass = -1
+			if useditem > 0 :
+				useditem = str(useditem)
+				itemreqs = items[useditem]['Actions'][promptcomm]['Requirements'].keys()
 				reqpass = 1
-				while reqno != reqtotal : #Checking requirements of the used item
-					reqno += 1
+				for reqno in itemreqs :
 					sreqno = str(reqno)
-					if items[useditem]['Requirements'][sreqno]['type'] == 'vital' :
-						id = items[useditem]['Requirements'][sreqno]['id']
-						evaluator = items[useditem]['Requirements'][sreqno]['evaluator']
-						value = items[useditem]['Requirements'][sreqno]['value']
+					if items[useditem]['Actions'][promptcomm]['Requirements'][sreqno]['type'] == 'vital' :
+						id = items[useditem]['Actions'][promptcomm]['Requirements'][sreqno]['id']
+						evaluator = items[useditem]['Actions'][promptcomm]['Requirements'][sreqno]['evaluator']
+						value = items[useditem]['Actions'][promptcomm]['Requirements'][sreqno]['value']
 						check = str(character['Vitals'][id])+evaluator+str(value)			
 						if eval(check) == False : 
 							reqpass = 0
-							reqno = reqtotal
-					elif items[useditem]['Requirements'][sreqno]['type'] == 'attribute' :
-						id = items[useditem]['Requirements'][sreqno]['id']
-						evaluator = items[useditem]['Requirements'][sreqno]['evaluator']
-						value = items[useditem]['Requirements'][sreqno]['value']
+							break
+					elif items[useditem]['Actions'][promptcomm]['Requirements'][sreqno]['type'] == 'attribute' :
+						id = items[useditem]['Actions'][promptcomm]['Requirements'][sreqno]['id']
+						evaluator = items[useditem]['Actions'][promptcomm]['Requirements'][sreqno]['evaluator']
+						value = items[useditem]['Actions'][promptcomm]['Requirements'][sreqno]['value']
 						check = str(character['Attributes'][id])+evaluator+str(value)			
 						if eval(check) == False : 
 							reqpass = 0
-							reqno = reqtotal
-					elif items[useditem]['Requirements'][sreqno]['type'] == 'item' :
-						evaluator = items[useditem]['Requirements'][sreqno]['evaluator']
-						id = int(items[useditem]['Requirements'][sreqno]['id'])
+							break
+					elif items[useditem]['Actions'][promptcomm]['Requirements'][sreqno]['type'] == 'item' :
+						evaluator = items[useditem]['Actions'][promptcomm]['Requirements'][sreqno]['evaluator']
+						id = int(items[useditem]['Actions'][promptcomm]['Requirements'][sreqno]['id'])
 						if (id in inventory) != eval(evaluator) :
 							reqpass = 0
-							reqno = reqtotal
-					elif items[useditem]['Requirements'][sreqno]['type'] == 'equip' :
-						evaluator = items[useditem]['Requirements'][sreqno]['evaluator']
-						id = int(items[useditem]['Requirements'][sreqno]['id'])
+							break
+					elif items[useditem]['Actions'][promptcomm]['Requirements'][sreqno]['type'] == 'equip' :
+						evaluator = items[useditem]['Actions'][promptcomm]['Requirements'][sreqno]['evaluator']
+						id = int(items[useditem]['Actions'][promptcomm]['Requirements'][sreqno]['id'])
 						if (id in equipment) != eval(evaluator) :
 							reqpass = 0
-							reqno = reqtotal
-				if reqpass == 1 :
-					print items[useditem]['usetext']
-					if items[useditem]['singleuse'] == 1 :
-						inventory.remove(int(useditem))
+							break
+			elif useditem < 0 :
+				#clr()
+				print "None of the listed items match that exact description"
+			if reqpass == 1 :
+				print items[useditem]['Actions'][promptcomm]['Details']['text']
+				if items[useditem]['Actions'][promptcomm]['Details']['singleuse'] == 1 :
+					inventory.remove(int(useditem))
+					invchanged = 1
+				itemeffects = items[useditem]['Actions'][promptcomm]['Effects'].keys()
+				for effectno in itemeffects :
+					seffectno = str(effectno)
+					if (items[useditem]['Actions'][promptcomm]['Effects'][seffectno]['type'] == 'vital') or ((items[useditem]['Actions'][promptcomm]['Effects'][seffectno]['type'] == 'vitalrestore') and (items[useditem]['Actions'][promptcomm]['Effects'][seffectno]['value']) > character['Vitals']['Initial Values'][id]):
+						id = items[useditem]['Actions'][promptcomm]['Effects'][seffectno]['id']
+						if items[useditem]['Actions'][promptcomm]['Effects'][seffectno]['type'] == 'vitalrestore' :
+							operator = '+='
+							if (character['Vitals'][id] + items[useditem]['Actions'][promptcomm]['Effects'][seffectno]['value']) > character['Vitals']['Initial Values'][id] :
+								value = character['Vitals']['Initial Values'][id] - character['Vitals'][id]
+							else : 
+								value = items[useditem]['Actions'][promptcomm]['Effects'][seffectno]['value']											
+						else :
+							operator = items[useditem]['Actions'][promptcomm]['Effects'][seffectno]['operator']
+							value = items[useditem]['Actions'][promptcomm]['Effects'][seffectno]['value']
+						exec("character['Vitals'][id]"+operator+str(value))					
+						statchanged = 1
+						if (items[useditem]['Actions'][promptcomm]['Effects'][seffectno]['type'] == 'vitalrestore') and (character['Vitals'][id] > character['Vitals']['Initial Values'][id]) :
+							character['Vitals'][id] = character['Vitals']['Initial Values'][id]
+					elif (items[useditem]['Actions'][promptcomm]['Effects'][seffectno]['type'] == 'attribute') or ((items[useditem]['Actions'][promptcomm]['Effects'][seffectno]['type'] == 'attributerestore') and (character['Attributes'][id] < character['Attributes']['Initial Values'][id])):
+						id = items[useditem]['Actions'][promptcomm]['Effects'][seffectno]['id']
+						if items[useditem]['Actions'][promptcomm]['Effects'][seffectno]['type'] == 'attributerestore' :
+							operator = '+='
+							if (character['Attributes'][id] + items[useditem]['Actions'][promptcomm]['Effects'][seffectno]['value']) > character['Attributes']['Initial Values'][id] :
+								value = character['Attributes']['Initial Values'][id] - character['Attributes'][id]
+							else : 
+								value = items[useditem]['Actions'][promptcomm]['Effects'][seffectno]['value']											
+						else :
+							operator = items[useditem]['Actions'][promptcomm]['Effects'][seffectno]['operator']
+							value = items[useditem]['Actions'][promptcomm]['Effects'][seffectno]['value']
+						exec("character['Attributes'][id]"+operator+str(value))
+						statchanged = 1
+					elif items[useditem]['Actions'][promptcomm]['Effects'][seffectno]['type'] == 'additem' :
+						id = items[useditem]['Actions'][promptcomm]['Effects'][seffectno]['id']
+						value = items[useditem]['Actions'][promptcomm]['Effects'][seffectno]['value']
+						for _ in repeat(None, value) :
+							inventory.append(int(id))
 						invchanged = 1
-					effecttotal = items[useditem]['Effects']['total']
-					effectno = 0
-					while effectno != effecttotal :
-						effectno += 1
-						seffectno = str(effectno)
-						if (items[useditem]['Effects'][seffectno]['type'] == 'vital') or ((items[useditem]['Effects'][seffectno]['type'] == 'vitalrestore') and (items[useditem]['Effects'][seffectno]['value']) > character['Vitals']['Initial Values'][id]):
-							id = items[useditem]['Effects'][seffectno]['id']
-							if items[useditem]['Effects'][seffectno]['type'] == 'vitalrestore' :
-								operator = '+='
-								if (character['Vitals'][id] + items[useditem]['Effects'][seffectno]['value']) > character['Vitals']['Initial Values'][id] :
-									value = character['Vitals']['Initial Values'][id] - character['Vitals'][id]
-								else : 
-									value = items[useditem]['Effects'][seffectno]['value']											
-							else :
-								operator = items[useditem]['Effects'][seffectno]['operator']
-								value = items[useditem]['Effects'][seffectno]['value']
-							exec("character['Vitals'][id]"+operator+str(value))					
-							statchanged = 1
-							if (items[useditem]['Effects'][seffectno]['type'] == 'vitalrestore') and (character['Vitals'][id] > character['Vitals']['Initial Values'][id]) :
-								character['Vitals'][id] = character['Vitals']['Initial Values'][id]
-						elif (items[useditem]['Effects'][seffectno]['type'] == 'attribute') or ((items[useditem]['Effects'][seffectno]['type'] == 'attributerestore') and (character['Attributes'][id] < character['Attributes']['Initial Values'][id])):
-							id = items[useditem]['Effects'][seffectno]['id']
-							if items[useditem]['Effects'][seffectno]['type'] == 'attributerestore' :
-								operator = '+='
-								if (character['Attributes'][id] + items[useditem]['Effects'][seffectno]['value']) > character['Attributes']['Initial Values'][id] :
-									value = character['Attributes']['Initial Values'][id] - character['Attributes'][id]
-								else : 
-									value = items[useditem]['Effects'][seffectno]['value']											
-							else :
-								operator = items[useditem]['Effects'][seffectno]['operator']
-								value = items[useditem]['Effects'][seffectno]['value']
-							exec("character['Attributes'][id]"+operator+str(value))
-							statchanged = 1
-						elif items[useditem]['Effects'][seffectno]['type'] == 'additem' :
-							id = items[useditem]['Effects'][seffectno]['id']
-							value = items[useditem]['Effects'][seffectno]['value']
-							for _ in repeat(None, value) :
-								inventory.append(int(id))
-							invchanged = 1
-						elif items[useditem]['Effects'][seffectno]['type'] == 'equip' :
-							id = items[useditem]['Effects'][seffectno]['id']
-							slotsused = equips[id]['equipslots']
-							charequips = character['Items']['Equipment']
-							replaceditems = []
-							for slotx in slotsused :
-								if str(slotx) in equipslots : #If there is already a piece of equipment occupying the slot
-									replacedequip = charequips[str(slotx)]
-									if (equips[replacedequip]['equipslots'] != equips[id]['equipslots']) and (equips[replacedequip]['equipslots'] != [slotx]) :
-										for clearslot in equips[replacedequip]['equipslots'] :
-											clearslot = str(clearslot)
-											if clearslot != slotx :
-												del character['Items']['Equipment'][clearslot]
-												equipslots = character['Items']['Equipment'].keys()
-									replaceditem = str(equips[replacedequip]['item'])
-									if replaceditem not in replaceditems :
-										inventory.append(int(replaceditem))
-										replaceditems.append(replaceditem)
-								charequips[str(slotx)] = id
-							invchanged = 1
-							equipchanged = 1
-				elif reqpass == 0 :
-					print items[useditem]['Requirements'][sreqno]['failtext']
+					elif items[useditem]['Actions'][promptcomm]['Effects'][seffectno]['type'] == 'equip' :
+						id = items[useditem]['Actions'][promptcomm]['Effects'][seffectno]['id']
+						slotsused = equips[id]['equipslots']
+						charequips = character['Items']['Equipment']
+						replaceditems = []
+						for slotx in slotsused :
+							if str(slotx) in equipslots : #If there is already a piece of equipment occupying the slot
+								replacedequip = charequips[str(slotx)]
+								if (equips[replacedequip]['equipslots'] != equips[id]['equipslots']) and (equips[replacedequip]['equipslots'] != [slotx]) :
+									for clearslot in equips[replacedequip]['equipslots'] :
+										clearslot = str(clearslot)
+										if clearslot != slotx :
+											del character['Items']['Equipment'][clearslot]
+											equipslots = character['Items']['Equipment'].keys()
+								replaceditem = str(equips[replacedequip]['item'])
+								if replaceditem not in replaceditems :
+									inventory.append(int(replaceditem))
+									replaceditems.append(replaceditem)
+							charequips[str(slotx)] = id
+						invchanged = 1
+						equipchanged = 1
+			elif reqpass == 0 :
+				print items[useditem]['Actions'][promptcomm]['Requirements'][sreqno]['failtext']
 		elif (prompt == "help") or (prompt == "h") or (prompt == "man") :
 			print "\nCommand List"
 			print "'choices': review availible options"
