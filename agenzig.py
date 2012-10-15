@@ -139,6 +139,7 @@ while charchosen == 0 :
 			opt = opt+1
 		print "\n%s) New Character\n" %(opt)
 		choice = raw_input("Please type a number corresponding to the above option you require >" )
+		clr()
 	else :
 		print "No characters found"
 		print "Initiating character creation"
@@ -147,7 +148,6 @@ while charchosen == 0 :
 		sel = int(choice)
 		if sel == opt :
 			from agccreator import createchar
-			clr()
 			createchar(advfolder)
 		else:
 			if sel < opt :
@@ -160,7 +160,7 @@ while charchosen == 0 :
 			else:
 				print "Value given is not within option range\n"
 	else:
-		print "Input must be a number"
+		print "Input must be a number\n"
 #Setting main and character varibles for easy access
 scene = str(character['Basics']['scene'])
 title = main['Details']['title']
