@@ -440,6 +440,34 @@ while True : #Primary game loop - all code above is only for setup and never nee
 				invlistgen = 1
 				print '\n'.join(inventorylist)
 		elif (promptcomm in main['Details']['usewords']) and  (promptval != 0) :
+			tempinventory = list(inventory)
+			if (promptcomm != 'equip') and (promptcomm != 'wield') :
+				for aequip in equipment :
+					print equips[aequip]['item']
+					tempinventory.append(equips[aequip]['item'])
+			temp2inventory = []
+			for element in tempinventory :
+				if element not in temp2inventory :
+					temp2inventory.append(element)
+			tempinventory = []
+			for element in temp2inventory :
+				if promptcomm in items[element]['Actions'].getkeys :
+					tempinventory.append(element)
+			if len(tempinventory) == 0 :
+				print "No items you possess can be used in that way" #Will soft-code
+			else :
+				potentialitems = []
+				for element in tempinventory :
+					if (promptval == items[element]['description']) or (promptval in items[element]['altdescs']) :
+						potentialitems.append(element)
+				if len(potentialitems) == 0 :
+					print "No items you possess match that description"
+				elif len(potentialitems) == 1 :
+					useditem = potentialitems[0]
+				else :
+					print "Which %s do you mean?" %(promptval)
+			
+			
 			if usecode <= opt :
 				useditem = str(tempinventory[usecode-1])
 				reqtotal = items[useditem]['Requirements']['total']
