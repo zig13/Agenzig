@@ -421,7 +421,7 @@ while True : #Primary game loop - all code above is only for setup and never nee
 				print equipmentlist
 			elif printinv == 0 :
 				pass
-		elif (prompt == "inventory") or (prompt == "i") : #Inventory list must be generated for items to be used/equipped so commands are combined
+		elif (prompt == "inventory") or (prompt == "i") : #This command simply prints the character's inventory in lsit form
 			if invlistgen != 1 :
 				printeditems = []
 				if len(inventory) == 0 :
@@ -429,13 +429,13 @@ while True : #Primary game loop - all code above is only for setup and never nee
 				else :
 					inventorylist = ['You are carrying:']
 					for aitem in inventory :
-						if printeditems.count(aitem) == 0 :
+						if printeditems.count(aitem) == 0 : #Ignores items that have already been processed
 							aitemocc = inventory.count(aitem)
 							aitemdesc = items[str(aitem)]['description']
-							if aitemocc == 1 :
-								inventorylist.append(aitemdesc)
+							if aitemocc > 1 : #If there are multiple copies of the same item
+								inventorylist.append(aitemdesc+" x "+str(aitemocc)) #Puts 'x #' next to the item where '#' is the number of copies
 							else :
-								inventorylist.append(aitemdesc+" x "+str(aitemocc))
+								inventorylist.append(aitemdesc)
 							printeditems.append(aitem)
 				invlistgen = 1
 				print '\n'.join(inventorylist)
