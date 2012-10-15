@@ -6,7 +6,7 @@ website = 'http:\\zig13.termisoc.org'
 currencyonename = 'gold coins'
 currencytwoname = 'silver coins'
 currencythreename = 'copper coins'
-usewords = ['use ','equip ','drink ','examine ','drop ','wield ']
+usewords = ['use','equip','drink','examine','drop','wield']
 
 [Currencies]
 	[[1]]
