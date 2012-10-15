@@ -437,7 +437,6 @@ while True : #Primary game loop - all code above is only for setup and never nee
 					for aitem in inventory :
 						if printeditems.count(aitem) == 0 :
 							aitemocc = inventory.count(aitem)
-							"aitemocc", aitemocc
 							aitemdesc = items[str(aitem)]['description']
 							if aitemocc == 1 :
 								inventorylist.append(aitemdesc)
