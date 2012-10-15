@@ -129,7 +129,7 @@ altdescs = ['potion']
 		[[[[Effects]]]]
 [7]
 description = 'Inventory Reset'
-aldescs = ['reset', 'invreset']
+altdescs = ['reset', 'invreset']
 [[Actions]]
 	[[[use]]]
 		[[[[Details]]]]
@@ -151,7 +151,7 @@ aldescs = ['reset', 'invreset']
 				value = 1
 [8]
 description = 'A stone'
-aldescs = ['stone']
+altdescs = ['stone']
 [[Actions]]
 	[[[use]]]
 		[[[[Details]]]]
