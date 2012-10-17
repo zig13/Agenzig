@@ -1,5 +1,6 @@
 [1]
-name = 'Hunting Leathers'
+description = 'Hunting Leathers'
+altdescs = ['leathers']
 equipslots = [1,2,3,4] # Chest, trousers and both arms (long-sleeved)
 slotuse = 'all'
 removetext = "You shake off the leathers and stuff them into your bag"
@@ -23,7 +24,8 @@ item = 3
 		id = 7
 		value = 1
 [2]
-name = 'Steel Dagger'
+description = 'Steel Dagger'
+altdescs = ['dagger']
 equipslots = [10]
 slotuse = 'all'
 removetext = "You remove the dagger from your belt"
@@ -37,7 +39,8 @@ item = 1
 		type = 'cability'
 		id = '2'
 [3]
-name = 'Sling'
+description = 'Sling'
+altdescs = []
 equipslots = [11]
 slotuse = 'all'
 removetext = "You put the sling in your bag"
@@ -51,7 +54,8 @@ item = 4
 		type = 'cability'
 		id = '4'
 [4]
-name = 'Iron Sword'
+description = 'Iron Sword'
+altdescs = ['sword']
 equipslots = [10]
 slotuse = 'all'
 removetext = "You remove the sword from the scabard on your belt"
@@ -65,7 +69,8 @@ item = 2
 		type = 'cability'
 		id = '6'
 [5]
-name = 'Studded Leather'
+description = 'Studded Leather'
+altdescs = ['studded','armour']
 equipslots = [1,2] # Chest and trousers slots (sleeveless)
 slotuse = 'all'
 removetext = "You untie the straps on the armour and put it in your bag"
@@ -89,7 +94,8 @@ item = 9
 		id = 7
 		value = 1
 [6]
-name = 'Steel Sword'
+description = 'Steel Sword'
+altdescs = ['sword']
 equipslots = [10]
 slotuse = 'all'
 removetext = "You remove the sword from the scabard on your belt"
