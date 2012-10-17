@@ -2,6 +2,7 @@
 name = 'Hunting Leathers'
 equipslots = [1,2,3,4] # Chest, trousers and both arms (long-sleeved)
 slotuse = 'all'
+removetext = "You shake off the leathers and stuff them into your bag"
 item = 3
 	[[Effects]]
 	total = 4
@@ -25,6 +26,7 @@ item = 3
 name = 'Steel Dagger'
 equipslots = [10]
 slotuse = 'all'
+removetext = "You remove the dagger from your belt"
 item = 1
 	[[Effects]]
 	total = 2
@@ -38,6 +40,7 @@ item = 1
 name = 'Sling'
 equipslots = [11]
 slotuse = 'all'
+removetext = "You put the sling in your bag"
 item = 4
 	[[Effects]]
 	total = 2
@@ -51,6 +54,7 @@ item = 4
 name = 'Iron Sword'
 equipslots = [10]
 slotuse = 'all'
+removetext = "You remove the sword from the scabard on your belt"
 item = 2
 	[[Effects]]
 	total = 2
@@ -64,6 +68,7 @@ item = 2
 name = 'Studded Leather'
 equipslots = [1,2] # Chest and trousers slots (sleeveless)
 slotuse = 'all'
+removetext = "You untie the straps on the armour and put it in your bag"
 item = 9
 	[[Effects]]
 	total = 4
@@ -87,6 +92,7 @@ item = 9
 name = 'Steel Sword'
 equipslots = [10]
 slotuse = 'all'
+removetext = "You remove the sword from the scabard on your belt"
 item = 10
 	[[Effects]]
 	total = 2
