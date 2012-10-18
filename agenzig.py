@@ -275,15 +275,15 @@ while True : #Primary game loop - all code above is only for setup and never nee
 			choicecodes.remove(choicecode)
 	choicesleft = len(choicecodes)
 	opt = 0
-	scenechoices = ""
+	scenechoices = []
 	while choicesleft != 0 :
 		opt = opt+1
 		schoicecode = str(choicecodes.pop())
 		choicesleft = len(choicecodes)
 		achoicedesc = choices[schoicecode]['description']
-		achoice = str(opt)+") "+achoicedesc+"\n"
-		scenechoices = scenechoices+achoice
-	print "\n"+scenechoices
+		achoice = str(opt)+") "+achoicedesc
+		scenechoices.append(achoice)
+	print '\n'.join(scenechoices)
 	sceneb = scene
 	scenestateb = scene
 	while scenechanged == 0 : #The second stage loop. This is only left, and the code above run when the scene or scene state changes
@@ -295,11 +295,11 @@ while True : #Primary game loop - all code above is only for setup and never nee
 		if len(splitprompt) > 1 :
 			promptval = splitprompt[1]
 		else :
-			promptval = 0
+			promptval = '-'
 		if prompt == "" :
 			pass #If user presses enter without typing anything, do nothing
 		elif ((prompt == "choices") or (prompt == "c")) and (choices != 0) :
-			print "\n"+scenechoices #Re-print scene choices
+			print '\n'.join(scenechoices) #Re-print scene choices
 		elif ((prompt == 'status') or (prompt == "s")) and (vitals != 0) and (attributes != 0):
 			if (statusgen != 1) :
 				statuslist = "You are:\n"
@@ -397,31 +397,74 @@ while True : #Primary game loop - all code above is only for setup and never nee
 				statusgen = 1
 				statchanged = 0
 			print statuslist
-		elif (prompt == 'equipment') or (prompt == "e") or (((promptcomm == "unequip") or (promptcomm == "unwield")) and  (promptval != 0)) : 
-			if prompt.startswith("unequip ") :
-				printequips = 0
-				eqtoremove = prompt[8:] #Strips 'unequip ' to give item code
-			else :
-				printequips = 1
+		elif (prompt == 'equipment') or (prompt == "e") :
 			if (equiplistgen != 1) : #Checks to see if list of equipment is already generated (i.e. command has been run before) in which case it simply prints it
 				tempequipment = []
-				for element in equipment :
-					if element not in tempequipment : #Removes duplicates as following code assumes no duplicates
-						tempequipment.append(element)
+				for aequip in equipment :
+					if aequip not in tempequipment : #Removes duplicates as following code assumes no duplicates
+						tempequipment.append(aequip)
 				equiptotal = len(tempequipment)
 				if equiptotal == 0 :
-					equipmentlist = "You have nothing equipped"
+					equipmentlist = ["You have nothing equipped"]
 				else :
-					equiprem = len(tempequipment)
-					equipmentlist = "You have equipped:\n"
+					equipmentlist = ["You have equipped:"]
 					for aequipno in tempequipment :
-						aequipdesc = equips[str(aequipno)]['name']
-						equipmentlist = equipmentlist+aequipdesc+"\n"
+						aequipdesc = equips[str(aequipno)]['description']
+						equipmentlist.append(aequipdesc)
 					equiplistgen = 1
-			if printequips == 1 :
-				print equipmentlist
-			elif printinv == 0 :
-				pass
+			print '\n'.join(equipmentlist)
+		elif  promptcomm in main['Commands']['Items']['removing'].keys() and promptval.isalpha() :
+			if len(equipment) > 0 :
+				tempequipment = list(set(equipment))
+				temp2equipment = []
+				for aequip in tempequipment :
+					if promptcomm in equips[aequip]['removewords'] :
+						temp2equipment.append(aequip)
+				if len(temp2equipment) > 0 :
+					potentialequips = []
+					for aequip in temp2equipment :
+						if (promptval == equips[aequip]['description'].lower()) or (promptval in equips[aequip]['altdescs']) :
+							potentialequips.append(aequip)
+					if len(potentialequips) > 0 :
+						if len(potentialequips) == 1 :						
+							equiptoremove = potentialequips[0]
+						else :
+							print "Which %s do you want to %s?" %(promptval, promptcomm)
+							potentialequipdescs = []
+							for aequip in potentialequips :
+								potentialequipdescs.append(equips[aequip]['description'])
+							print '\n'.join(potentialequipdescs)
+							prompt = raw_input(">")
+							if prompt.isdigit() :
+								if int(prompt) <= len(potentialequips) :
+									equiptoremove = potentialequips[int(prompt)-1]
+								else :
+									equiptoremove = 0
+							elif prompt.isalpha and prompt != 'help':
+								equiptoremove = 0
+								for aequip in potentialequips :
+									if (prompt.lower() == items[str(aequip)]['description'].lower()) :
+										equiptoremove = aequip
+							else :
+								equiptoremove = 0
+						if equiptoremove > 0 :
+							itemtoadd = equips[equiptoremove]['item']								
+							clearslots = equips[equiptoremove]['equipslots']
+							for clearslot in clearslots :
+								del character['Items']['Equipment'][str(clearslot)]
+							inventory.append(itemtoadd)
+							print equips[equiptoremove]['removetext']
+							invchanged = 1
+							equipchanged = 1
+						else :
+							#clr()
+							print "Enter either a number coresponding to the position of a item on the list or the complete description of a listed item"
+					else :
+						print main['Commands']['Items']['removing'][promptcomm]['fail_b']
+				else :
+					print main['Commands']['Items']['removing'][promptcomm]['fail_a']
+			else :
+				print main['Commands']['Items']['removing'][promptcomm]['fail_a']
 		elif (prompt == "inventory") or (prompt == "i") : #This command simply prints the character's inventory in lsit form
 			if invlistgen != 1 :
 				printeditems = []
@@ -440,9 +483,9 @@ while True : #Primary game loop - all code above is only for setup and never nee
 							printeditems.append(aitem)
 				invlistgen = 1
 				print '\n'.join(inventorylist)
-		elif (promptcomm in main['Details']['usewords']) and  (promptval != 0) :
+		elif (promptcomm in main['Commands']['Items']['using'].keys() or main['Commands']['Items']['equipping'].keys()) and promptval.isalpha() :
 			tempinventory = list(inventory)
-			if (promptcomm != 'equip') and (promptcomm != 'wield') :
+			if promptcomm not in promptcomm in main['Commands']['Items']['equipping'].keys() :
 				for aequip in equipment :
 					tempinventory.append(equips[aequip]['item'])
 			temp2inventory = []
@@ -460,7 +503,7 @@ while True : #Primary game loop - all code above is only for setup and never nee
 			else :
 				potentialitems = []
 				for element in tempinventory :
-					if (promptval == items[str(element)]['description']) or (promptval in items[str(element)]['altdescs']) :
+					if (promptval == items[str(element)]['description'].lower()) or (promptval in items[str(element)]['altdescs']) :
 						potentialitems.append(element)
 				if len(potentialitems) == 0 :
 					#clr()
@@ -591,10 +634,13 @@ while True : #Primary game loop - all code above is only for setup and never nee
 			confirm = raw_input(">")				
 			if (confirm == "yes") or (confirm == "y") or (confirm == "sure") or (confirm == "please") :
 				exit(0)
-		elif promptcomm in main['Details']['usewords'] :
-			print "'%s' must be followed by all or part of the description of an item" %(promptcomm)
+		elif promptcomm in main['Commands']['Items']['using'].keys() or promptcomm in promptcomm in main['Commands']['Items']['equipping'].keys():
+			if promptval.isdigit() :
+				print "'%s' should be followed by all or part of the description of an item - not a number" %(promptcomm)
+			else :
+				print "'%s' should be followed by all or part of the description of an item" %(promptcomm)
 		else :
-			print "Try using an ACTUAL command moron"  #Might change this before release...
+			print main['Messages']['unknowncommand']
 		if (scene != sceneb) or (scenestate != scenestateb) or (invchanged == 1) or (statchanged == 1) or (equipchanged == 1):
 			character.write()
 			if (scene != sceneb) or (scenestate != scenestateb) :
