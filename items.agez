@@ -44,7 +44,7 @@ altdescs = ['sword']
 description = 'Hunting Leathers'
 altdescs = ['leathers']
 [[Actions]]
-	[[[equip]]]
+	[[[wear]]]
 		[[[[Details]]]]
 			text = "You put on the hunting leathers"
 			singleuse = 1
@@ -163,7 +163,7 @@ altdescs = ['stone']
 description = 'Studded Leather'
 altdescs = ['studded','armour']
 [[Actions]]
-	[[[equip]]]
+	[[[wear]]]
 		[[[[Details]]]]
 			text = "You put on the armour"
 			singleuse = 1
