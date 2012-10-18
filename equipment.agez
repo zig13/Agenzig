@@ -3,6 +3,7 @@ description = 'Hunting Leathers'
 altdescs = ['leathers']
 equipslots = [1,2,3,4] # Chest, trousers and both arms (long-sleeved)
 slotuse = 'all'
+removewords = ['remove']
 removetext = "You shake off the leathers and stuff them into your bag"
 item = 3
 	[[Effects]]
@@ -28,6 +29,7 @@ description = 'Steel Dagger'
 altdescs = ['dagger']
 equipslots = [10]
 slotuse = 'all'
+removewords = ['unwield']
 removetext = "You remove the dagger from your belt"
 item = 1
 	[[Effects]]
@@ -43,6 +45,7 @@ description = 'Sling'
 altdescs = []
 equipslots = [11]
 slotuse = 'all'
+removewords = ['unwield']
 removetext = "You put the sling in your bag"
 item = 4
 	[[Effects]]
@@ -58,6 +61,7 @@ description = 'Iron Sword'
 altdescs = ['sword']
 equipslots = [10]
 slotuse = 'all'
+removewords = ['unwield']
 removetext = "You remove the sword from the scabard on your belt"
 item = 2
 	[[Effects]]
@@ -73,6 +77,7 @@ description = 'Studded Leather'
 altdescs = ['studded','armour']
 equipslots = [1,2] # Chest and trousers slots (sleeveless)
 slotuse = 'all'
+removewords = ['remove']
 removetext = "You untie the straps on the armour and put it in your bag"
 item = 9
 	[[Effects]]
@@ -98,6 +103,7 @@ description = 'Steel Sword'
 altdescs = ['sword']
 equipslots = [10]
 slotuse = 'all'
+removewords = ['unwield']
 removetext = "You remove the sword from the scabard on your belt"
 item = 10
 	[[Effects]]
