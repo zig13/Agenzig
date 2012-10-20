@@ -413,7 +413,7 @@ while True : #Primary game loop - all code above is only for setup and never nee
 						equipmentlist.append(aequipdesc)
 					equiplistgen = 1
 			print '\n'.join(equipmentlist)
-		elif  promptcomm in main['Commands']['Items']['removing'].keys() and promptval.isalpha() :
+		elif  promptcomm in main['Commands']['Items']['removing'].keys() and promptval.replace(' ', '').isalpha() :
 			if len(equipment) > 0 :
 				tempequipment = list(set(equipment))
 				temp2equipment = []
@@ -483,7 +483,7 @@ while True : #Primary game loop - all code above is only for setup and never nee
 							printeditems.append(aitem)
 				invlistgen = 1
 				print '\n'.join(inventorylist)
-		elif (promptcomm in main['Commands']['Items']['using'].keys() or main['Commands']['Items']['equipping'].keys()) and promptval.isalpha() :
+		elif (promptcomm in main['Commands']['Items']['using'].keys() or main['Commands']['Items']['equipping'].keys()) and promptval.replace(' ', '').isalpha() :
 			tempinventory = list(inventory)
 			if promptcomm not in promptcomm in main['Commands']['Items']['equipping'].keys() :
 				for aequip in equipment :
