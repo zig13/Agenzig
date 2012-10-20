@@ -6,6 +6,46 @@ website = 'http:\\zig13.termisoc.org'
 currencyonename = 'gold coins'
 currencytwoname = 'silver coins'
 currencythreename = 'copper coins'
+[Commands]
+	[[Items]]
+		viewinventory = ['i', 'inventory']
+		viewequipment = ['e', 'equipment']
+		[[[using]]]
+			[[[[use]]]]
+				fail_a = "No items you possess can be used"
+				fail_b = "No items that match that description can be used"
+			[[[[drink]]]]
+				fail_a = "No posess no potable objects"
+				fail_b = "No items matching that description can be drinked"
+			[[[[examine]]]]
+				fail_a = "No items you possess can be examined"
+				fail_b = "No items that match that description can be examined"
+			[[[[drop]]]]
+				fail_a = "No items you possess can be dropped"
+				fail_b = "No items that match that description can be dropped"
+		[[[equipping]]]
+			[[[[equip]]]]
+				fail_a = "You are not carrying any loose equipment"
+				fail_b = "No are not carrying any equipment of that description"
+			[[[[wield]]]]
+				fail_a = "You are not carrying any loose weapons"
+				fail_b = "No are not carrying any weapons of that description"
+			[[[[wear]]]]
+				fail_a = "You are not carrying any loose clothing"
+				fail_b = "No are not carrying any clothing of that description"
+		[[[removing]]]
+			[[[[unequip]]]]
+				fail_a = "You have nothing to unequip"
+				fail_b = "No have nothing equipped of that description"
+			[[[[unwield]]]]
+				fail_a = "You are not wielding any weapons"
+				fail_b = "No are not carrying any weapons of that description"
+			[[[[remove]]]]
+				fail_a = "You are not wearing anything that you would be happy to remove"
+				fail_b = "You are not wearing anything that fits that description"
+		
+[Messages]
+unknowncommand = "Try using an ACTUAL command moron"
 
 [Currencies]
 	[[1]]
@@ -60,7 +100,7 @@ technique = 1
 		minval = 15
 		maxval = 25
 	[[Inventory]]
-	val = [2,5,7,8,8, 9]
+	val = [2,5,7,8,8,9,10]
 	[[Equipment]]
 		[[[1]]]
 		id = '1'

@@ -1,161 +1,209 @@
 [1]
 description = 'Steel Dagger'
-usetext = "You install the dagger in a scabard on your belt ready for use"
-singleuse = 1
-	[[Requirements]]
-	total = 1
-		[[[1]]]
-		type = 'equip'
-		id = '2'
-		evaluator = 'False'
-		failtext = "You are already using a remarkably similar dagger"
-	[[Effects]]
-	total = 1
-		[[[1]]]
-		type = 'equip'
-		id = '2'
+altdescs = ['dagger']
+[[Actions]]
+	[[[wield]]]
+		[[[[Details]]]]
+			text = "You install the dagger in a scabard on your belt ready for use"
+			singleuse = 1
+		[[[[Requirements]]]]
+			[[[[[1]]]]]
+				type = 'equip'
+				id = '2'
+				evaluator = 'False'
+				failtext = "You are already using a remarkably similar dagger"
+		[[[[Effects]]]]
+			[[[[[1]]]]]
+				type = 'equip'
+				id = '2'
 [2]
 description = 'Iron Sword'
-usetext = "You install the sword in a scabard on your belt ready for use"
-singleuse = 1
-	[[Requirements]]
-	total = 1
-		[[[1]]]
-		type = 'attribute'
-		id = '1'
-		evaluator = '>'
-		value = 18
-		failtext = "You are not strong enougth to weild this weapon effectively"
-		[[[2]]]
-		type = 'equip'
-		id = '4'
-		evaluator = 'False'
-		failtext = "You are already using a remarkably similar sword"
-	[[Effects]]
-	total = 1
-		[[[1]]]
-		type = 'equip'
-		id = '4'
+altdescs = ['sword']
+[[Actions]]
+	[[[wield]]]
+		[[[[Details]]]]
+			text = "You install the sword in a scabard on your belt ready for use"
+			singleuse = 1
+		[[[[Requirements]]]]
+			[[[[[1]]]]]
+				type = 'attribute'
+				id = '1'
+				evaluator = '>'
+				value = 18
+				failtext = "You are not strong enougth to weild this weapon effectively"
+			[[[[[2]]]]]
+				type = 'equip'
+				id = '4'
+				evaluator = 'False'
+				failtext = "You are already using a remarkably similar sword"
+		[[[[Effects]]]]
+			[[[[[1]]]]]
+				type = 'equip'
+				id = '4'
 [3]
 description = 'Hunting Leathers'
-usetext = 'You put on the hunting leathers'
-singleuse = 1
-	[[Requirements]]
-	total = 1
-		[[[1]]]
-		type = 'equip'
-		id = '1'
-		evaluator = 'False'
-		failtext = "You are already wearing a remarkably similar outfit"
-	[[Effects]]
-	total = 1
-		[[[1]]]
-		type = 'equip'
-		id = '1'
+altdescs = ['leathers']
+[[Actions]]
+	[[[wear]]]
+		[[[[Details]]]]
+			text = "You put on the hunting leathers"
+			singleuse = 1
+		[[[[Requirements]]]]
+			[[[[[1]]]]]
+				type = 'equip'
+				id = '1'
+				evaluator = 'False'
+				failtext = "You are already wearing a remarkably similar outfit"
+		[[[[Effects]]]]
+			[[[[[1]]]]]
+				type = 'equip'
+				id = '1'
 [4]
 description = 'Sling'
-usetext = "You move he sling to somewhere accesible and pick up a few rocks as amunition"
-singleuse = 1
-	[[Requirements]]
-	total = 1
-		[[[1]]]
-		type = 'equip'
-		id = '3'
-		evaluator = 'False'
-		failtext = "You are already using a remarkably similar sling"
-	[[Effects]]
-	total = 1
-		[[[1]]]
-		type = 'equip'
-		id = '3'
+altdescs = []
+[[Actions]]
+	[[[wield]]]
+		[[[[Details]]]]
+		text = "You move he sling to somewhere accesible and pick up a few rocks as amunition"
+		singleuse = 1
+		[[[[Requirements]]]]
+			[[[[[1]]]]]
+				type = 'equip'
+				id = '3'
+				evaluator = 'False'
+				failtext = "You are already using a remarkably similar sling"
+		[[[[Effects]]]]
+			[[[[[1]]]]]
+				type = 'equip'
+				id = '3'
 [5]
 description = 'Can of Blue Bolt'
-usetext = "You down the Blue Bolt"
-singleuse = 1
-	[[Requirements]]
-	total = 0
-	[[Effects]]
-	total = 4
-		[[[1]]]
-		type = 'vitalrestore'
-		id = '1'
-		operator = '+='
-		value = 10
-		[[[2]]]
-		type = 'vital'
-		id = '2'
-		operator = '='
-		value = 70
-		[[[3]]]
-		type = 'vital'
-		id = '1'
-		operator = '+='
-		value = 2
-		[[[4]]]
-		type = 'attributerestore'
-		id = '1'
-		operator = '+='
-		value = 1
+altdescs = ['blue bolt','can']
+[[Actions]]
+	[[[drink]]]
+		[[[[Details]]]]
+			text = "You down the Blue Bolt"
+			singleuse = 1
+		[[[[Requirements]]]]
+		[[[[Effects]]]]
+			[[[1]]]
+				type = 'vitalrestore'
+				id = '1'
+				operator = '+='
+				value = 10
+			[[[2]]]
+				type = 'vital'
+				id = '2'
+				operator = '='
+				value = 70
+			[[[3]]]
+				type = 'vital'
+				id = '1'
+				operator = '+='
+				value = 2
+			[[[4]]]
+				type = 'attributerestore'
+				id = '1'
+				operator = '+='
+				value = 1
 [6]
 description = 'Floor Potion'
-usetext = "Despite not knowing it's contents, you drink the potion you found on the floor. You feel more dexterous"
-singleuse = 1
-	[[Requirements]]
-	total = 0
-	[[Effects]]
-	total = 1
-		[[[1]]]
-		type = 'attribute'
-		id = '3'
-		operator = '+='
-		value = 4
+altdescs = ['potion']
+[[Actions]]
+	[[[drink]]]
+		[[[[Details]]]]
+			text = "Despite not knowing it's contents, you drink the potion you found on the floor. You feel more dexterous"
+			singleuse = 1
+		[[[[Requirements]]]]
+		[[[[Effects]]]]
+			[[[[[1]]]]]
+			type = 'attribute'
+			id = '3'
+			operator = '+='
+			value = 4
+	[[[drop]]]
+		[[[[Details]]]]
+			text = "The potion returns to the floor from whence it came"
+			singleuse = 1
+		[[[[Requirements]]]]
+		[[[[Effects]]]]
 [7]
 description = 'Inventory Reset'
-usetext = "You regain default items"
-singleuse = 0
-	[[Requirements]]
-	total = 0
-	[[Effects]]
-	total = 3
-		[[[1]]]
-		type = 'additem'
-		id = '5'
-		value = 1
-		[[[2]]]
-		type = 'additem'
-		id = '6'
-		value = 1
-		[[[3]]]
-		type = 'additem'
-		id = '2'
-		value = 1
+altdescs = ['reset', 'invreset']
+[[Actions]]
+	[[[use]]]
+		[[[[Details]]]]
+			text = "You regain default items"
+			singleuse = 0
+		[[[[Requirements]]]]
+		[[[[Effects]]]]
+			[[[[[1]]]]]
+				type = 'additem'
+				id = '5'
+				value = 1
+			[[[[[2]]]]]
+				type = 'additem'
+				id = '6'
+				value = 1
+			[[[[[3]]]]]
+				type = 'additem'
+				id = '2'
+				value = 1
 [8]
 description = 'A stone'
-usetext = "You see no way to use this item"
-singleuse = 0
-	[[Requirements]]
-	total = 0
-	[[Effects]]
-	total = 0
+altdescs = ['stone']
+[[Actions]]
+	[[[use]]]
+		[[[[Details]]]]
+			text = "You see no way to use this item"
+			singleuse = 0
+		[[[[Requirements]]]]
+		[[[[Effects]]]]
 [9]
 description = 'Studded Leather'
-usetext = 'You put on the armour'
-singleuse = 1
-	[[Requirements]]
-	total = 1
-		[[[1]]]
-		type = 'equip'
-		id = '5'
-		evaluator = 'False'
-		failtext = "You are already wearing a remarkably similar outfit"
-		[[[2]]]
-		type = 'attribute'
-		id = '1'
-		evaluator = '>'
-		value = 18
-		failtext = "This armour is too heavy for you to wear comfortably"
-	[[Effects]]
-	total = 1
-		[[[1]]]
-		type = 'equip'
-		id = '5'
+altdescs = ['studded','armour']
+[[Actions]]
+	[[[wear]]]
+		[[[[Details]]]]
+			text = "You put on the armour"
+			singleuse = 1
+		[[[[Requirements]]]]
+			[[[[[1]]]]]
+				type = 'equip'
+				id = '5'
+				evaluator = 'False'
+				failtext = "You are already wearing a remarkably similar outfit"
+			[[[[[2]]]]]
+				type = 'attribute'
+				id = '1'
+				evaluator = '>'
+				value = 18
+				failtext = "This armour is too heavy for you to wear comfortably"
+		[[[[Effects]]]]
+			[[[[[1]]]]]
+				type = 'equip'
+				id = '5'
+[10]
+description = 'Steel Sword'
+altdescs = ['sword']
+[[Actions]]
+	[[[wield]]]
+		[[[[Details]]]]
+			text = "You install the sword in a scabard on your belt ready for use"
+			singleuse = 1
+		[[[[Requirements]]]]
+			[[[[[1]]]]]
+				type = 'attribute'
+				id = '1'
+				evaluator = '>'
+				value = 19
+				failtext = "You are not strong enougth to weild this weapon effectively"
+			[[[[[2]]]]]
+				type = 'equip'
+				id = '6'
+				evaluator = 'False'
+				failtext = "You are already using a remarkably similar sword"
+		[[[[Effects]]]]
+			[[[[[1]]]]]
+				type = 'equip'
+				id = '6'
