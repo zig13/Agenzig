@@ -287,9 +287,8 @@ while True : #Primary game loop - all code above is only for setup and never nee
 	sceneb = scene
 	scenestateb = scene
 	while scenechanged == 0 : #The second stage loop. This is only left, and the code above run when the scene or scene state changes
-		prompt = raw_input(">") #The main prompt!
+		prompt = raw_input(">").lower() #The main prompt!
 		#clr()
-		prompt = prompt.lower() #Make input all lower case
 		splitprompt = prompt.split(' ',1)
 		promptcomm = splitprompt[0]
 		if len(splitprompt) > 1 :
@@ -517,7 +516,7 @@ while True : #Primary game loop - all code above is only for setup and never nee
 					for element in potentialitems :
 						potentialitemdescs.append(items[str(element)]['description'])
 					print '\n'.join(potentialitemdescs)
-					prompt = raw_input(">")
+					prompt = raw_input(">").lower()
 					if prompt.isdigit() :
 						if int(prompt) <= len(potentialitems) :
 							useditem = potentialitems[int(prompt)-1]
@@ -528,7 +527,7 @@ while True : #Primary game loop - all code above is only for setup and never nee
 					else :
 						useditem = -1
 						for element in potentialitems :
-							if (prompt.lower() == items[str(element)]['description'].lower()) :
+							if prompt == items[str(element)]['description'].lower() :
 								useditem = element
 			reqpass = -1
 			if useditem > 0 :
