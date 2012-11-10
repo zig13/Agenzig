@@ -10,12 +10,11 @@
 #			http://creativecommons.org/licenses/by-nc-sa/3.0/
 #-------------------------------------------------------------------------------
 try:
-	import configobj #I'm using configobj instead of the built-in Configeditor as it allows for nested sections and list values
+	from configobj import * #I'm using configobj instead of the built-in Configeditor as it allows for nested sections and list values
 except ImportError, e:
 	err = raw_input("ConfigObj module is required. Please install and try again")
 	if err != "Override" :
 		exit(0)
-from configobj import *
 from os import curdir, sep, access, listdir, R_OK, makedirs, path, name, system
 from time import sleep
 from subprocess import Popen
