@@ -9,5 +9,15 @@ states = "2"
 [2]
 states = "1"
 	[[1]]
-	description = "Some other place"
-	choices = [4,5]
+	description = "You are in another equally cave-y cave"
+	choices = [4]
+[3]
+states = "1"
+	[[1]]
+	description = "This cave has slime on the walls - how different"
+	choices = [5]
+[4]
+states = "1"
+	[[1]]
+	description = "You were teleported here"
+	choices = [6,7,8,9]

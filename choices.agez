@@ -41,3 +41,63 @@ result = 'You pick up the potion and add it to your pack'
 		type = 'additem'
 		id = '6'
 		value = 1
+[4]
+description = 'Go somewhere'
+result = 'You go somewhere else'
+	[[Requirements]]
+	total = 0
+	[[Effects]]
+	total = 1
+		[[[1]]]
+		type = 'scene'
+		id = '3'
+[5]
+description = 'Go somewhere'
+result = 'You go somewhere else'
+	[[Requirements]]
+	total = 0
+	[[Effects]]
+	total = 1
+		[[[1]]]
+		type = 'scene'
+		id = '2'
+[6]
+description = 'Scene1'
+result = 'You go somewhere else'
+	[[Requirements]]
+	total = 0
+	[[Effects]]
+	total = 1
+		[[[1]]]
+		type = 'scene'
+		id = '1'
+[7]
+description = 'Scene2'
+result = 'You go somewhere else'
+	[[Requirements]]
+	total = 0
+	[[Effects]]
+	total = 1
+		[[[1]]]
+		type = 'scene'
+		id = '2'
+[8]
+description = 'Scene3'
+result = 'You go somewhere else'
+	[[Requirements]]
+	total = 0
+	[[Effects]]
+	total = 1
+		[[[1]]]
+		type = 'scene'
+		id = '3'
+[9]
+description = 'Scene4'
+result = 'You go somewhere else'
+	[[Requirements]]
+	total = 0
+	[[Effects]]
+	total = 1
+		[[[1]]]
+		type = 'scene'
+		id = '4'
