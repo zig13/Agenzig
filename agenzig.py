@@ -208,7 +208,6 @@ attotal = len(attributes.keys())
 if attotal == 0 : #If Attributes file contains no Attributes
 	attributes = 0
 #These are mostly used for while loops and repetition checks
-scenechanged = 0
 statusgen = 0
 sstatusgen = 0
 invlistgen = 0
@@ -222,7 +221,6 @@ from math import ceil
 if sel!= opt : #If user has chosen an existing character rather than creating a new one
 	print "Continuing adventure\n"
 while True : #Primary game loop - all code above is only for setup and never needs to be reset/run-again
-	clr()
 	if	scene in (character['Scene States'].keys()) : #If character file has noted that the scenestate of the current scene is different from default
 		scenestate = str(character['Scene States'][scene])
 	else :
@@ -284,10 +282,11 @@ while True : #Primary game loop - all code above is only for setup and never nee
 		scenechoices.append(achoice)
 	print '\n'.join(scenechoices)
 	sceneb = scene
-	scenestateb = scene
+	scenestateb = scenestate
+	scenechanged = 0
 	while scenechanged == 0 : #The second stage loop. This is only left, and the code above run when the scene or scene state changes
 		prompt = raw_input(">").lower() #The main prompt!
-		#clr()
+		clr()
 		splitprompt = prompt.split(' ',1)
 		promptcomm = splitprompt[0]
 		if len(splitprompt) > 1 :
@@ -455,7 +454,7 @@ while True : #Primary game loop - all code above is only for setup and never nee
 							invchanged = 1
 							equipchanged = 1
 						else :
-							#clr()
+							clr()
 							print "Enter either a number coresponding to the position of a item on the list or the complete description of a listed item"
 					else :
 						print main['Commands']['Items']['removing'][promptcomm]['fail_b']
@@ -495,7 +494,7 @@ while True : #Primary game loop - all code above is only for setup and never nee
 				if promptcomm in items[str(element)]['Actions'].keys() :
 					tempinventory.append(element)
 			if len(tempinventory) == 0 :
-				#clr()
+				clr()
 				print "No items you possess can be used in that way\n" #Will soft-code
 				useditem = 0
 			else :
@@ -504,7 +503,7 @@ while True : #Primary game loop - all code above is only for setup and never nee
 					if (promptval == items[str(element)]['description'].lower()) or (promptval in items[str(element)]['altdescs']) :
 						potentialitems.append(element)
 				if len(potentialitems) == 0 :
-					#clr()
+					clr()
 					print "No items you possess that match that description can be used in that way\n" #Will soft-code
 					useditem = 0
 				elif len(potentialitems) == 1 :
@@ -520,7 +519,7 @@ while True : #Primary game loop - all code above is only for setup and never nee
 						if int(prompt) <= len(potentialitems) :
 							useditem = potentialitems[int(prompt)-1]
 						else :
-							#clr()
+							clr()
 							print "You only possess %s %s that can be %s\n" %(len(potentialitems), promptval, promptcomm)
 							useditem = 0
 					else :
@@ -558,9 +557,10 @@ while True : #Primary game loop - all code above is only for setup and never nee
 							reqpass = 0
 							break
 			elif useditem < 0 :
-				#clr()
+				clr()
 				print "None of the listed items match that exact description"
 			if reqpass == 1 :
+				clr()
 				print items[useditem]['Actions'][promptcomm]['Details']['text']
 				if items[useditem]['Actions'][promptcomm]['Details']['singleuse'] == 1 :
 					inventory.remove(int(useditem))
@@ -569,29 +569,29 @@ while True : #Primary game loop - all code above is only for setup and never nee
 				for effectno in itemeffects :
 					seffectno = str(effectno)
 					id = items[useditem]['Actions'][promptcomm]['Effects'][seffectno]['id']
-					if items[useditem]['Actions'][promptcomm]['Effects'][seffectno]['type'] != 'equip' : value = items[useditem]['Actions'][promptcomm]['Effects'][seffectno]['value']
-					if items[useditem]['Actions'][promptcomm]['Effects'][seffectno]['type'] == 'vital' :
+					usetype = items[useditem]['Actions'][promptcomm]['Effects'][seffectno]['type']
+					if usetype != 'equip' and usetype != 'scene' : value = items[useditem]['Actions'][promptcomm]['Effects'][seffectno]['value']
+					if usetype == 'vital' :
 						operator = items[useditem]['Actions'][promptcomm]['Effects'][seffectno]['operator']
 						exec("character['Vitals'][id]"+operator+str(value))					
 						statchanged = 1
-					elif (items[useditem]['Actions'][promptcomm]['Effects'][seffectno]['type'] == 'vitalrestore') and (character['Vitals'][id] < character['Vitals']['Initial Values'][id]):
+					elif (usetype == 'vitalrestore') and (character['Vitals'][id] < character['Vitals']['Initial Values'][id]):
 						exec("character['Vitals'][id]+="+str(value))
 						if character['Vitals'][id] > character['Vitals']['Initial Values'][id] : character['Vitals'][id] = character['Vitals']['Initial Values'][id] 
 						statchanged = 1
-					elif items[useditem]['Actions'][promptcomm]['Effects'][seffectno]['type'] == 'attribute' :
+					elif usetype == 'attribute' :
 						operator = items[useditem]['Actions'][promptcomm]['Effects'][seffectno]['operator']
 						exec("character['Attributes'][id]"+operator+str(value))
 						statchanged = 1
-					elif (items[useditem]['Actions'][promptcomm]['Effects'][seffectno]['type'] == 'attributerestore') and (character['Attributes'][id] < character['Attributes']['Initial Values'][id]) :
+					elif (usetype == 'attributerestore') and (character['Attributes'][id] < character['Attributes']['Initial Values'][id]) :
 						exec("character['Attributes'][id]+="+str(value))
 						if character['Attributes'][id] > character['Attributes']['Initial Values'][id] : character['Attributes'][id] = character['Attributes']['Initial Values'][id] 
 						statchanged = 1
-					elif items[useditem]['Actions'][promptcomm]['Effects'][seffectno]['type'] == 'additem' :
+					elif usetype == 'additem' :
 						for _ in repeat(None, value) :
 							inventory.append(int(id))
 						invchanged = 1
-					elif items[useditem]['Actions'][promptcomm]['Effects'][seffectno]['type'] == 'equip' :
-						id = items[useditem]['Actions'][promptcomm]['Effects'][seffectno]['id']
+					elif usetype == 'equip' :
 						slotsused = equips[id]['equipslots']
 						charequips = character['Items']['Equipment']
 						replaceditems = []
@@ -611,10 +611,12 @@ while True : #Primary game loop - all code above is only for setup and never nee
 							charequips[str(slotx)] = id
 						invchanged = 1
 						equipchanged = 1
+					elif usetype == 'scene' :
+						scene = id
 			elif reqpass == 0 :
 				print items[useditem]['Actions'][promptcomm]['Requirements'][sreqno]['failtext']
 		elif (prompt == "help") or (prompt == "h") or (prompt == "man") :
-			print "\nCommand List"
+			print "Command List"
 			print "'choices': review availible options"
 			print "'inventory': view your inventory"
 			print "'equipment': view what items you have equipped"
