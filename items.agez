@@ -207,3 +207,17 @@ altdescs = ['sword']
 			[[[[[1]]]]]
 				type = 'equip'
 				id = '6'
+[11]
+description = 'A magic stone'
+altdescs = ['stone','tele','teleporter']
+[[Actions]]
+	[[[use]]]
+		[[[[Details]]]]
+			text = "You see no way to use this item"
+			singleuse = 0
+		[[[[Requirements]]]]
+		[[[[Effects]]]]
+			[[[[[1]]]]]
+				type = 'scene'
+				id = '4'
+			
