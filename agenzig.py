@@ -32,12 +32,13 @@ else :
 		print "\n" * 10
 #Hopefully the use of these will help make the engine cross-platform
 advfolder = dot+sep
-mainfile = advfolder+"main.agez" #Initially it is assumed that the agez files are in the script directory (i.e. there is one adventure)
 advsfolder = "%s%sAdventures%s" %(dot,sep,sep)
+
 mpc = dot+sep+"mpc-hc.exe"
 aplayer = access(mpc, R_OK) #A variable that tests whether Media Player Classic is available
 kpic = dot+sep+"kpic.exe"
 gviewer = access(kpic, R_OK) #A variable that tests whether KPic is available
+
 if (access(advsfolder, R_OK)) and (str(listdir(advsfolder)) != "[]") : #If there is a non-empty folder called 'Adventures' in the script folder
 	if aplayer == True :
 		aztheme = dot+sep+"aztheme.aza"
@@ -50,42 +51,39 @@ if (access(advsfolder, R_OK)) and (str(listdir(advsfolder)) != "[]") : #If there
 			viewsplash = Popen([kpic, azsplash]) #Will display the splash screen for Agenzig if KPic is available and theme (azsplash.azg) exists
 			sleep(3)
 			viewsplash.kill()
-	advchosen = 0
-	repeat = 0
-	while advchosen == 0 :
-		advs = listdir(advsfolder)
-		advs.reverse()
-		advsno = len(advs)
-		if repeat == 0 :
-			print "Listing adventures"
-			opt = 0
-			while advsno != 0 :
-				opt = opt+1
-				print "%s) %s" %(opt,advs.pop())
-				advsno = advsno-1
-			choice = raw_input("\nPlease type a number corresponding to the adventure you wish to play >" )
-		else :
-			choice = raw_input(">")
-		repeat = 1
-		if choice == "" :
-			pass #If user inputs nothing then nothing happens
-		elif choice.isdigit() == 1 : #This section basically does the reverse of the above one to determine what adventure the inputted number refers to
-			sel = int(choice)
-			if sel <= opt :
-				advs2 = listdir(advsfolder)
-				advfolder = advsfolder+str(advs2.pop((sel-1)))+sep
-				mainfile = advfolder+sep+"main.agez"
-				if access(mainfile, R_OK) :
-					advchosen = 1
+	
+	advfollist = listdir(advsfolder)
+	print "Listing adventures"
+	opt = 0
+	for advfolname in advfollist :
+		opt += 1
+		print "%s) %s" %(opt,advfolname)
+	prompt = raw_input("\nPlease type a number corresponding to the adventure you wish to play >" )
+	while True :
+		if prompt == "" : pass #If user inputs nothing then nothing happens
+		elif prompt.isdigit() == 1 : #This section basically does the reverse of the above one to determine what adventure the inputted number refers to
+			selection = int(prompt)
+			if selection <= len(advfollist) :
+				advfolder = advsfolder+advfollist[selection-1]+sep
+				mainfile = advfolder+"main.agez"
+				scenefile = advfolder+"scenes.agez"
+				if access(mainfile, R_OK) and access(scenefile, R_OK) :
+					break
 				else :
-					print "Selected adventure folder does not contain a main file"
-			else:
+					print "Selected adventure folder has key files missing\n"
+			else :
 				print "Value given is not within option range\n"
-		else:
+		else :
 			print "Input must be a number\n"
+		prompt = raw_input(">")
 	clr()
-elif access(mainfile, R_OK) : # If there is only one adventure that is installed in the script directory
-	pass #Has no specific code of it's own as mainfile is defined at beginning
+elif access(advfolder+"main.agez", R_OK) : # If there is only one adventure that is installed in the script directory
+	mainfile = advfolder+"main.agez"
+	scenefile = advfolder+"scenes.agez"
+	if (access(mainfile, R_OK) == False) or (access(scenefile, R_OK) == False) :
+		err = raw_input("Key files for this adventure are missing")
+		if err != "Override" :
+			exit(0)
 else : #Non-valid situations
 	if access(advsfolder, R_OK) :
 		print "The Adventures folder exists but contains no Adventure folders\n"
@@ -95,18 +93,14 @@ else : #Non-valid situations
 	err = raw_input("If you don't know what this means, then you should probably reinstall") #More informative than a crash...
 	if err != "Override" :
 		exit(0)
+
 #Below code applies to both valid situations (multiple adventures in seperate folders and single adventure in script folder)
 main = ConfigObj(mainfile, unrepr=True)
-scenefile = advfolder+sep+"scenes.agez"
-if access(scenefile, R_OK) : #Main.agez and scenes.agez are bare minimum for an adventure
-	scenes = ConfigObj(scenefile, unrepr=True)
-	advname = main['Details']['title']
-	charfolder = advfolder+"Characters"+sep
-	print advname+" succesfully loaded\n"
-else :
-	err = raw_input("Scenes file missing! This is not a valid adventure")
-	if err != "Override" :
-		exit(0)
+scenes = ConfigObj(scenefile, unrepr=True)
+advname = main['Details']['title']
+charfolder = advfolder+"Characters"+sep
+print advname+" succesfully loaded\n"	
+
 if access(advfolder+"Graphics"+sep, R_OK) :
 	graphics = advfolder+"Graphics"+sep
 else :
@@ -122,9 +116,11 @@ if gviewer == True :
 		viewsplash = Popen([kpic, splash]) #Will display the splash screen for the adventure if KPic is available and theme exists in adventure folder
 		sleep(3)
 		viewsplash.kill()
-charchosen = 0
+
 if not path.exists(charfolder):
     makedirs(charfolder) #Creates a character folder if it does not exist as following code requires it
+
+charchosen = 0
 while charchosen == 0 :
 	chars = listdir(charfolder)
 	chars.reverse()
@@ -160,6 +156,7 @@ while charchosen == 0 :
 				print "Value given is not within option range\n"
 	else:
 		print "Input must be a number\n"
+
 #Setting main and character varibles for easy access
 scene = str(character['Basics']['scene'])
 title = main['Details']['title']
@@ -169,6 +166,7 @@ website = "For more information, go to "+main['Details']['website']
 equipslots = character['Items']['Equipment'].keys()
 equipment = character['Items']['Equipment'].values()
 inventory = character['Items']['inventory']
+
 # Loading other files if they exist
 choicefile = advfolder+sep+"choices.agez"
 if access(choicefile, R_OK) :
@@ -180,93 +178,96 @@ if access(confrontationfile, R_OK) :
 	confrontations = ConfigObj(confrontationfile, unrepr=True)
 else :
 	confrontations = 0
-attributefile = advfolder+sep+"attributes.agez"
+attributefile = advfolder+"attributes.agez"
 if access(attributefile, R_OK) :
 	attributes = ConfigObj(attributefile, unrepr=True)
+	attotal = len(attributes.keys())
 else :
 	attributes = 0
-vitalfile = advfolder+sep+"vitals.agez"
+	attotal = 0
+vitalfile = advfolder+"vitals.agez"
 if access(vitalfile, R_OK) :
 	vitals = ConfigObj(vitalfile, unrepr=True)
+	vittotal = len(vitals.keys())
 else :
 	vitals = 0
-itemfile = advfolder+sep+"items.agez"
+	vittotal = 0
+itemfile = advfolder+"items.agez"
 if access(vitalfile, R_OK) :
 	items = ConfigObj(infile=itemfile, unrepr=True)
 else :
 	items = 0
-equipmentfile = advfolder+sep+"equipment.agez"
+equipmentfile = advfolder+"equipment.agez"
 if access(equipmentfile, R_OK) :
 	equips = ConfigObj(equipmentfile, unrepr=True)
 else :
 	equips = 0
+
 fight = 0 #Will use to disable combat while is a WIP
-vittotal = len(vitals.keys())
-if vittotal == 0 : #If Vitals file contains no Vitals
-	vitals = 0
-attotal = len(attributes.keys())
-if attotal == 0 : #If Attributes file contains no Attributes
-	attributes = 0
+
 #These are mostly used for while loops and repetition checks
 statusgen = 0
-sstatusgen = 0
 invlistgen = 0
 equiplistgen = 0
 invchanged = 0
 statchanged = 0
 equipchanged = 0
+
 #More imports...
 from decimal import Decimal
 from math import ceil
+
 if sel!= opt : #If user has chosen an existing character rather than creating a new one
 	print "Continuing adventure\n"
+
 while True : #Primary game loop - all code above is only for setup and never needs to be reset/run-again
 	if	scene in (character['Scene States'].keys()) : #If character file has noted that the scenestate of the current scene is different from default
 		scenestate = str(character['Scene States'][scene])
 	else :
 		scenestate = str(1) #Else set scenestate to default (1)
 	print scenes[scene][scenestate]['description']
-	scenechoicecodelist = scenes[scene][scenestate]['choices']
-	choicecodelist = list(scenes[scene][scenestate]['choices'])
-	for choicecode in choicecodelist :
-		choicereqs = choices[choicecode]['Requirements'].keys()
-		reqpass = 1
-		for choicereq in choicereqs :
-			if choices[choicecode]['Requirements'][choicereq]['type'] == 'vital' :
-				id = choices[choicecode]['Requirements'][choicereq]['id']
-				evaluator = choices[choicecode]['Requirements'][choicereq]['evaluator']
-				value = choices[choicecode]['Requirements'][choicereq]['value']
-				check = str(character['Vitals'][id])+evaluator+str(value)			
-				if eval(check) == False : 
-					reqpass = 0
-			elif choices[choicecode]['Requirements'][choicereq]['type'] == 'attribute' :
-				id = choices[choicecode]['Requirements'][choicereq]['id']
-				evaluator = choices[choicecode]['Requirements'][choicereq]['evaluator']
-				value = choices[choicecode]['Requirements'][choicereq]['value']
-				check = str(character['Attributes'][id])+evaluator+str(value)			
-				if eval(check) == False : 
-					reqpass = 0
-			elif choices[choicecode]['Requirements'][choicereq]['type'] == 'item' :
-				evaluator = choices[choicecode]['Requirements'][choicereq]['evaluator']
-				id = int(choices[choicecode]['Requirements'][choicereq]['id'])
-				if (id in inventory) != eval(evaluator) :
-					reqpass = 0
-			elif choices[choicecode]['Requirements'][choicereq]['type'] == 'equip' :
-				evaluator = choices[choicecode]['Requirements'][choicereq]['evaluator']
-				id = int(choices[choicecode]['Requirements'][choicereq]['id'])
-				if (id in equipment) != eval(evaluator) :
-					reqpass = 0
-			if reqpass == 0 :
-				choicecodelist.remove(choicecode)
-				break
-	choicetextlist = []
-	opt = 0
-	for element in choicecodelist :
-		opt = opt+1
-		achoicedesc = choices[element]['description']
-		choicetext = str(opt)+") "+achoicedesc
-		choicetextlist.append(choicetext)
-	print '\n'.join(choicetextlist)
+	if choices != 0 :
+		scenechoicecodelist = scenes[scene][scenestate]['choices']
+		choicecodelist = list(scenes[scene][scenestate]['choices'])
+		for choicecode in choicecodelist :
+			choicereqs = choices[choicecode]['Requirements'].keys()
+			reqpass = 1
+			for choicereq in choicereqs :
+				if choices[choicecode]['Requirements'][choicereq]['type'] == 'vital' :
+					id = choices[choicecode]['Requirements'][choicereq]['id']
+					evaluator = choices[choicecode]['Requirements'][choicereq]['evaluator']
+					value = choices[choicecode]['Requirements'][choicereq]['value']
+					check = str(character['Vitals'][id])+evaluator+str(value)			
+					if eval(check) == False : 
+						reqpass = 0
+				elif choices[choicecode]['Requirements'][choicereq]['type'] == 'attribute' :
+					id = choices[choicecode]['Requirements'][choicereq]['id']
+					evaluator = choices[choicecode]['Requirements'][choicereq]['evaluator']
+					value = choices[choicecode]['Requirements'][choicereq]['value']
+					check = str(character['Attributes'][id])+evaluator+str(value)			
+					if eval(check) == False : 
+						reqpass = 0
+				elif choices[choicecode]['Requirements'][choicereq]['type'] == 'item' :
+					evaluator = choices[choicecode]['Requirements'][choicereq]['evaluator']
+					id = int(choices[choicecode]['Requirements'][choicereq]['id'])
+					if (id in inventory) != eval(evaluator) :
+						reqpass = 0
+				elif choices[choicecode]['Requirements'][choicereq]['type'] == 'equip' :
+					evaluator = choices[choicecode]['Requirements'][choicereq]['evaluator']
+					id = int(choices[choicecode]['Requirements'][choicereq]['id'])
+					if (id in equipment) != eval(evaluator) :
+						reqpass = 0
+				if reqpass == 0 :
+					choicecodelist.remove(choicecode)
+					break
+		choicetextlist = []
+		opt = 0
+		for element in choicecodelist :
+			opt = opt+1
+			achoicedesc = choices[element]['description']
+			choicetext = str(opt)+") "+achoicedesc
+			choicetextlist.append(choicetext)
+		print '\n'.join(choicetextlist)
 	sceneb = scene
 	scenestateb = scenestate
 	scenechanged = 0
@@ -281,9 +282,11 @@ while True : #Primary game loop - all code above is only for setup and never nee
 			promptval = '-'
 		if prompt == "" :
 			pass #If user presses enter without typing anything, do nothing
-		elif ((prompt == "choices") or (prompt == "c")) and (choices != 0) :
-			print '\n'.join(scenechoices) #Re-print scene choices
-		elif ((prompt == 'status') or (prompt == "s")) and (vitals != 0) and (attributes != 0):
+		elif ((prompt == "choices" or prompt == "c") and choices != 0) or (prompt == "scene") or (prompt == "s" and (attributes == 0 and vitals == 0)) :
+			print scenes[scene][scenestate]['description']
+			if choices != 0 :
+				print '\n'.join(choicetextlist) #Re-print scene choices
+		elif (prompt == "status" or prompt == "s" or prompt == "health") and (attributes != 0 or vitals != 0):
 			if (statusgen != 1) :
 				statuslist = "You are:\n"
 				vitno = 0
