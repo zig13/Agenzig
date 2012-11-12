@@ -2,9 +2,7 @@
 description = 'Go West'
 result = 'You pass under a low archway into another cave'
 	[[Requirements]]
-	total = 0
 	[[Effects]]
-	total = 1
 		[[[1]]]
 		type = 'scene'
 		id = '2'
@@ -12,7 +10,6 @@ result = 'You pass under a low archway into another cave'
 description = 'Go East'
 result = 'You climb up a wall barehanded and drop down the other side to find yourself in another cave'
 	[[Requirements]]
-	total = 2
 		[[[1]]]
 		type = 'attribute'
 		id = '1'
@@ -23,7 +20,6 @@ result = 'You climb up a wall barehanded and drop down the other side to find yo
 		id = '6'
 		evaluator = 'True' #Valid options are 'True' and 'False'
 	[[Effects]]
-	total = 1
 		[[[1]]]
 		type = 'scene'
 		id = '3'
@@ -31,7 +27,6 @@ result = 'You climb up a wall barehanded and drop down the other side to find yo
 description = 'Pick up potion'
 result = 'You pick up the potion and add it to your pack'
 	[[Requirements]]
-	total = 0
 	[[Effects]]
 		[[[1]]]
 		type = 'scenestate'
@@ -45,9 +40,7 @@ result = 'You pick up the potion and add it to your pack'
 description = 'Go somewhere'
 result = 'You go somewhere else'
 	[[Requirements]]
-	total = 0
 	[[Effects]]
-	total = 1
 		[[[1]]]
 		type = 'scene'
 		id = '3'
@@ -55,9 +48,7 @@ result = 'You go somewhere else'
 description = 'Go somewhere'
 result = 'You go somewhere else'
 	[[Requirements]]
-	total = 0
 	[[Effects]]
-	total = 1
 		[[[1]]]
 		type = 'scene'
 		id = '2'
@@ -65,9 +56,7 @@ result = 'You go somewhere else'
 description = 'Scene1'
 result = 'You go somewhere else'
 	[[Requirements]]
-	total = 0
 	[[Effects]]
-	total = 1
 		[[[1]]]
 		type = 'scene'
 		id = '1'
@@ -75,9 +64,7 @@ result = 'You go somewhere else'
 description = 'Scene2'
 result = 'You go somewhere else'
 	[[Requirements]]
-	total = 0
 	[[Effects]]
-	total = 1
 		[[[1]]]
 		type = 'scene'
 		id = '2'
@@ -85,9 +72,7 @@ result = 'You go somewhere else'
 description = 'Scene3'
 result = 'You go somewhere else'
 	[[Requirements]]
-	total = 0
 	[[Effects]]
-	total = 1
 		[[[1]]]
 		type = 'scene'
 		id = '3'
@@ -95,9 +80,7 @@ result = 'You go somewhere else'
 description = 'Scene4'
 result = 'You go somewhere else'
 	[[Requirements]]
-	total = 0
 	[[Effects]]
-	total = 1
 		[[[1]]]
 		type = 'scene'
 		id = '4'
