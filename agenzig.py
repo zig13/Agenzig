@@ -226,61 +226,47 @@ while True : #Primary game loop - all code above is only for setup and never nee
 	else :
 		scenestate = str(1) #Else set scenestate to default (1)
 	print scenes[scene][scenestate]['description']
-	scenechoicecodes = scenes[scene][scenestate]['choices']
-	choicecodes = list(scenes[scene][scenestate]['choices'])
-	choicetotal = len(scenechoicecodes)
-	choiceno = 0
-	while choiceno != choicetotal :
-		choiceno += 1
-		choicecode = scenechoicecodes[choiceno-1]
-		schoicecode = str(choicecode)
-		reqtotal = choices[schoicecode]['Requirements']['total']
-		reqno = 0
+	scenechoicecodelist = scenes[scene][scenestate]['choices']
+	choicecodelist = list(scenes[scene][scenestate]['choices'])
+	for choicecode in choicecodelist :
+		choicereqs = choices[choicecode]['Requirements'].keys()
 		reqpass = 1
-		while reqno != reqtotal :
-			reqno += 1
-			sreqno = str(reqno)
-			if choices[schoicecode]['Requirements'][sreqno]['type'] == 'vital' :
-				id = choices[schoicecode]['Requirements'][sreqno]['id']
-				evaluator = choices[schoicecode]['Requirements'][sreqno]['evaluator']
-				value = choices[schoicecode]['Requirements'][sreqno]['value']
+		for choicereq in choicereqs :
+			if choices[choicecode]['Requirements'][choicereq]['type'] == 'vital' :
+				id = choices[choicecode]['Requirements'][choicereq]['id']
+				evaluator = choices[choicecode]['Requirements'][choicereq]['evaluator']
+				value = choices[choicecode]['Requirements'][choicereq]['value']
 				check = str(character['Vitals'][id])+evaluator+str(value)			
 				if eval(check) == False : 
 					reqpass = 0
-					reqno = reqtotal
-			elif choices[schoicecode]['Requirements'][sreqno]['type'] == 'attribute' :
-				id = choices[schoicecode]['Requirements'][sreqno]['id']
-				evaluator = choices[schoicecode]['Requirements'][sreqno]['evaluator']
-				value = choices[schoicecode]['Requirements'][sreqno]['value']
+			elif choices[choicecode]['Requirements'][choicereq]['type'] == 'attribute' :
+				id = choices[choicecode]['Requirements'][choicereq]['id']
+				evaluator = choices[choicecode]['Requirements'][choicereq]['evaluator']
+				value = choices[choicecode]['Requirements'][choicereq]['value']
 				check = str(character['Attributes'][id])+evaluator+str(value)			
 				if eval(check) == False : 
 					reqpass = 0
-					reqno = reqtotal
-			elif choices[schoicecode]['Requirements'][sreqno]['type'] == 'item' :
-				evaluator = choices[schoicecode]['Requirements'][sreqno]['evaluator']
-				id = int(choices[schoicecode]['Requirements'][sreqno]['id'])
+			elif choices[choicecode]['Requirements'][choicereq]['type'] == 'item' :
+				evaluator = choices[choicecode]['Requirements'][choicereq]['evaluator']
+				id = int(choices[choicecode]['Requirements'][choicereq]['id'])
 				if (id in inventory) != eval(evaluator) :
 					reqpass = 0
-					reqno = reqtotal
-			elif choices[schoicecode]['Requirements'][sreqno]['type'] == 'equip' :
-				evaluator = choices[schoicecode]['Requirements'][sreqno]['evaluator']
-				id = int(choices[schoicecode]['Requirements'][sreqno]['id'])
+			elif choices[choicecode]['Requirements'][choicereq]['type'] == 'equip' :
+				evaluator = choices[choicecode]['Requirements'][choicereq]['evaluator']
+				id = int(choices[choicecode]['Requirements'][choicereq]['id'])
 				if (id in equipment) != eval(evaluator) :
 					reqpass = 0
-					reqno = reqtotal
-		if reqpass == 0 :
-			choicecodes.remove(choicecode)
-	choicesleft = len(choicecodes)
+			if reqpass == 0 :
+				choicecodelist.remove(choicecode)
+				break
+	choicetextlist = []
 	opt = 0
-	scenechoices = []
-	while choicesleft != 0 :
+	for element in choicecodelist :
 		opt = opt+1
-		schoicecode = str(choicecodes.pop())
-		choicesleft = len(choicecodes)
-		achoicedesc = choices[schoicecode]['description']
-		achoice = str(opt)+") "+achoicedesc
-		scenechoices.append(achoice)
-	print '\n'.join(scenechoices)
+		achoicedesc = choices[element]['description']
+		choicetext = str(opt)+") "+achoicedesc
+		choicetextlist.append(choicetext)
+	print '\n'.join(choicetextlist)
 	sceneb = scene
 	scenestateb = scenestate
 	scenechanged = 0
