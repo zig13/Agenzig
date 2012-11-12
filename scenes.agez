@@ -2,22 +2,22 @@
 states = "2"
 	[[1]]
 	description = "You are in a cave.\nIt looks very much like a cave.\nThere is a potion on the ground."
-	choices = [1,2,3]
+	choices = ['1','2','3']
 	[[2]]
 	description = "You are in a cave.\nIt looks very much like a cave."
-	choices = [1,2]
+	choices = ['1','2']
 [2]
 states = "1"
 	[[1]]
 	description = "You are in another equally cave-y cave"
-	choices = [4]
+	choices = ['4']
 [3]
 states = "1"
 	[[1]]
 	description = "This cave has slime on the walls - how different"
-	choices = [5]
+	choices = ['5']
 [4]
 states = "1"
 	[[1]]
 	description = "You were teleported here"
-	choices = [6,7,8,9]
+	choices = ['6','7','8','9']
