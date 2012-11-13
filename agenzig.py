@@ -261,12 +261,14 @@ while True : #Primary game loop - all code above is only for setup and never nee
 					choicecodelist.remove(choicecode)
 					break
 		choicetextlist = []
+		choicetextlist_lc = []
 		opt = 0
 		for element in choicecodelist :
 			opt = opt+1
 			achoicedesc = choices[element]['description']
 			choicetext = str(opt)+") "+achoicedesc
 			choicetextlist.append(choicetext)
+			choicetextlist_lc.append(achoicedesc.lower())
 		print '\n'.join(choicetextlist)
 	sceneb = scene
 	scenestateb = scenestate
@@ -280,12 +282,68 @@ while True : #Primary game loop - all code above is only for setup and never nee
 			promptval = splitprompt[1]
 		else :
 			promptval = '-'
+		
 		if prompt == "" :
 			pass #If user presses enter without typing anything, do nothing
+		
+		elif prompt in choicetextlist_lc :
+			for position, item in enumerate(choicetextlist_lc):
+				if item == prompt:
+					chosen = choicecodelist[position]
+			choiceeffects = choices[chosen]['Effects'].keys()
+			for effectno in choiceeffects :
+				seffectno = str(effectno)
+				id = choices[chosen]['Effects'][seffectno]['id']
+				usetype = choices[chosen]['Effects'][seffectno]['type']
+				if usetype != 'equip' and usetype != 'scene' : value = choices[chosen]['Effects'][seffectno]['value']
+				if usetype == 'vital' :
+					operator = choices[chosen]['Effects'][seffectno]['operator']
+					exec("character['Vitals'][id]"+operator+str(value))					
+					statchanged = 1
+				elif (usetype == 'vitalrestore') and (character['Vitals'][id] < character['Vitals']['Initial Values'][id]):
+					exec("character['Vitals'][id]+="+str(value))
+					if character['Vitals'][id] > character['Vitals']['Initial Values'][id] : character['Vitals'][id] = character['Vitals']['Initial Values'][id] 
+					statchanged = 1
+				elif usetype == 'attribute' :
+					operator = choices[chosen]['Effects'][seffectno]['operator']
+					exec("character['Attributes'][id]"+operator+str(value))
+					statchanged = 1
+				elif (usetype == 'attributerestore') and (character['Attributes'][id] < character['Attributes']['Initial Values'][id]) :
+					exec("character['Attributes'][id]+="+str(value))
+					if character['Attributes'][id] > character['Attributes']['Initial Values'][id] : character['Attributes'][id] = character['Attributes']['Initial Values'][id] 
+					statchanged = 1
+				elif usetype == 'additem' :
+					for _ in repeat(None, value) :
+						inventory.append(int(id))
+					invchanged = 1
+				elif usetype == 'equip' :
+					slotsused = equips[id]['equipslots']
+					charequips = character['Items']['Equipment']
+					replaceditems = []
+					for slotx in slotsused :
+						if str(slotx) in equipslots : #If there is already a piece of equipment occupying the slot
+							replacedequip = charequips[str(slotx)]
+							if (equips[replacedequip]['equipslots'] != equips[id]['equipslots']) and (equips[replacedequip]['equipslots'] != [slotx]) :
+								for clearslot in equips[replacedequip]['equipslots'] :
+									clearslot = str(clearslot)
+									if clearslot != slotx :
+										del character['Items']['Equipment'][clearslot]
+										equipslots = character['Items']['Equipment'].keys()
+							replaceditem = str(equips[replacedequip]['item'])
+							if replaceditem not in replaceditems :
+								inventory.append(int(replaceditem))
+								replaceditems.append(replaceditem)
+						charequips[str(slotx)] = id
+					invchanged = 1
+					equipchanged = 1
+				elif usetype == 'scene' :
+					scene = id		
+			
 		elif ((prompt == "choices" or prompt == "c") and choices != 0) or (prompt == "scene") or (prompt == "s" and (attributes == 0 and vitals == 0)) :
 			print scenes[scene][scenestate]['description']
 			if choices != 0 :
 				print '\n'.join(choicetextlist) #Re-print scene choices
+		
 		elif (prompt == "status" or prompt == "s" or prompt == "health") and (attributes != 0 or vitals != 0):
 			if (statusgen != 1) :
 				statuslist = "You are:\n"
@@ -383,6 +441,7 @@ while True : #Primary game loop - all code above is only for setup and never nee
 				statusgen = 1
 				statchanged = 0
 			print statuslist
+		
 		elif (prompt == 'equipment') or (prompt == "e") :
 			if (equiplistgen != 1) : #Checks to see if list of equipment is already generated (i.e. command has been run before) in which case it simply prints it
 				tempequipment = []
@@ -399,6 +458,7 @@ while True : #Primary game loop - all code above is only for setup and never nee
 						equipmentlist.append(aequipdesc)
 					equiplistgen = 1
 			print '\n'.join(equipmentlist)
+		
 		elif  promptcomm in main['Commands']['Items']['removing'].keys() and promptval.replace(' ', '').isalpha() :
 			if len(equipment) > 0 :
 				tempequipment = list(set(equipment))
@@ -451,6 +511,7 @@ while True : #Primary game loop - all code above is only for setup and never nee
 					print main['Commands']['Items']['removing'][promptcomm]['fail_a']
 			else :
 				print main['Commands']['Items']['removing'][promptcomm]['fail_a']
+		
 		elif (prompt == "inventory") or (prompt == "i") : #This command simply prints the character's inventory in lsit form
 			if invlistgen != 1 :
 				printeditems = []
@@ -469,6 +530,7 @@ while True : #Primary game loop - all code above is only for setup and never nee
 							printeditems.append(aitem)
 				invlistgen = 1
 			print '\n'.join(inventorylist)
+		
 		elif (promptcomm in main['Commands']['Items']['using'].keys() or promptcomm in main['Commands']['Items']['equipping'].keys()) and promptval.replace(' ', '').isalpha() :
 			tempinventory = list(inventory)
 			if promptcomm not in promptcomm in main['Commands']['Items']['equipping'].keys() :
@@ -550,7 +612,7 @@ while True : #Primary game loop - all code above is only for setup and never nee
 				print "None of the listed items match that exact description"
 			if reqpass == 1 :
 				clr()
-				if items[useditem]['Actions'][promptcomm]['Details']['text']!= "" : print items[useditem]['Actions'][promptcomm]['Details']['text']
+				print items[useditem]['Actions'][promptcomm]['Details']['text']
 				if items[useditem]['Actions'][promptcomm]['Details']['singleuse'] == 1 :
 					inventory.remove(int(useditem))
 					invchanged = 1
@@ -601,10 +663,10 @@ while True : #Primary game loop - all code above is only for setup and never nee
 						invchanged = 1
 						equipchanged = 1
 					elif usetype == 'scene' :
-						if choices[id]['text'] != "" : print choices[id]['text']
 						scene = id
 			elif reqpass == 0 :
 				print items[useditem]['Actions'][promptcomm]['Requirements'][sreqno]['failtext']
+		
 		elif (prompt == "help") or (prompt == "h") or (prompt == "man") :
 			print "Command List"
 			print "'choices': review availible options"
@@ -615,15 +677,18 @@ while True : #Primary game loop - all code above is only for setup and never nee
 			print "'about': show information about the adventure you are playing"
 			print "'help': view these commands again"
 			print "'quit': shut down the game engine"
+		
 		elif (prompt == "about") or (prompt == "credits") or (prompt == "a"):
 			print "\n"+title+" - "+subtitle+" was made by "+author
 			print website
 			print "You are currently on scene "+scene
+		
 		elif (prompt == "quit") or (prompt == "exit") or (prompt == "x") or (prompt == "leave") :
 			print "Are you sure you want to quit?"
 			confirm = raw_input(">")				
 			if (confirm == "yes") or (confirm == "y") or (confirm == "sure") or (confirm == "please") :
 				exit(0)
+		
 		elif promptcomm in main['Commands']['Items']['using'].keys() or promptcomm in promptcomm in main['Commands']['Items']['equipping'].keys():
 			if promptval.isdigit() :
 				print "'%s' should be followed by all or part of the description of an item - not a number" %(promptcomm)
@@ -631,6 +696,7 @@ while True : #Primary game loop - all code above is only for setup and never nee
 				print "'%s' should be followed by all or part of the description of an item" %(promptcomm)
 		else :
 			print main['Messages']['unknowncommand']
+		
 		if (scene != sceneb) or (scenestate != scenestateb) or (invchanged == 1) or (statchanged == 1) or (equipchanged == 1):
 			character.write()
 			if (scene != sceneb) or (scenestate != scenestateb) :
