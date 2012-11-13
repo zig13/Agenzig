@@ -1,6 +1,6 @@
 [1]
 description = 'Go West'
-result = 'You pass under a low archway into another cave'
+text = 'You pass under a low archway into another cave'
 	[[Requirements]]
 	[[Effects]]
 		[[[1]]]
@@ -8,7 +8,7 @@ result = 'You pass under a low archway into another cave'
 		id = '2'
 [2]
 description = 'Go East'
-result = 'You climb up a wall barehanded and drop down the other side to find yourself in another cave'
+text = 'You climb up a wall barehanded and drop down the other side to find yourself in another cave'
 	[[Requirements]]
 		[[[1]]]
 		type = 'attribute'
@@ -25,7 +25,7 @@ result = 'You climb up a wall barehanded and drop down the other side to find yo
 		id = '3'
 [3]
 description = 'Pick up potion'
-result = 'You pick up the potion and add it to your pack'
+text = 'You pick up the potion and add it to your pack'
 	[[Requirements]]
 	[[Effects]]
 		[[[1]]]
@@ -38,7 +38,7 @@ result = 'You pick up the potion and add it to your pack'
 		value = 1
 [4]
 description = 'Go somewhere'
-result = 'You go somewhere else'
+text = 'You go somewhere else'
 	[[Requirements]]
 	[[Effects]]
 		[[[1]]]
@@ -46,7 +46,7 @@ result = 'You go somewhere else'
 		id = '3'
 [5]
 description = 'Go somewhere'
-result = 'You go somewhere else'
+text = 'You go somewhere else'
 	[[Requirements]]
 	[[Effects]]
 		[[[1]]]
@@ -54,7 +54,7 @@ result = 'You go somewhere else'
 		id = '2'
 [6]
 description = 'Scene1'
-result = 'You go somewhere else'
+text = 'You go somewhere else'
 	[[Requirements]]
 	[[Effects]]
 		[[[1]]]
@@ -62,7 +62,7 @@ result = 'You go somewhere else'
 		id = '1'
 [7]
 description = 'Scene2'
-result = 'You go somewhere else'
+text = 'You go somewhere else'
 	[[Requirements]]
 	[[Effects]]
 		[[[1]]]
@@ -70,7 +70,7 @@ result = 'You go somewhere else'
 		id = '2'
 [8]
 description = 'Scene3'
-result = 'You go somewhere else'
+text = 'You go somewhere else'
 	[[Requirements]]
 	[[Effects]]
 		[[[1]]]
@@ -78,7 +78,7 @@ result = 'You go somewhere else'
 		id = '3'
 [9]
 description = 'Scene4'
-result = 'You go somewhere else'
+text = 'You go somewhere else'
 	[[Requirements]]
 	[[Effects]]
 		[[[1]]]
