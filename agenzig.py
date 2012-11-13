@@ -550,7 +550,7 @@ while True : #Primary game loop - all code above is only for setup and never nee
 				print "None of the listed items match that exact description"
 			if reqpass == 1 :
 				clr()
-				print items[useditem]['Actions'][promptcomm]['Details']['text']
+				if items[useditem]['Actions'][promptcomm]['Details']['text']!= "" : print items[useditem]['Actions'][promptcomm]['Details']['text']
 				if items[useditem]['Actions'][promptcomm]['Details']['singleuse'] == 1 :
 					inventory.remove(int(useditem))
 					invchanged = 1
@@ -601,6 +601,7 @@ while True : #Primary game loop - all code above is only for setup and never nee
 						invchanged = 1
 						equipchanged = 1
 					elif usetype == 'scene' :
+						if choices[id]['text'] != "" : print choices[id]['text']
 						scene = id
 			elif reqpass == 0 :
 				print items[useditem]['Actions'][promptcomm]['Requirements'][sreqno]['failtext']

@@ -1,5 +1,6 @@
 [1]
 description = 'Go West'
+altdescs = ['west']
 text = 'You pass under a low archway into another cave'
 	[[Requirements]]
 	[[Effects]]
@@ -8,6 +9,7 @@ text = 'You pass under a low archway into another cave'
 		id = '2'
 [2]
 description = 'Go East'
+altdescs = ['east']
 text = 'You climb up a wall barehanded and drop down the other side to find yourself in another cave'
 	[[Requirements]]
 		[[[1]]]
@@ -25,6 +27,7 @@ text = 'You climb up a wall barehanded and drop down the other side to find your
 		id = '3'
 [3]
 description = 'Pick up potion'
+altdescs = []
 text = 'You pick up the potion and add it to your pack'
 	[[Requirements]]
 	[[Effects]]
@@ -38,6 +41,7 @@ text = 'You pick up the potion and add it to your pack'
 		value = 1
 [4]
 description = 'Go somewhere'
+altdescs = []
 text = 'You go somewhere else'
 	[[Requirements]]
 	[[Effects]]
@@ -46,6 +50,7 @@ text = 'You go somewhere else'
 		id = '3'
 [5]
 description = 'Go somewhere'
+altdescs = []
 text = 'You go somewhere else'
 	[[Requirements]]
 	[[Effects]]
@@ -54,6 +59,7 @@ text = 'You go somewhere else'
 		id = '2'
 [6]
 description = 'Scene1'
+altdescs = []
 text = 'You go somewhere else'
 	[[Requirements]]
 	[[Effects]]
@@ -62,6 +68,7 @@ text = 'You go somewhere else'
 		id = '1'
 [7]
 description = 'Scene2'
+altdescs = []
 text = 'You go somewhere else'
 	[[Requirements]]
 	[[Effects]]
@@ -70,6 +77,7 @@ text = 'You go somewhere else'
 		id = '2'
 [8]
 description = 'Scene3'
+altdescs = []
 text = 'You go somewhere else'
 	[[Requirements]]
 	[[Effects]]
@@ -78,6 +86,7 @@ text = 'You go somewhere else'
 		id = '3'
 [9]
 description = 'Scene4'
+altdescs = []
 text = 'You go somewhere else'
 	[[Requirements]]
 	[[Effects]]
