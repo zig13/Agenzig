@@ -2,15 +2,18 @@
 
 This is a project to build a text-based adventure game engine in Python. By engine, I mean that without changing a line of code, a user could create their own interactive adventure which could then be played with the script. This is achieved with the ConfigObj module (an improved version of the built-in ConfigEditor module) which allows Python to read human-readable data using the standard .ini file structure.
 
+This branch is dedicated to the fragmenting by object-orientation of the main script. It's placement in a branch is in-line with the drastic overhaul and subsequent reduced stabiltiy this entails.
+
 In addition I intend to utilise external programs - specifically a graphics viewer and an audio player - to allow adventure writers/creators to include graphical and audio content which will be displayed/played when appropriate to complement the text
 
 ## Implemented Features
 
-Scenes are loaded and the prompt is presented so the script is very much useable and will not crash (unless files are missing). However features are somewhat limited. Making choices, fighting and 
-- Basic, sem-random character creation method
-- Printing scenes (athougth currently scenes can only be changed manually)
+Scenes are loaded and the prompt is presented so the script is very much useable and will not crash (unless files are missing). However features are somewhat limited.
+- Basic, semi-random character creation method (alpha.py)
+- Printing scenes
 - Printing available choices (that your character meets the requirements for)
-- Using inventory items including equipping equipment
+- Making a choice (with limited effects) by typing the exact text of the choice
+- Using inventory items with effects including equipping equipment and changing the scene
 - Printing character inventory
 - Printing character status (text descriptions of health, fatigue and attributes)
 - Printing character equipmentcan be displayed. 
@@ -35,11 +38,9 @@ Firstly, the script was made for Python 2.7.2. Little problem should be had with
 Secondly, ConfigObj is required. The download comes with an installation script but it's easier to use EasyInstall which is part of the setuptools package. First download the correct setuptools installer from here: http://pypi.python.org/pypi/setuptools. Once installed, run Python.exe and type: "easy_install configobj"
 This will automatically download and install the ConfigObj module
 
-With ConfigObj installed, running agenzig.py with the various .agez files in the same directory will run the engine with the default included story 'Murderous Monastery'.
-
-Straight editing the .agez files will work fine but it's safer to setup multiple adventures. To do this move the .agez files into a folder called Murderous Monastery inside a folder called 'Adventures'. Then duplicate the Murderous Monastery folder and rename it. Now when you run agenzig.py, it will ask which of the TWO adventures you wish to run.
-
-Basically the script first checks if there is a file called 'Main.agez' in the same folder as it. If there is, it will load along with the other .agez files the script needs (which it now presumes are there also). If not, it will check to see if there are any sub-folders within the folder 'Adventures'. If there are, it will presume they contain .agez files and will list them as options.
+From a fresh installation, running agenzig.py will load the alpha testing adventure - Murderous Monastery. It's human-readable data files are contained within the folder Murderous Monastery in the folder Adventures.
+Editing the files (e.g. Main.agez or scenes.agez) will directly alter the adventure.
+If you want to try and create your own adventure, then duplicate and rename the Murderous Monastery folder. It will now appear as an option when you run agenzig.py.
 
 ## License
 
