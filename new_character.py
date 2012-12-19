@@ -9,12 +9,6 @@
 # Licence:      Licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License.
 #			http://creativecommons.org/licenses/by-nc-sa/3.0/
 #-------------------------------------------------------------------------------
-try:
-	from configobj import ConfigObj #I'm using configobj instead of the built-in Configeditor as it allows for nested sections and list values
-except ImportError, e:
-	raw_input("ConfigObj module is required. Please install and try again")
-	exit(0)
-
 from classes.classPath import Path
 path = Path()
 
@@ -36,7 +30,6 @@ while True :
 			exit(0)
 	else :
 		from classes.classAdventure import Adventures, Adventure, validation_fail
-		adventures = Adventures(path)
 		print "Listing Adventures:"
 		while True :
 			print "Which adventure would you like to make a character for?"
