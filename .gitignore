@@ -1,2 +1,4 @@
 *.azc
 *.pyc
+*.exe
+*.db
