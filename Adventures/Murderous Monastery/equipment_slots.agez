@@ -1,0 +1,280 @@
+ # Armour
+[1]
+description = 'Chest'
+equipment = 'Cuirass'
+type = 'natural' # Can be natural, unlocked or secondary (enabled by equipment)
+	[[Text]]
+	equip = "You get into the {{1}}"
+	remove = "You remove the {{1}} from your chest"
+	full = "Protecting your chest is a {{1}}"
+	empty = "Your chest is uncovered"
+[2]
+description = 'Left Shoulder'
+equipment = 'Pauldron'
+type = 'natural' # Can be natural, unlocked or secondary (enabled by equipment)
+	[[Text]]
+	equip = "You drape the {{1}} over your left shoulder"
+	remove = "You remove the {{1}} from your left shoulder"
+	full = "Covering your left shoulder is a {{1}}"
+	empty = "You have nothing on your left shoulder"
+[3]
+description = 'Left Arm'
+equipment = 'Rerebrace'
+type = 'natural' # Can be natural, unlocked or secondary (enabled by equipment)
+	[[Text]]
+	equip = "You attach the {{1}} to your left arm"
+	remove = "You remove the {{1}} from your left elbow"
+	full = "Covering your left arm is a {{1}}"
+	empty = "You have nothing on your left arm"
+[4]
+description = 'Left Elbow'
+equipment = 'Couter'
+type = 'natural' # Can be natural, unlocked or secondary (enabled by equipment)
+	[[Text]]
+	equip = "You attach the {{1}} to your left elbow"
+	remove = "You remove the {{1}} from your left elbow"
+	full = "Covering your left elbow is a {{1}}"
+	empty = "You have nothing on your left elbow"
+[5]
+description = 'Left Forearm'
+equipment = 'Vambrace'
+type = 'natural' # Can be natural, unlocked or secondary (enabled by equipment)
+	[[Text]]
+	equip = "You attach the {{1}} to your left forearm"
+	remove = "You remove the {{1}} from your left forearm"
+	full = "Covering your left forearm is a {{1}}"
+	empty = "You have nothing on your left forearm"
+[6]
+description = 'Left Wrist'
+equipment = 'Bracelet'
+type = 'natural' # Can be natural, unlocked or secondary (enabled by equipment)
+	[[Text]]
+	equip = "You hang the {{1}} on your left wrist"
+	remove = "You remove the {{1}} from your left wrist"
+	full = "On your left wrist is a {{1}}"
+	empty = "You have nothing on your left wrist"
+[7]
+description = 'Left Hand'
+equipment = 'Gauntlet'
+type = 'natural' # Can be natural, unlocked or secondary (enabled by equipment)
+	[[Text]]
+	equip = "You put the {{1}} onto your left hand"
+	remove = "You pull your left hand out of the {{1}}"
+	full = "You wear a {{1}} on your left hand"
+	empty = "Your left hand is bare"
+[8]
+description = 'Left Thumb'
+equipment = 'Ring'
+type = 'natural' # Can be natural, unlocked or secondary (enabled by equipment)
+	[[Text]]
+	equip = "You put the {{1}} onto your left thumb"
+	remove = "You pull the {{1}} off your left thumb"
+	full = "On your left thumb is a {{1}}"
+	empty = "Your left thumb is unadorned"
+[9]
+description = 'Left Index Finger'
+equipment = 'Ring'
+type = 'natural' # Can be natural, unlocked or secondary (enabled by equipment)
+	[[Text]]
+	equip = "You put the {{1}} onto your left index finger"
+	remove = "You pull the {{1}} off your left index finger"
+	full = "On your left index finger is a {{1}}"
+	empty = "Your left index finger is unadorned"
+[10]
+description = 'Left Middle Finger'
+equipment = 'Ring'
+type = 'natural' # Can be natural, unlocked or secondary (enabled by equipment)
+	[[Text]]
+	equip = "You put the {{1}} onto your left middle finger"
+	remove = "You pull the {{1}} off your left middle finger"
+	full = "On your left middle finger is a {{1}}"
+	empty = "Your left middle finger is unadorned"
+[11]
+description = 'Left Ring Finger'
+equipment = 'Ring'
+type = 'natural' # Can be natural, unlocked or secondary (enabled by equipment)
+	[[Text]]
+	equip = "You put the {{1}} onto your left ring finger"
+	remove = "You pull the {{1}} off your left ring finger"
+	full = "On your left ring finger is a {{1}}"
+	empty = "Your left ring finger is unadorned"
+[12]
+description = 'Left Little Finger'
+equipment = 'Ring'
+type = 'natural' # Can be natural, unlocked or secondary (enabled by equipment)
+	[[Text]]
+	equip = "You put the {{1}} onto your left little finger"
+	remove = "You pull the {{1}} off your left little finger"
+	full = "On your left little finger is a {{1}}"
+	empty = "Your left little finger is unadorned"
+[13]
+description = 'Right Shoulder'
+equipment = 'Pauldron'
+type = 'natural' # Can be natural, unlocked or secondary (enabled by equipment)
+	[[Text]]
+	equip = "You drape the {{1}} over your right shoulder"
+	remove = "You remove the {{1}} from your right shoulder"
+	full = "Covering your right shoulder is a {{1}}"
+	empty = "You have nothing on your right shoulder"
+[14]
+description = 'Right Arm'
+equipment = 'Rerebrace'
+type = 'natural' # Can be natural, unlocked or secondary (enabled by equipment)
+	[[Text]]
+	equip = "You attach the {{1}} to your right arm"
+	remove = "You remove the {{1}} from your right elbow"
+	full = "Covering your right arm is a {{1}}"
+	empty = "You have nothing on your right arm"
+[15]
+description = 'Right Elbow'
+equipment = 'Couter'
+type = 'natural' # Can be natural, unlocked or secondary (enabled by equipment)
+	[[Text]]
+	equip = "You attach the {{1}} to your right elbow"
+	remove = "You remove the {{1}} from your right elbow"
+	full = "Covering your right elbow is a {{1}}"
+	empty = "You have nothing on your right elbow"
+[16]
+description = 'Right Forearm'
+equipment = 'Vambrace'
+type = 'natural' # Can be natural, unlocked or secondary (enabled by equipment)
+	[[Text]]
+	equip = "You attach the {{1}} to your right forearm"
+	remove = "You remove the {{1}} from your right forearm"
+	full = "Covering your right forearm is a {{1}}"
+	empty = "You have nothing on your right forearm"
+[17]
+description = 'Right Wrist'
+equipment = 'Bracelet'
+type = 'natural' # Can be natural, unlocked or secondary (enabled by equipment)
+	[[Text]]
+	equip = "You hang the {{1}} on your right wrist"
+	remove = "You remove the {{1}} from your right wrist"
+	full = "On your right wrist is a {{1}}"
+	empty = "You have nothing on your right wrist"
+[17]
+description = 'Right Hand'
+equipment = 'Gauntlet'
+type = 'natural' # Can be natural, unlocked or secondary (enabled by equipment)
+	[[Text]]
+	equip = "You put the {{1}} onto your right hand"
+	remove = "You pull your right hand out of the {{1}}"
+	full = "You wear a {{1}} on your right hand"
+	empty = "Your right hand is bare"
+[18]
+description = 'Right Thumb'
+equipment = 'Ring'
+type = 'natural' # Can be natural, unlocked or secondary (enabled by equipment)
+	[[Text]]
+	equip = "You put the {{1}} onto your right thumb"
+	remove = "You pull the {{1}} off your right thumb"
+	full = "On your right thumb is a {{1}}"
+	empty = "Your right thumb is unadorned"
+[19]
+description = 'Right Index Finger'
+equipment = 'Ring'
+type = 'natural' # Can be natural, unlocked or secondary (enabled by equipment)
+	[[Text]]
+	equip = "You put the {{1}} onto your right index finger"
+	remove = "You pull the {{1}} off your right index finger"
+	full = "On your right index finger is a {{1}}"
+	empty = "Your right index finger is unadorned"
+[20]
+description = 'Right Middle Finger'
+equipment = 'Ring'
+type = 'natural' # Can be natural, unlocked or secondary (enabled by equipment)
+	[[Text]]
+	equip = "You put the {{1}} onto your right middle finger"
+	remove = "You pull the {{1}} off your right middle finger"
+	full = "On your right middle finger is a {{1}}"
+	empty = "Your right middle finger is unadorned"
+[21]
+description = 'Right Ring Finger'
+equipment = 'Ring'
+type = 'natural' # Can be natural, unlocked or secondary (enabled by equipment)
+	[[Text]]
+	equip = "You put the {{1}} onto your right ring finger"
+	remove = "You pull the {{1}} off your right ring finger"
+	full = "On your right ring finger is a {{1}}"
+	empty = "Your right ring finger is unadorned"
+[22]
+description = 'Right Little Finger'
+equipment = 'Ring'
+type = 'natural' # Can be natural, unlocked or secondary (enabled by equipment)
+	[[Text]]
+	equip = "You put the {{1}} onto your right little finger"
+	remove = "You pull the {{1}} off your right little finger"
+	full = "On your right little finger is a {{1}}"
+	empty = "Your right little finger is unadorned"
+[23]
+description = 'Head'
+equipment = 'Cap'
+type = 'natural' # Can be natural, unlocked or secondary (enabled by equipment)
+	[[Text]]
+	equip = "You put the {{1}} on your head"
+	remove = "You take the {{1}} off your head"
+	full = "You wear a {{1}} on your head"
+	empty = "Your head is unadorned"
+[24]
+description = 'Face'
+equipment = 'Mask'
+type = 'natural' # Can be natural, unlocked or secondary (enabled by equipment)
+	[[Text]]
+	equip = "You put on the {{1}}"
+	remove = "You remove the {{1}} from your face"
+	full = "Your face is covered by a {{1}}"
+	empty = "Your face is uncovered"
+[25]
+description = 'Neck'
+equipment = 'Necklace'
+type = 'natural' # Can be natural, unlocked or secondary (enabled by equipment)
+	[[Text]]
+	equip = "You wear the {{1}} around your neck"
+	remove = "You take off the {{1}}"
+	full = "You wear a {{1}} around your neck"
+	empty = "Your neck is unadorned"
+[26]
+description = 'Legs'
+equipment = 'Trousers'
+type = 'natural' # Can be natural, unlocked or secondary (enabled by equipment)
+	[[Text]]
+	equip = "You get into the {{1}}"
+	remove = "You remove the {{1}}"
+	full = "You wear {{1}} over your legs"
+	empty = "Your legs are uncovered"
+[27]
+description = 'Waist'
+equipment = 'Belt'
+type = 'natural' # Can be natural, unlocked or secondary (enabled by equipment)
+	[[Text]]
+	equip = "You get into the {{1}}"
+	remove = "You remove the {{1}}"
+	full = "You wear {{1}} over your legs"
+	empty = "Your legs are uncovered"
+
+ # Weapons
+[27]
+description = 'Back'
+equipment = 'Bow' # Or big sword
+type = 'natural' # Can be natural, unlocked or secondary (enabled by equipment)
+[28]
+description = "Belt'
+equipment = 'Melee Weapon'
+type = 'secondary' # Can be natural, unlocked or secondary (enabled by equipment)
+
+[29]
+description = 'Melee Weapon'
+equipment = 'Melee Weapon'
+type = 'natural' # Can be natural, unlocked or secondary (enabled by equipment)
+
+ # Combinations
+[1,26]
+description = 'Sleeveless'
+equipment = 'Armour'
+	[[Text]]
+	equip = "You put on the {{1}}"
+	remove = You untie the straps on the {{1}} and put it in your bag
+	full = "You are wearing {{1}} that covers your chest and legs"
+
+	
+	
