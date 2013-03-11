@@ -1,5 +1,6 @@
 def createchar(path) :
 	charname = raw_input("Please enter a name for your character >" )
+	success = [charname]
 	from configobj import ConfigObj
 	charfile = path.charfolder+charname+".azc"
 	character = ConfigObj(charfile, unrepr=True)
@@ -61,4 +62,5 @@ def createchar(path) :
 			character['Currency'][currencyno] = 0
 	character['Scene States'] = {}
 	character.write()
-	return True	
+	success.append(True)
+	return success

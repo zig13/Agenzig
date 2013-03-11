@@ -5,10 +5,16 @@ class Path :
 		if foldername == None :
 			self.advsfolder = curdir+sep+"Adventures"+sep
 			self.adventures = listdir(self.advsfolder)
-			self.advstotal = len(listdir(self.advsfolder))
+			self.advstotal = len(self.adventures)
 		else :		
 			self.folder = curdir+sep+"Adventures"+sep+foldername+sep
 			self.charfolder = self.folder+"Characters"+sep
+			from os import access, R_OK
+			if not access(self.charfolder, R_OK) : 
+				from os import makedirs
+				makedirs(self.charfolder)
+			self.characters = listdir(self.charfolder)
+			self.chartotal = len(self.characters)
 			self.main = self.folder+"Main.agez"
 			self.scenes = self.folder+"scenes.agez"
 		

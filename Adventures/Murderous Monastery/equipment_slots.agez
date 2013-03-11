@@ -1,4 +1,4 @@
- # Armour
+﻿ # Armour
 [1]
 description = 'Chest'
 equipment = 'Cuirass'
@@ -258,23 +258,108 @@ description = 'Back'
 equipment = 'Bow' # Or big sword
 type = 'natural' # Can be natural, unlocked or secondary (enabled by equipment)
 [28]
-description = "Belt'
+description = 'Belt'
 equipment = 'Melee Weapon'
 type = 'secondary' # Can be natural, unlocked or secondary (enabled by equipment)
-
 [29]
-description = 'Melee Weapon'
+description = 'Belt'
 equipment = 'Melee Weapon'
+type = 'secondary' # Can be natural, unlocked or secondary (enabled by equipment)
+[30]
+description = 'Main Weapon'
+equipment = 'Melee Weapon'
+type = 'natural' # Can be natural, unlocked or secondary (enabled by equipment)
+[31]
+description = 'Side Arm'
+equipment = 'Melee Weapon'
+type = 'natural' # Can be natural, unlocked or secondary (enabled by equipment)
+[32]
+description = 'Ranged Weapon'
+equipment = 'Ranged Weapon'
+type = 'natural' # Can be natural, unlocked or secondary (enabled by equipment)
+[33]
+description = 'Pocket'
+type = 'natural' # Can be natural, unlocked or secondary (enabled by equipment)
+[34]
+description = 'Pocket'
 type = 'natural' # Can be natural, unlocked or secondary (enabled by equipment)
 
  # Combinations
 [1,26]
-description = 'Sleeveless'
 equipment = 'Armour'
+type = 'combination'
 	[[Text]]
 	equip = "You put on the {{1}}"
 	remove = You untie the straps on the {{1}} and put it in your bag
 	full = "You are wearing {{1}} that covers your chest and legs"
-
-	
+[1,2,3,4,5,13,14,15,16,26]
+equipment = 'Armour'
+type = 'combination'
+	[[Text]]
+	equip = "You put on the {{1}}"
+	remove = "You pull-off the {{1}}"
+	full = "You are wearing {{1}} that covers your chest, arms and legs"
+[1,2,3,4,5,13,14,15,16,26]
+equipment = 'Armour'
+type = 'combination'
+	[[Text]]
+	equip = "You put on the {{1}}"
+	remove = "You pull-off the {{1}}"
+	full = "You are wearing {{1}} that covers your chest, arms and legs"
+[27,30]
+equipment = 'Great Sword'
+type = 'combination'
+	[[Text]]
+	equip = "You strap the {{1}} to your back"
+	remove = You detach the {{1}} from your back
+	full = "You have a {{1}} strapped to your back"
+[27,32]
+equipment = 'Bow'
+type = 'combination'
+	[[Text]]
+	equip = "You strap the {{1}} to your back"
+	remove = You detach the {{1}}"
+	full = "You have a {{1}} strapped to your back"
+[28,30]
+equipment = 'Sword'
+type = 'combination'
+	[[Text]]
+	equip = "You drive the {{1}} into a scabbard on your belt"
+	remove = You remove the {{1}} from it's scabbard"
+	full = "You have a {{1}} hanging at your waist"
+[29,30]
+equipment = 'Sword'
+type = 'combination'
+	[[Text]]
+	equip = "You drive the {{1}} into a scabbard on your belt"
+	remove = You remove the {{1}} from it's scabbard"
+	full = "You have a {{1}} hanging at your waist"
+[28,31]
+equipment = 'Dagger'
+type = 'combination'
+	[[Text]]
+	equip = "You strap the {{1}} into a scabbard on your belt"
+	remove = You remove the {{1}} from it's scabbard"
+	full = "You have a {{1}} at your waist"
+[29,31]
+equipment = 'Dagger'
+type = 'combination'
+	[[Text]]
+	equip = "You strap the {{1}} into a scabbard on your belt"
+	remove = You remove the {{1}} from it's scabbard"
+	full = "You have a {{1}} at your waist"
+[32,33]
+equipment = 'Sling'
+type = 'combination'
+	[[Text]]
+	equip = "You move he sling to somewhere accesible and pick up a few rocks as amunition"
+	remove = "You throw the {{1}} in your pack"
+	full = "You have a {{1}} sticking out your pocket"
+[32,34]
+equipment = 'Sling'
+type = 'combination'
+	[[Text]]
+	equip = "You move he sling to somewhere accesible and pick up a few rocks as amunition"
+	remove = "You throw the {{1}} in your pack"
+	full = "You have a {{1}} sticking out your pocket"
 	

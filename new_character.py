@@ -29,11 +29,11 @@ while True :
 			raw_input("Character creation cannot continue")
 			exit(0)
 	else :
-		from classes.classAdventure import Adventures, Adventure, validation_fail
+		from classes.classAdventure import Adventure, validation_fail
 		print "Listing Adventures:"
 		while True :
 			print "Which adventure would you like to make a character for?"
-			choice = choicelist(path.adventures)
+			choice = list(choicelist(path.adventures))
 			try :		
 				adventure = Adventure(choice[1])
 				adventure.validate()
@@ -43,18 +43,14 @@ while True :
 	
 	adventure.details()
 	
-	exec "from charcreators."+adventure.charcreator+" import createchar"
-	success = bool(createchar(adventure.path))
+	exec "from charcreators."+adventure.charcreator+" import createchar" #Runs the apropriate character creator for the adventure
+	newchar = createchar(adventure.path)
 	Clr()
-	if success == True :
+	if bool(newchar[0]) == True :
 		print "Character created successfully\n"
 	else :
 		print "Character creation failed\n"
 	print "Would you like to create another?"
 	answer = bool(yesno())
-	Clr()
 	if answer == False :
 		break
-	
-
-		

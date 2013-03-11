@@ -2,3 +2,5 @@
 *.pyc
 *.exe
 *.db
+*.sublime-workspace
+*.sublime-project

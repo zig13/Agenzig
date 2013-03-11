@@ -1,0 +1,14 @@
+[1]
+catname = 'Gender'
+	[[1]]
+	valname = 'Male'
+	[[2]]
+	valname = 'Female'
+[2]
+catname = 'Example'
+	[[1]]
+	valname = 'Awesome'
+	[[2]]
+	valname = 'Not Awesome'
+	[[3]]
+	valname = 'Dunno'

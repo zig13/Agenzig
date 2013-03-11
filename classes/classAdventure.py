@@ -20,9 +20,6 @@ class Adventure :
 		if self.requirements[7] == 1 and not access(self.path.equipslots, R_OK) : raise validation_fail("equipslots file missing")
 		if self.requirements[8] == 1 and not access(self.path.items, R_OK) : raise validation_fail("items file missing")
 		if self.requirements[9] == 1 and not access(self.path.vitals, R_OK) : raise validation_fail("vitals file missing")
-		if not access(self.path.charfolder, R_OK) : 
-			from os import makedirs
-			makedirs(self.path.charfolder)
 		
 	def details(self) :
 		self.title = self.file['Details']['title']

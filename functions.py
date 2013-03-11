@@ -6,10 +6,12 @@ def Clr() :
 		system('cls') #Executes the shell command 'cls' which clears the terminal in Windows
 	else :
 		print "\n" * 10
+
 def yesno() :
 	output = None
 	while output == None :
 		input = raw_input(">")
+		Clr()
 		if input.isdigit() :
 			output = bool(input)
 		elif input.isalpha() :
@@ -22,6 +24,7 @@ def yesno() :
 				print "Input not recognised"
 		else :
 			print "Input not recognised"
+	return output
 
 def choicelist(inlist) :
 	outlist = []
@@ -40,5 +43,18 @@ def choicelist(inlist) :
 			print "Input must be a whole number.\n"
 		except IndexError :
 			print "Input is outside of range of options.\n"
+			
+def dupremove(seq) :
+   seen = {}
+   result = []
+   for item in seq:
+       if item in seen: continue
+       seen[item] = 1
+       result.append(item)
+   return result
+   
+def valremove(seq,val) :
+	if val in seq :
+		return [x for x in seq if x != val]
 	
 	

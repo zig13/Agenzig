@@ -1,13 +1,10 @@
 [1]
 description = 'Hunting Leathers'
 altdescs = ['leathers']
-equipslots = [1,2,3,4] # Chest, trousers and both arms (long-sleeved)
-slotuse = 'all'
-removewords = ['remove']
-removetext = "You shake off the leathers and stuff them into your bag"
 item = 3
+	[[Slots]]
+	1 = [1,2,3,4,5,13,14,15,16,26]
 	[[Effects]]
-	total = 4
 		[[[1]]]
 		type = 'resistance'
 		id = '1'
@@ -27,13 +24,11 @@ item = 3
 [2]
 description = 'Steel Dagger'
 altdescs = ['dagger']
-equipslots = [10]
-slotuse = 'all'
-removewords = ['unwield']
-removetext = "You remove the dagger from your belt"
 item = 1
+	[[Slots]]
+	1 = [28,31]
+	2 = [29,31]
 	[[Effects]]
-	total = 2
 		[[[1]]]
 		type = 'cability'
 		id = '1'
@@ -43,13 +38,11 @@ item = 1
 [3]
 description = 'Sling'
 altdescs = []
-equipslots = [11]
-slotuse = 'all'
-removewords = ['unwield']
-removetext = "You put the sling in your bag"
 item = 4
+	[[Slots]]
+	1 = [32,33]
+	2 = [32,34]
 	[[Effects]]
-	total = 2
 		[[[1]]]
 		type = 'cability'
 		id = '3'
@@ -59,13 +52,11 @@ item = 4
 [4]
 description = 'Iron Sword'
 altdescs = ['sword']
-equipslots = [10]
-slotuse = 'all'
-removewords = ['unwield']
-removetext = "You remove the sword from the scabard on your belt"
 item = 2
+	[[Slots]]
+	1 = [28,30]
+	2 = [29,30]
 	[[Effects]]
-	total = 2
 		[[[1]]]
 		type = 'cability'
 		id = '5'
@@ -75,13 +66,10 @@ item = 2
 [5]
 description = 'Studded Leather'
 altdescs = ['studded','armour']
-equipslots = [1,2] # Chest and trousers slots (sleeveless)
-slotuse = 'all'
-removewords = ['remove']
-removetext = "You untie the straps on the armour and put it in your bag"
 item = 9
+	[[Slots]]
+	1 = [1,26]
 	[[Effects]]
-	total = 4
 		[[[1]]]
 		type = 'resistance'
 		id = '1'
@@ -101,18 +89,40 @@ item = 9
 [6]
 description = 'Steel Sword'
 altdescs = ['sword']
-equipslots = [10]
-slotuse = 'all'
-removewords = ['unwield']
-removetext = "You remove the sword from the scabard on your belt"
 item = 10
+	[[Slots]]
+	1 = [27]
 	[[Effects]]
-	total = 2
 		[[[1]]]
 		type = 'cability'
 		id = '5'
 		[[[2]]]
 		type = 'cability'
 		id = '6'
-
+[7]
+description = "Great Sword"
+altdescs = ['sword']
+item = 12
+	[[Slots]]
+	1 = [27,30]
+	[[Effects]]
+		[[[1]]]
+		type = 'cability'
+		id = '5'
+		[[[2]]]
+		type = 'cability'
+		id = '6'
+[8]
+description = "Belt"
+altdescs = []
+item = 13
+	[[Slots]]
+	1 = [27]
+	[[Effects]]
+		[[[1]]]
+		type = 'slot'
+		id = '28'
+		[[[2]]]
+		type = 'slot'
+		id = 29'
 

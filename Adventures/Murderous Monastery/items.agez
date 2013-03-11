@@ -30,7 +30,7 @@ altdescs = ['sword']
 				id = '1'
 				evaluator = '>'
 				value = 18
-				failtext = "You are not strong enougth to weild this weapon effectively"
+				failtext = "You are not strong enougth to wield this weapon effectively"
 			[[[[[2]]]]]
 				type = 'equip'
 				id = '4'
@@ -197,7 +197,7 @@ altdescs = ['sword']
 				id = '1'
 				evaluator = '>'
 				value = 19
-				failtext = "You are not strong enougth to weild this weapon effectively"
+				failtext = "You are not strong enougth to wield this weapon effectively"
 			[[[[[2]]]]]
 				type = 'equip'
 				id = '6'
@@ -220,4 +220,45 @@ altdescs = ['stone','tele','teleporter']
 			[[[[[1]]]]]
 				type = 'scene'
 				id = '4'
+[12]
+description = 'Great Sword'
+altdescs = ['sword']
+[[Actions]]
+	[[[wield]]]
+		[[[[Details]]]]
+			singleuse = 1
+		[[[[Requirements]]]]
+			[[[[[1]]]]]
+				type = 'attribute'
+				id = '1'
+				evaluator = '>'
+				value = 23
+				failtext = "You are not strong enougth to wield this weapon effectively"
+			[[[[[2]]]]]
+				type = 'equip'
+				id = '7'
+				evaluator = 'False'
+				failtext = "You are already using a remarkably similar sword"
+		[[[[Effects]]]]
+			[[[[[1]]]]]
+				type = 'equip'
+				id = '7'
+[13]
+description = 'Belt'
+altdescs = []
+[[Actions]]
+	[[[wear]]]
+		[[[[Details]]]]
+			singleuse = 1
+		[[[[Requirements]]]]
+			[[[[[1]]]]]
+				type = 'equip'
+				id = '8'
+				evaluator = 'False'
+				failtext = "You are already wearing a remarkably similar belt"
+		[[[[Effects]]]]
+			[[[[[1]]]]]
+				type = 'equip'
+				id = '8'
+
 			
