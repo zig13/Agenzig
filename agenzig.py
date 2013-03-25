@@ -588,8 +588,8 @@ while True : #Primary game loop - all code above is only for setup and never nee
 			
 			elif (prompt == "quit") or (prompt == "exit") or (prompt == "x") or (prompt == "leave") :
 				print "Are you sure you want to quit?"
-				confirm = raw_input(">")				
-				if (confirm == "yes") or (confirm == "y") or (confirm == "sure") or (confirm == "please") :
+				answer = bool(yesno())				
+				if answer == True :
 					exit(0)
 			
 			elif promptcomm in main['Commands']['Items']['using'].keys() or promptcomm in promptcomm in main['Commands']['Items']['equipping'].keys():
