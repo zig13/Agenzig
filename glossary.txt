@@ -1,0 +1,7 @@
+Effect = Change to character condition either temporarily while an item is present in the inventory, an ability is granted or an equipment is equipped OR permanently by a choice, action or activation.
+
+
+while item is in inventory, ability granted or equipment equipped. Could include the granting of actions
+Ability = Act exactly like an inventory item in that once granted they bestow alterations to the character which could include the granting of actions
+Action = Similar in reach to a choice except not bound to a scene
+Activation = A method of interacting with an item.
