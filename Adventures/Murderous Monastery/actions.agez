@@ -1,0 +1,93 @@
+[1]
+description = 'Dance'
+altdescs = []
+text = 'You dance like a fool'
+	[[Requirements]]
+	[[Effects]]
+
+[2]
+description = 'Go East'
+altdescs = ['east']
+text = 'You climb up a wall barehanded and drop down the other side to find yourself in another cave'
+	[[Requirements]]
+		[[[1]]]
+		type = 'attribute'
+		id = '1'
+		evaluator = '>' #Valid options are '==' (equal to), '<=' (less than or equal to), '>=' (greater than or equal to) and '!=' (not equal to)
+		value = 20
+		[[[2]]]
+		type = 'item'
+		id = '6'
+		evaluator = 'True' #Valid options are 'True' and 'False'
+	[[Effects]]
+		[[[1]]]
+		type = 'scene'
+		id = '3'
+[3]
+description = 'Pick up potion'
+altdescs = []
+text = 'You pick up the potion and add it to your pack'
+	[[Requirements]]
+	[[Effects]]
+		[[[1]]]
+		type = 'scenestate'
+		id = '1'
+		value = 2
+		[[[2]]]
+		type = 'additem'
+		id = '6'
+		value = 1
+[4]
+description = 'Go somewhere'
+altdescs = []
+text = 'You go somewhere else'
+	[[Requirements]]
+	[[Effects]]
+		[[[1]]]
+		type = 'scene'
+		id = '3'
+[5]
+description = 'Go somewhere'
+altdescs = []
+text = 'You go somewhere else'
+	[[Requirements]]
+	[[Effects]]
+		[[[1]]]
+		type = 'scene'
+		id = '2'
+[6]
+description = 'Scene1'
+altdescs = []
+text = 'You go somewhere else'
+	[[Requirements]]
+	[[Effects]]
+		[[[1]]]
+		type = 'scene'
+		id = '1'
+[7]
+description = 'Scene2'
+altdescs = []
+text = 'You go somewhere else'
+	[[Requirements]]
+	[[Effects]]
+		[[[1]]]
+		type = 'scene'
+		id = '2'
+[8]
+description = 'Scene3'
+altdescs = []
+text = 'You go somewhere else'
+	[[Requirements]]
+	[[Effects]]
+		[[[1]]]
+		type = 'scene'
+		id = '3'
+[9]
+description = 'Scene4'
+altdescs = []
+text = 'You go somewhere else'
+	[[Requirements]]
+	[[Effects]]
+		[[[1]]]
+		type = 'scene'
+		id = '4'
