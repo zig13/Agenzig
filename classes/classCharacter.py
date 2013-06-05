@@ -13,7 +13,7 @@ class Character :
 		
 	def set_inventory(self, path) :
 		from classes.classInventory import Inventory
-		self.inventory = Inventory(path, self.file['Items'][Inventory'])
+		self.inventory = Inventory(path, self.file['Items']['Inventory'])
 	
 	def getscene(self) :
 		return self.file['Basics']['scene']
@@ -24,31 +24,10 @@ class Character :
 		else :
 			return '1'
 	
-	def item(self, item_id, action) :
-		
+	def rendertemp(self, list=None) :
+		print stuff
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	def equip(self, item_id, slotsused) :
-		charequips = self.file['Items']['Equipment']
-		replaceditems = []
-		for slot in slotsused :
-			if str(slotx) in .keys() : #If there is already a piece of equipment occupying the slot
-				replacedequip = charequips[str(slotx)]
-				if (equips[replacedequip]['equipslots'] != equips[id]['equipslots']) and (equips[replacedequip]['equipslots'] != [slotx]) :
-					for clearslot in equips[replacedequip]['equipslots'] :
-						clearslot = str(clearslot)
-						if clearslot != slotx :
-							del character['Items']['Equipment'][clearslot]
-							equipslots = character['Items']['Equipment'].keys()
-				replaceditem = str(equips[replacedequip]['item'])
-				if replaceditem not in replaceditems :
-					inventory.append(int(replaceditem))
-					replaceditems.append(replaceditem)
-			charequips[str(slotx)] = id
+	def renderperm(self, list=None) :
+		print stuff
+			
