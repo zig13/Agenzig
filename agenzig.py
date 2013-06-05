@@ -73,46 +73,6 @@ from classes.classScene import Scene
 scene = Scene(adventure.path, character.getscene)
 scene.setstate(character.checkstate(scene.id))
 
-equipslots = character['Items']['Equipment'].keys()
-equipment = character['Items']['Equipment'].values()
-inventory = character['Items']['inventory']
-
-# Loading other files if they exist
-choicefile = advfolder+sep+"choices.agez"
-if access(choicefile, R_OK) :
-	choices = ConfigObj(choicefile, unrepr=True)
-else :
-	choices = 0
-confrontationfile = advfolder+sep+"confrontations.agez"
-if access(confrontationfile, R_OK) :
-	confrontations = ConfigObj(confrontationfile, unrepr=True)
-else :
-	confrontations = 0
-attributefile = advfolder+"attributes.agez"
-if access(attributefile, R_OK) :
-	attributes = ConfigObj(attributefile, unrepr=True)
-	attotal = len(attributes.keys())
-else :
-	attributes = 0
-	attotal = 0
-vitalfile = advfolder+"vitals.agez"
-if access(vitalfile, R_OK) :
-	vitals = ConfigObj(vitalfile, unrepr=True)
-	vittotal = len(vitals.keys())
-else :
-	vitals = 0
-	vittotal = 0
-itemfile = advfolder+"items.agez"
-if access(vitalfile, R_OK) :
-	items = ConfigObj(infile=itemfile, unrepr=True)
-else :
-	items = 0
-equipmentfile = advfolder+"equipment.agez"
-if access(equipmentfile, R_OK) :
-	equips = ConfigObj(equipmentfile, unrepr=True)
-else :
-	equips = 0
-
 fight = 0 #Will use to disable combat while is a WIP
 
 #These are mostly used for while loops and repetition checks
@@ -126,9 +86,6 @@ equipchanged = 0
 #More imports...
 from decimal import Decimal
 from math import ceil
-
-if sel!= opt : #If user has chosen an existing character rather than creating a new one
-	print "Continuing adventure\n"
 
 while True : #Primary game loop - all code above is only for setup and never needs to be reset/run-again
 	print scene.description()
