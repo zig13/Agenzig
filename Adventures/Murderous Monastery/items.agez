@@ -1,7 +1,7 @@
 [1]
 description = 'Steel Dagger'
 altdescs = ['dagger']
-[[Actions]]
+[[Activations]]
 	[[[wield]]]
 		[[[[Details]]]]
 			text = "You install the dagger in a scabard on your belt ready for use"
@@ -19,7 +19,7 @@ altdescs = ['dagger']
 [2]
 description = 'Iron Sword'
 altdescs = ['sword']
-[[Actions]]
+[[Activations]]
 	[[[wield]]]
 		[[[[Details]]]]
 			text = "You install the sword in a scabard on your belt ready for use"
@@ -43,7 +43,7 @@ altdescs = ['sword']
 [3]
 description = 'Hunting Leathers'
 altdescs = ['leathers']
-[[Actions]]
+[[Activations]]
 	[[[wear]]]
 		[[[[Details]]]]
 			text = "You put on the hunting leathers"
@@ -61,7 +61,7 @@ altdescs = ['leathers']
 [4]
 description = 'Sling'
 altdescs = []
-[[Actions]]
+[[Activations]]
 	[[[wield]]]
 		[[[[Details]]]]
 		text = "You move he sling to somewhere accesible and pick up a few rocks as amunition"
@@ -79,7 +79,7 @@ altdescs = []
 [5]
 description = 'Can of Blue Bolt'
 altdescs = ['blue bolt','can']
-[[Actions]]
+[[Activations]]
 	[[[drink]]]
 		[[[[Details]]]]
 			text = "You down the Blue Bolt"
@@ -109,7 +109,7 @@ altdescs = ['blue bolt','can']
 [6]
 description = 'Floor Potion'
 altdescs = ['potion']
-[[Actions]]
+[[Activations]]
 	[[[drink]]]
 		[[[[Details]]]]
 			text = "Despite not knowing it's contents, you drink the potion you found on the floor. You feel more dexterous"
@@ -130,7 +130,7 @@ altdescs = ['potion']
 [7]
 description = 'Inventory Reset'
 altdescs = ['reset', 'invreset']
-[[Actions]]
+[[Activations]]
 	[[[use]]]
 		[[[[Details]]]]
 			text = "You regain default items"
@@ -152,7 +152,7 @@ altdescs = ['reset', 'invreset']
 [8]
 description = 'A stone'
 altdescs = ['stone']
-[[Actions]]
+[[Activations]]
 	[[[use]]]
 		[[[[Details]]]]
 			text = "You see no way to use this item"
@@ -162,7 +162,7 @@ altdescs = ['stone']
 [9]
 description = 'Studded Leather'
 altdescs = ['studded','armour']
-[[Actions]]
+[[Activations]]
 	[[[wear]]]
 		[[[[Details]]]]
 			text = "You put on the armour"
@@ -186,7 +186,7 @@ altdescs = ['studded','armour']
 [10]
 description = 'Steel Sword'
 altdescs = ['sword']
-[[Actions]]
+[[Activations]]
 	[[[wield]]]
 		[[[[Details]]]]
 			text = "You install the sword in a scabard on your belt ready for use"
@@ -210,7 +210,7 @@ altdescs = ['sword']
 [11]
 description = 'A magic stone'
 altdescs = ['stone','tele','teleporter']
-[[Actions]]
+[[Activations]]
 	[[[use]]]
 		[[[[Details]]]]
 			text = "Whooosh!"
@@ -223,7 +223,7 @@ altdescs = ['stone','tele','teleporter']
 [12]
 description = 'Great Sword'
 altdescs = ['sword']
-[[Actions]]
+[[Activations]]
 	[[[wield]]]
 		[[[[Details]]]]
 			singleuse = 1
@@ -246,7 +246,7 @@ altdescs = ['sword']
 [13]
 description = 'Belt'
 altdescs = []
-[[Actions]]
+[[Activations]]
 	[[[wear]]]
 		[[[[Details]]]]
 			singleuse = 1
