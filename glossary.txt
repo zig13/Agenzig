@@ -18,7 +18,7 @@ Action
 Choice
 - An action granted by the PC's presence in a scene(state)
 - May be subject to requirements
-- The same choice could be present in multiple scenes but it's availabilty must be implicitely stated each time
+- The same choice could be present in multiple scenes but it's availability must be implicitly stated each time
 
 Ability
 - An alternative way of imparting temporary effects
@@ -30,9 +30,9 @@ Item
 - An entry in the inventory database
 - It's presence may be checked for by a requirement 
 - While an item is in inventory, it may effect the player character
-- A player can carry any number of items simultaeneously
+- A player can carry any number of items simultaneously
 
 Activation
 - An action in the specific context of a specific item
-- Put another way it is an action with a parameter - the item
+- Put another way it is an action with a parameter – the item
 - Most usually this will be "drop _itemname_" or "equip _itemname_"
